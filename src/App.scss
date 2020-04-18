@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 .App {
   text-align: center;
 }
@@ -31,9 +33,9 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(10px)
+    transform: translateY(10px);
   }
   100% {
-    transform: translateY(0px)
+    transform: translateY(0px);
   }
 }
