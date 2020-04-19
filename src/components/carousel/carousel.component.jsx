@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import Carousel from "react-bootstrap/Carousel";
+import Container from "react-bootstrap/Container";
 
 import { fetchNowPlayingStart } from "../../redux/movies/movies.actions";
 import { selectMoviesCollection } from "../../redux/movies/movies.selectors";
@@ -11,56 +12,39 @@ const MoviesCarousel = ({ fetchNowPlayingStart, collections }) => {
   useEffect(() => {
     fetchNowPlayingStart();
   }, [fetchNowPlayingStart]);
-  console.log(collections);
-
-  let movieImageUrl =
-    "https://image.tmdb.org/t/p/w500/" + collections[0].backdrop_path;
-  let movieImageUrl2 =
-    "https://image.tmdb.org/t/p/w500/" + collections[1].backdrop_path;
-  let movieImageUrl3 =
-    "https://image.tmdb.org/t/p/w500/" + collections[2].backdrop_path;
 
   return (
-    <div className="carousel">
-      <Carousel>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={movieImageUrl}
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={movieImageUrl2}
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={movieImageUrl3}
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+    <div className="carousel-container">
+      <Container>
+        <Carousel indicators="false">
+          {collections
+            ? collections.map(
+                ({ backdrop_path, title, vote_average, poster_path }) => (
+                  <Carousel.Item>
+                    <div className="carousel-images">
+                      <img
+                        className="d-block carousel-img"
+                        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                        alt={title}
+                      />
+                      <div className="backdrop-img">
+                        <img
+                          className="d-block w-100 carousel-img"
+                          src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+                          alt={title}
+                        />
+                        <div className="backdrop-caption">
+                          <h1>{title}</h1>
+                          <p>IMDB Rating: {vote_average}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Carousel.Item>
+                )
+              )
+            : null}
+        </Carousel>
+      </Container>
     </div>
   );
 };

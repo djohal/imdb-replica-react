@@ -1,0 +1,58 @@
+.carousel-container {
+  margin-top: 1rem;
+
+  .carousel-images {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .carousel-img {
+    height: 50vh;
+    background-repeat: repeat;
+  } 
+
+  .backdrop-img {
+      flex-grow: 1;
+      margin-left: 1rem;
+      width: 100%;
+  }
+
+  .backdrop-img::after {
+    display: block;
+    position: relative;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0,
+      rgb(0, 0, 0) 100%
+    );
+    margin-top: -20rem;
+    height: 20rem;
+    width: 100%;
+    content: "";
+  }
+
+  .backdrop-caption {
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    z-index: 100;
+    margin-left: 5rem;
+    width: 60%;
+
+    h1 {
+      font-weight: 400;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      overflow: hidden;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .carousel-indicators {
+    display: none;
+  }
+}
