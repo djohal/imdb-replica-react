@@ -8,13 +8,13 @@ import Container from "react-bootstrap/Container";
 import { fetchNowPlayingStart } from "../../redux/movies/movies.actions";
 import { selectMoviesCollection } from "../../redux/movies/movies.selectors";
 
-const MoviesCarousel = ({ fetchNowPlayingStart, collections }) => {
+const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
   useEffect(() => {
     fetchNowPlayingStart();
   }, [fetchNowPlayingStart]);
 
   return (
-    <div className="carousel-container">
+    <div className="now-playing-container">
       <Container>
         <Carousel indicators="false">
           {collections
@@ -57,4 +57,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchNowPlayingStart: () => dispatch(fetchNowPlayingStart()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesCarousel);
+export default connect(mapStateToProps, mapDispatchToProps)(NowPlaying);
