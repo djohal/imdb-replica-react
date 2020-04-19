@@ -1,4 +1,4 @@
-import MoviesActionType from "./movies.types";
+import MoviesActionType from "../movies.types";
 
 const INITIAL_STATE = {
   collections: null,
@@ -6,22 +6,22 @@ const INITIAL_STATE = {
   errorMessage: undefined,
 };
 
-const movieReducer = (state = INITIAL_STATE, action) => {
+const featuredTodayReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case MoviesActionType.FETCH_NOW_PLAYING_START:
+    case MoviesActionType.FETCH_FEATURED_TODAY_START:
       return {
         ...state,
         isFetching: true,
       };
 
-    case MoviesActionType.FETCH_NOW_PLAYING_SUCCESS:
+    case MoviesActionType.FETCH_FEATURED_TODAY_SUCCESS:
       return {
         ...state,
         isFetching: false,
         collections: action.payload,
       };
 
-    case MoviesActionType.FETCH_NOW_PLAYING_FAILURE:
+    case MoviesActionType.FETCH_FEATURED_TODAY_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -33,4 +33,4 @@ const movieReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default movieReducer;
+export default featuredTodayReducer;

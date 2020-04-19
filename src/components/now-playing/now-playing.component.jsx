@@ -6,7 +6,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 
 import { fetchNowPlayingStart } from "../../redux/movies/movies.actions";
-import { selectMoviesCollection } from "../../redux/movies/movies.selectors";
+import { selectMoviesCollection } from "../../redux/movies/selectors/now-playing.selectors";
 
 const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
   useEffect(() => {
@@ -19,8 +19,8 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
         <Carousel indicators="false">
           {collections
             ? collections.map(
-                ({ backdrop_path, title, vote_average, poster_path }) => (
-                  <Carousel.Item>
+                ({ backdrop_path, title, vote_average, poster_path, id }) => (
+                  <Carousel.Item key={id}>
                     <div className="carousel-images">
                       <img
                         className="d-block carousel-img"

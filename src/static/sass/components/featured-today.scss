@@ -1,0 +1,7 @@
+.featured-today-container {
+  margin-top: 2rem;
+
+  .title {
+    @include sectionTitle;
+  }
+}

@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import MovieReducer from "./movies/movies.reducers";
+import nowPlayingReducer from "./movies/reducers/now-playing.reducers";
+import featuredTodayReducer from "./movies/reducers/featured-today.reducers";
 
 const persistConfig = {
   key: "root",
@@ -9,7 +10,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  movies: MovieReducer,
+  nowPlaying: nowPlayingReducer,
+  featuredToday: featuredTodayReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -1,18 +1,18 @@
 import { createSelector } from "reselect";
 
-const selectMovies = (state) => state.movies;
+const selectMovies = (state) => state.nowPlaying;
 
 export const selectMoviesCollection = createSelector(
   [selectMovies],
-  (movies) => movies.collections
+  (nowPlaying) => nowPlaying.collections
 );
 
 export const selectIsCollectionFetching = createSelector(
   [selectMovies],
-  (movies) => movies.isFetching
+  (nowPlaying) => nowPlaying.isFetching
 );
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectMovies],
-  (movies) => !!movies.collections
+  (nowPlaying) => !!nowPlaying.collections
 );

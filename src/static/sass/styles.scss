@@ -1,6 +1,8 @@
 @import "abstracts/variables";
 @import "abstracts/base";
+@import "abstracts/functions";
 
 @import "components/layout/header";
 @import "components/carousel";
 @import "components/now-playing";
+@import "components/featured-today";

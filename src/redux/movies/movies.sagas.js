@@ -3,25 +3,38 @@ import { takeEvery, call, all, put } from "redux-saga/effects";
 import axios from "../../axios-movies";
 
 import {
+  fetchFeaturedTodayFailure,
   fetchNowPlayingSuccess,
   fetchNowPlayingFailure,
+  fetchFeaturedTodaySuccess,
 } from "./movies.actions";
 
 import MoviesActionType from "./movies.types";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+
 export function* fetchNowPlayingAsync() {
   try {
-    const nowPlayingCollectionRequest = yield axios.get(
+    const request = yield axios.get(
       `/movie/now_playing?api_key=${API_KEY}&language=en-US`
     );
 
-    const nowPlayingCollection = nowPlayingCollectionRequest.data.results;
-
-    yield put(fetchNowPlayingSuccess(nowPlayingCollection));
+    yield put(fetchNowPlayingSuccess(request.data.results));
   } catch (error) {
     put(fetchNowPlayingFailure(error));
+  }
+}
+
+export function* fetchFeaturedTodayAsync() {
+  try {
+    const request = yield axios.get(
+      `/trending/all/day?api_key=${API_KEY}&language=en-US`
+    );
+
+    yield put(fetchFeaturedTodaySuccess(request.data.results));
+  } catch (error) {
+    put(fetchFeaturedTodayFailure(error));
   }
 }
 
@@ -31,7 +44,13 @@ export function* fetchNowPlayingStart() {
     fetchNowPlayingAsync
   );
 }
+export function* fetchFeaturedTodayStart() {
+  yield takeEvery(
+    MoviesActionType.FETCH_FEATURED_TODAY_START,
+    fetchFeaturedTodayAsync
+  );
+}
 
 export function* moviesSaga() {
-  yield all([call(fetchNowPlayingStart)]);
+  yield all([call(fetchNowPlayingStart), call(fetchFeaturedTodayStart)]);
 }

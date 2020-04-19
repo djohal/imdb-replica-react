@@ -13,3 +13,17 @@ export const fetchNowPlayingFailure = (error) => ({
   type: MoviesActionType.FETCH_NOW_PLAYING_FAILURE,
   payload: error,
 });
+
+export const fetchFeaturedTodayStart = () => ({
+  type: MoviesActionType.FETCH_FEATURED_TODAY_START,
+});
+
+export const fetchFeaturedTodaySuccess = (payload) => ({
+  type: MoviesActionType.FETCH_FEATURED_TODAY_SUCCESS,
+  payload,
+});
+
+export const fetchFeaturedTodayFailure = (error) => ({
+  type: MoviesActionType.FETCH_FEATURED_TODAY_FAILURE,
+  payload: error,
+});
