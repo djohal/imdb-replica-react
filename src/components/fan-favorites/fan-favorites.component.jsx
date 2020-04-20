@@ -16,7 +16,6 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
   useEffect(() => {
     fetchFanFavoritesStart();
   }, [fetchFanFavoritesStart]);
-  console.log(collections);
 
   return (
     <div className="fan-favorites-container">
