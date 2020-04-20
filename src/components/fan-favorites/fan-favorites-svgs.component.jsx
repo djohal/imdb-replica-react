@@ -45,7 +45,7 @@ export const RatingSvg = () => (
     width="24"
     height="24"
     xmlns="http://www.w3.org/2000/svg"
-    class="ipc-icon ipc-icon--star-inline"
+    className="ipc-icon ipc-icon--star-inline"
     viewBox="0 0 24 24"
     fill="currentColor"
     role="presentation"

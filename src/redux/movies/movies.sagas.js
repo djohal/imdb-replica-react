@@ -46,7 +46,6 @@ export function* fetchFanFavoritesAsync() {
       `/movie/popular?api_key=${API_KEY}&language=en-US`
     );
     const results = request.data.results;
-      console.log(results);
       
     yield put(fetchFanFavoritesSuccess(results));
   } catch (error) {

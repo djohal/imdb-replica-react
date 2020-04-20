@@ -41,3 +41,17 @@ export const fetchFanFavoritesFailure = (error) => ({
   type: MoviesActionType.FETCH_FAN_FAVORITES_FAILURE,
   payload: error,
 });
+
+export const fetchExternalIdStart = () => ({
+  type: MoviesActionType.FETCH_EXTERNAL_ID_START,
+});
+
+export const fetchExternalIdSuccess = (payload) => ({
+  type: MoviesActionType.FETCH_EXTERNAL_ID_SUCCESS,
+  payload,
+});
+
+export const fetchExternalIdFailure = (error) => ({
+  type: MoviesActionType.FETCH_EXTERNAL_ID_FAILURE,
+  payload: error,
+});
