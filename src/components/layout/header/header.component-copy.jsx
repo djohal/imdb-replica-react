@@ -16,7 +16,7 @@ import {
 
 const Header = () => (
   <div className="header">
-    <Navbar className="navbar-custom" variant="dark" expand="lg">
+    <Navbar className="navbar-custom" variant="dark" expand="md">
       <Container>
         <Navbar.Brand>
           <img className="logo" src={Logo} alt="logo" />
@@ -40,7 +40,6 @@ const Header = () => (
             <SearchButtonSvg />
           </button>
         </Form>
-
         <Navbar.Collapse>
           <Nav>
             <Nav.Link>

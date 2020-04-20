@@ -1,11 +1,32 @@
 @mixin header-text-style {
-  font-weight: bold;
   font-size: 0.9rem;
+  color: white;
 }
 
 .header {
   .navbar-custom {
     background-color: $color-dark;
+  }
+  .navbar-dark {
+    align-items: center;
+    .navbar-nav {
+      width: 100%;
+
+      .nav-link {
+        @include header-text-style();
+        padding: 0.4rem 1rem;
+        margin: 0 0.25rem;
+
+        &:hover {
+          background-color: rgba($color: gray, $alpha: 0.5);
+          border-radius: 0.25rem;
+          color: white;
+        }
+      }
+    }
+  }
+  .navbar-collapse {
+    flex-grow: 0;
   }
   .navbar-brand {
     margin-right: 0;
@@ -23,6 +44,7 @@
       border-radius: 0.25rem;
     }
   }
+
   .menu {
     display: flex;
     justify-content: space-between;
@@ -54,7 +76,6 @@
       justify-content: center;
       align-items: center;
       padding: 1rem 0rem 1rem 0.5rem;
-      @include header-text-style();
     }
 
     input {
@@ -78,10 +99,10 @@
       align-items: center;
     }
   }
-  
+
   .verticle-line {
     border-right: 2px solid gray;
     width: 1px;
-    height: 2rem;
+    height: 2.2rem;
   }
 }
