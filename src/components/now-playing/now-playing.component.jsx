@@ -16,7 +16,7 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
   return (
     <div className="now-playing-container">
       <Container>
-        <Carousel indicators="false">
+        <Carousel>
           {collections
             ? collections.map(
                 ({ backdrop_path, title, vote_average, poster_path, id }) => (

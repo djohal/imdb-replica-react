@@ -28,3 +28,8 @@
 .carousel-indicators {
   display: none !important;
 }
+
+.carousel-images {
+  display: flex;
+  justify-content: space-between;
+}

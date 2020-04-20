@@ -1,7 +1,15 @@
 .featured-today-container {
   margin-top: 2rem;
 
+  // .carousel {
+  //   fle
+  // }
+
   .title {
     @include sectionTitle;
+  }
+
+  .carousel-img {
+    height: 30vh;
   }
 }

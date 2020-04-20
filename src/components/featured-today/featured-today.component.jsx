@@ -17,14 +17,25 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
     <div className="featured-today-container">
       <Container>
         <h3 className="title">Featured today</h3>
-        <Carousel indicators="false">
-          {collections
-            ? collections.map(
-                ({ backdrop_path, title, name, vote_average, poster_path, id }) => (
-                  <Carousel.Item key={id}>{title || name}</Carousel.Item>
-                )
-              )
-            : null}
+        <Carousel interval={null}>
+          {collections.map((collection) => (
+            <Carousel.Item>
+              <div className="carousel-images">
+                <img
+                  className="d-block carousel-img"
+                  src={`https://image.tmdb.org/t/p/w500/${collection[0].backdrop_path}`}
+                  alt={collection[0].title}
+                  key={collection[0].id}
+                />
+                <img
+                  className="d-block carousel-img"
+                  src={`https://image.tmdb.org/t/p/w500/${collection[1].backdrop_path}`}
+                  alt={collection[1].title}
+                  key={collection[1].id}
+                />
+              </div>
+            </Carousel.Item>
+          ))}
         </Carousel>
       </Container>
     </div>
