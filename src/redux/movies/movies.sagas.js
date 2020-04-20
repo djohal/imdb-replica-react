@@ -10,7 +10,6 @@ import {
 } from "./movies.actions";
 
 import MoviesActionType from "./movies.types";
-import { transformFeaturedTodayCollection } from "./movies.utils";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -32,9 +31,8 @@ export function* fetchFeaturedTodayAsync() {
       `/trending/all/day?api_key=${API_KEY}&language=en-US`
     );
     const results = request.data.results;
-    const transformedResults = transformFeaturedTodayCollection(results);
 
-    yield put(fetchFeaturedTodaySuccess(transformedResults));
+    yield put(fetchFeaturedTodaySuccess(results));
   } catch (error) {
     put(fetchFeaturedTodayFailure(error));
   }

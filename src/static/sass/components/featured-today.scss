@@ -1,15 +1,33 @@
 .featured-today-container {
   margin-top: 2rem;
 
-  // .carousel {
-  //   fle
-  // }
-
   .title {
     @include sectionTitle;
   }
 
+  .react-multi-carousel-list {
+    width: 75%;
+    .container {
+      margin: 0;
+    }
+  }
+
+  .carousel-images {
+    justify-content: space-between;
+  }
+
   .carousel-img {
-    height: 30vh;
+    width: 25rem;
+    margin: 1rem;
+  }
+
+  .react-multiple-carousel__arrow {
+    @include carousel-arrow;
+  }
+  .react-multiple-carousel__arrow--right {
+    @include carousel-right-arrow;
+  }
+  .react-multiple-carousel__arrow--left {
+    @include carousel-left-arrow;
   }
 }
