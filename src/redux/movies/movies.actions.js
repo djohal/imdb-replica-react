@@ -27,3 +27,17 @@ export const fetchFeaturedTodayFailure = (error) => ({
   type: MoviesActionType.FETCH_FEATURED_TODAY_FAILURE,
   payload: error,
 });
+
+export const fetchFanFavoritesStart = () => ({
+  type: MoviesActionType.FETCH_FAN_FAVORITES_START,
+});
+
+export const fetchFanFavoritesSuccess = (payload) => ({
+  type: MoviesActionType.FETCH_FAN_FAVORITES_SUCCESS,
+  payload,
+});
+
+export const fetchFanFavoritesFailure = (error) => ({
+  type: MoviesActionType.FETCH_FAN_FAVORITES_FAILURE,
+  payload: error,
+});

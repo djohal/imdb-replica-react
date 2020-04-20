@@ -7,6 +7,8 @@ import {
   fetchNowPlayingSuccess,
   fetchNowPlayingFailure,
   fetchFeaturedTodaySuccess,
+  fetchFanFavoritesSuccess,
+  fetchFanFavoritesFailure,
 } from "./movies.actions";
 
 import MoviesActionType from "./movies.types";
@@ -38,6 +40,20 @@ export function* fetchFeaturedTodayAsync() {
   }
 }
 
+export function* fetchFanFavoritesAsync() {
+  try {
+    const request = yield axios.get(
+      `/movie/popular?api_key=${API_KEY}&language=en-US`
+    );
+    const results = request.data.results;
+      console.log(results);
+      
+    yield put(fetchFanFavoritesSuccess(results));
+  } catch (error) {
+    put(fetchFanFavoritesFailure(error));
+  }
+}
+
 export function* fetchNowPlayingStart() {
   yield takeEvery(
     MoviesActionType.FETCH_NOW_PLAYING_START,
@@ -50,7 +66,17 @@ export function* fetchFeaturedTodayStart() {
     fetchFeaturedTodayAsync
   );
 }
+export function* fetchFanFavoritesStart() {
+  yield takeEvery(
+    MoviesActionType.FETCH_FAN_FAVORITES_START,
+    fetchFanFavoritesAsync
+  );
+}
 
 export function* moviesSaga() {
-  yield all([call(fetchNowPlayingStart), call(fetchFeaturedTodayStart)]);
+  yield all([
+    call(fetchNowPlayingStart),
+    call(fetchFeaturedTodayStart),
+    call(fetchFanFavoritesStart),
+  ]);
 }

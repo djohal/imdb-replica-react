@@ -1,0 +1,67 @@
+.fan-favorites-container {
+  margin-top: 2rem;
+
+  .title {
+    @include sectionTitle;
+  }
+
+  .sub-title {
+    position: relative;
+    line-height: 1.5rem;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    &::before {
+      background: $color-primary;
+      height: 1.5rem;
+      position: absolute;
+      align-self: flex-start;
+      width: 4px;
+      content: "";
+      left: 0;
+      border-radius: 0.25rem;
+    }
+  }
+  .sub-title__desc {
+    color: rgba($color: #fff, $alpha: 0.7);
+    margin: 0;
+  }
+
+  .carousel-img {
+    position: relative;
+    width: 10rem;
+    margin: 1rem;
+    margin-bottom: 0rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .watchlist-ribbon {
+    position: absolute;
+    margin-top: 1rem;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    .watchlist-ribbon__bg {
+      position: relative;
+      background-size: 2rem;
+    }
+    .watchlist-ribbon__icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
