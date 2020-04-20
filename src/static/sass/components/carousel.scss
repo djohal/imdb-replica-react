@@ -23,3 +23,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+.react-multiple-carousel__arrow {
+  @include carousel-arrow;
+}
+.react-multiple-carousel__arrow--right {
+  @include carousel-right-arrow;
+}
+.react-multiple-carousel__arrow--left {
+  @include carousel-left-arrow;
+}
