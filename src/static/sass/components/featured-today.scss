@@ -19,6 +19,11 @@
   .carousel-img {
     width: 25rem;
     margin: 1rem;
+    margin-bottom: 0rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   .react-multiple-carousel__arrow {
@@ -29,5 +34,16 @@
   }
   .react-multiple-carousel__arrow--left {
     @include carousel-left-arrow;
+  }
+
+  .featured-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1rem;
+    margin-left: 0rem;
+
+    span:first-child {
+      width: 70%;
+    }
   }
 }
