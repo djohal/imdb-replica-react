@@ -4,38 +4,13 @@ import { createStructuredSelector } from "reselect";
 
 import Container from "react-bootstrap/Container";
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
 import { fetchFanFavoritesStart } from "../../redux/movies/movies.actions";
 import { selectMoviesCollection } from "../../redux/movies/selectors/fan-favorites.selectors";
-
-const responsive = {
-  desktop: {
-    breakpoint: {
-      max: 3000,
-      min: 1024,
-    },
-    items: 6,
-    partialVisibilityGutter: 40,
-  },
-  mobile: {
-    breakpoint: {
-      max: 464,
-      min: 0,
-    },
-    items: 1,
-    partialVisibilityGutter: 30,
-  },
-  tablet: {
-    breakpoint: {
-      max: 1024,
-      min: 464,
-    },
-    items: 2,
-    partialVisibilityGutter: 30,
-  },
-};
+import {
+  WatchlistRibbonSvg,
+  WatchlistRibbonIconSvg,
+} from "./fan-favorites-svgs.component";
+import CarouselContainer from "../carousel/carousel.component";
 
 const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
   useEffect(() => {
@@ -51,23 +26,7 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
         <span className="sub-title__desc">
           This week's most popular fan movies
         </span>
-        <Carousel
-          additionalTransfrom={0}
-          arrows
-          autoPlaySpeed={2000}
-          centerMode={false}
-          draggable
-          focusOnSelect={false}
-          infinite={false}
-          keyBoardControl
-          minimumTouchDrag={80}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-          responsive={responsive}
-          showDots={false}
-          slidesToSlide={6}
-          swipeable
-        >
+        <CarouselContainer desktop={6} slidesToSlide={6}>
           {collections.map(
             ({
               poster_path,
@@ -86,46 +45,14 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
                   />
                 </div>
                 <div
-                  className="watchlist-ribbon focusable watchlist-ribbon--m watchlist-ribbon--baseAlt watchlist-ribbon--onImage poster__watchlist-ribbon"
+                  className="watchlist-ribbon"
                   aria-label="add to watchlist"
                   role="button"
-                  tabindex="0"
+                  tabIndex="0"
                 >
-                  <svg
-                    className="watchlist-ribbon__bg"
-                    width="24px"
-                    height="34px"
-                    viewBox="0 0 24 34"
-                    xmlns="http://www.w3.org/2000/svg"
-                    role="presentation"
-                  >
-                    <polygon
-                      className="watchlist-ribbon__bg-ribbon"
-                      fill="#000000"
-                      points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"
-                    ></polygon>
-                    <polygon
-                      className="watchlist-ribbon__bg-hover"
-                      points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"
-                    ></polygon>
-                    <polygon
-                      className="watchlist-ribbon__bg-shadow"
-                      points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"
-                    ></polygon>
-                  </svg>
+                  <WatchlistRibbonSvg />
                   <div className="watchlist-ribbon__icon" role="presentation">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      className="icon icon--add icon--inline"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      role="presentation"
-                    >
-                      <path fill="none" d="M0 0h24v24H0V0z"></path>
-                      <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path>
-                    </svg>
+                    <WatchlistRibbonIconSvg />
                   </div>
                 </div>
                 <div className="featured-details">
@@ -135,7 +62,7 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
               </React.Fragment>
             )
           )}
-        </Carousel>
+        </CarouselContainer>
       </Container>
     </div>
   );

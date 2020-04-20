@@ -4,38 +4,9 @@ import { createStructuredSelector } from "reselect";
 
 import Container from "react-bootstrap/Container";
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
 import { fetchFeaturedTodayStart } from "../../redux/movies/movies.actions";
 import { selectMoviesCollection } from "../../redux/movies/selectors/featured-today.selectors";
-
-const responsive = {
-  desktop: {
-    breakpoint: {
-      max: 3000,
-      min: 1024,
-    },
-    items: 2,
-    partialVisibilityGutter: 40,
-  },
-  mobile: {
-    breakpoint: {
-      max: 464,
-      min: 0,
-    },
-    items: 1,
-    partialVisibilityGutter: 30,
-  },
-  tablet: {
-    breakpoint: {
-      max: 1024,
-      min: 464,
-    },
-    items: 2,
-    partialVisibilityGutter: 30,
-  },
-};
+import CarouselContainer from "../carousel/carousel.component";
 
 const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
   useEffect(() => {
@@ -46,25 +17,16 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
     <div className="featured-today-container">
       <Container>
         <h3 className="title">Featured today</h3>
-        <Carousel
-          additionalTransfrom={0}
-          arrows
-          autoPlaySpeed={2000}
-          centerMode={false}
-          draggable
-          focusOnSelect={false}
-          infinite={false}
-          keyBoardControl
-          minimumTouchDrag={80}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-          responsive={responsive}
-          showDots={false}
-          slidesToSlide={2}
-          swipeable
-        >
+        <CarouselContainer desktop={2} slidesToSlide={2}>
           {collections.map(
-            ({ backdrop_path, title, name, release_date, first_air_date, id }) => (
+            ({
+              backdrop_path,
+              title,
+              name,
+              release_date,
+              first_air_date,
+              id,
+            }) => (
               <React.Fragment key={id}>
                 <div className="carousel-images">
                   <img
@@ -80,7 +42,7 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
               </React.Fragment>
             )
           )}
-        </Carousel>
+        </CarouselContainer>
       </Container>
     </div>
   );
