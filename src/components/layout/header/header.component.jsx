@@ -18,16 +18,13 @@ import SearchDropdown from "../../search-dropdown/search-dropdown.component";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState();
-  const [overlay, setOverlay] = useState();
 
   const handleChange = (event) => {
     setSearchInput(event.target.value);
-    setOverlay(true);
   };
 
   const removeOverlay = () => {
     setSearchInput(null);
-    setOverlay(false);
   };
 
   return (
@@ -60,7 +57,7 @@ const Header = () => {
               <SearchButtonSvg />
             </button>
             <div
-              className={`${overlay ? "overlay" : null}`}
+              className={`${searchInput ? "overlay" : null}`}
               onClick={() => removeOverlay()}
             ></div>
             <SearchDropdown searchInput={searchInput} />

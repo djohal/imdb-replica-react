@@ -12,6 +12,33 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
+const menuItems = [
+  {
+    title: "Movies",
+    svg: faFilm,
+  },
+  {
+    title: "TV Shows",
+    svg: faTv,
+  },
+  {
+    title: "Awards & Event",
+    svg: faAward,
+  },
+  {
+    title: "Celebs",
+    svg: faUserFriends,
+  },
+  {
+    title: "Videos",
+    svg: faVideo,
+  },
+  {
+    title: "Community",
+    svg: faGlobe,
+  },
+];
+
 const SideNavContainer = (props) => {
   const [showNav, setShowNav] = useState();
   return (
@@ -23,40 +50,20 @@ const SideNavContainer = (props) => {
         showNav={showNav}
         onHideNav={() => setShowNav(false)}
         title={[
-          <>
+          <React.Fragment key={1}>
             <FontAwesomeIcon
               icon={faTimes}
               color="white"
               onClick={() => setShowNav(false)}
             />
-          </>,
+          </React.Fragment>,
         ]}
-        items={[
-          <>
-            <FontAwesomeIcon icon={faFilm} color="white" size="1.5x" />
-            <span>Movies</span>
-          </>,
-          <>
-            <FontAwesomeIcon icon={faTv} color="white" size="1.5x" />
-            <span>TV Shows</span>
-          </>,
-          <>
-            <FontAwesomeIcon icon={faAward} color="white" size="1.5x" />
-            <span>Awards & Events</span>
-          </>,
-          <>
-            <FontAwesomeIcon icon={faUserFriends} color="white" size="1.5x" />
-            <span>Celebs</span>
-          </>,
-          <>
-            <FontAwesomeIcon icon={faVideo} color="white" size="1.5x" />
-            <span>Videos</span>
-          </>,
-          <>
-            <FontAwesomeIcon icon={faGlobe} color="white" size="1.5x" />
-            <span>Community</span>
-          </>,
-        ]}
+        items={menuItems.map(({ title, svg }, index) => (
+          <React.Fragment key={index}>
+            <FontAwesomeIcon icon={svg} color="white" size="1x" />
+            <span>{title}</span>
+          </React.Fragment>
+        ))}
       />
     </div>
   );
