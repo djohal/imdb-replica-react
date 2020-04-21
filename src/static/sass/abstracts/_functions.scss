@@ -56,7 +56,7 @@
     no-repeat 50% / 100% 100% !important;
   background-size: 1.5rem !important;
   right: calc(1% + 1px) !important;
-  z-index: 2 !important;
+  z-index: 1 !important;
 
   &:hover {
     background: rgba($color: #000000, $alpha: 0.5)
@@ -76,6 +76,7 @@
     no-repeat 50% / 100% 100% !important;
   background-size: 1.5rem !important;
   left: calc(0%) !important;
+  z-index: 1 !important;
 
   &:hover {
     background: rgba($color: #000000, $alpha: 0.5)

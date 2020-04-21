@@ -14,15 +14,27 @@ import {
   WatchlistSvg,
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
+import SearchDropdown from "../../search-dropdown/search-dropdown.component";
 
 const Header = () => {
-  const [showNav, setShowNav] = useState();
+  const [searchInput, setSearchInput] = useState();
+  const [overlay, setOverlay] = useState();
+
+  const handleChange = (event) => {
+    setSearchInput(event.target.value);
+    setOverlay(true);
+  };
+
+  const removeOverlay = () => {
+    setSearchInput(null);
+    setOverlay(false);
+  };
+
   return (
     <div className="header">
       <Navbar className="navbar-custom" variant="dark" expand="lg">
         <Container>
-          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
-         <SideNavContainer />
+          <SideNavContainer />
           <Navbar.Brand>
             <img className="logo" src={Logo} alt="logo" />
           </Navbar.Brand>
@@ -39,10 +51,19 @@ const Header = () => {
               <span>All</span>
               <DropDownIconSvg />
             </div>
-            <FormControl type="text" placeholder="Search IMDb" />
+            <FormControl
+              type="text"
+              placeholder="Search IMDb"
+              onChange={(e) => handleChange(e)}
+            />
             <button type="submit" className="search-button">
               <SearchButtonSvg />
             </button>
+            <div
+              className={`${overlay ? "overlay" : null}`}
+              onClick={() => removeOverlay()}
+            ></div>
+            <SearchDropdown searchInput={searchInput} />
           </Form>
           <Navbar.Collapse>
             <Nav>

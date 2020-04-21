@@ -70,6 +70,17 @@
     flex-grow: 1;
     display: flex;
     margin: 0 1rem;
+    position: relative;
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.2);
+      z-index: 2;
+    }
 
     .search-category-selector {
       display: flex;
@@ -96,7 +107,7 @@
       height: 2rem;
       border-radius: 0;
       border: none;
-      
+
       @include responsive(phone) {
         display: none;
       }
