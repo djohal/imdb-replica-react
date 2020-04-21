@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Navbar from "react-bootstrap/Navbar";
@@ -36,13 +36,10 @@ const Header = ({
   clearSearchEntry,
   clearSearchCollections,
 }) => {
-  const [setDefaultSearchInput] = useState();
-
   const handleChange = (event) => {
     if (event.target.value.trim() !== "") {
       searchInput(event.target.value);
       fetchSearchMovieStart();
-      setDefaultSearchInput(event.target.value);
     } else {
       clearSearchEntry();
       clearSearchCollections();

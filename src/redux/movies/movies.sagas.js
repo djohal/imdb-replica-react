@@ -101,7 +101,7 @@ export function* fetchFanFavoritesStart() {
 
 export function* fetchSearchMovieStart() {
   yield debounce(
-    500,
+    100,
     MoviesActionType.FETCH_SEARCH_MOVIE_START,
     fetchSearchMovieAsync
   );
