@@ -32,6 +32,21 @@ const searchMovieReducers = (state = INITIAL_STATE, action) => {
         isFetching: false,
         errorMessage: action.payload,
       };
+
+    case MoviesActionType.CLEAR_SEARCH_ENTRY:
+      return {
+        ...state,
+        searchInput: null,
+        isFetching: false,
+        errorMessage: action.payload,
+      };
+    case MoviesActionType.CLEAR_SEARCH_COLLECTIONS:
+      return {
+        ...state,
+        collections: null,
+        isFetching: false,
+        errorMessage: action.payload,
+      };
     default:
       return state;
   }

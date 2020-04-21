@@ -1,4 +1,11 @@
-import { takeEvery, call, all, put, select } from "redux-saga/effects";
+import {
+  takeEvery,
+  call,
+  all,
+  put,
+  select,
+  debounce,
+} from "redux-saga/effects";
 
 import { selectSearchInput } from "./selectors/search.selectors";
 
@@ -60,13 +67,14 @@ export function* fetchFanFavoritesAsync() {
 export function* fetchSearchMovieAsync() {
   try {
     const searchInput = yield select(selectSearchInput);
+    if (searchInput.trim() !== "") {
+      const request = yield axios.get(
+        `/search/movie?api_key=${API_KEY}&language=en-US&query=${searchInput}`
+      );
+      const results = request.data.results;
 
-    const request = yield axios.get(
-      `/search/movie?api_key=${API_KEY}&language=en-US&query=${searchInput}`
-    );
-    const results = request.data.results;
-
-    yield put(fetchSearchMovieSuccess(results));
+      yield put(fetchSearchMovieSuccess(results));
+    }
   } catch (error) {
     put(fetchSearchMovieFailure(error));
   }
@@ -92,7 +100,8 @@ export function* fetchFanFavoritesStart() {
 }
 
 export function* fetchSearchMovieStart() {
-  yield takeEvery(
+  yield debounce(
+    500,
     MoviesActionType.FETCH_SEARCH_MOVIE_START,
     fetchSearchMovieAsync
   );

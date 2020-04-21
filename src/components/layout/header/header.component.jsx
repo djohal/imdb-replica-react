@@ -16,7 +16,11 @@ import {
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
 import SearchDropdown from "../../search-dropdown/search-dropdown.component";
-import { searchInput } from "../../../redux/movies/movies.actions";
+import {
+  searchInput,
+  clearSearchEntry,
+  clearSearchCollections,
+} from "../../../redux/movies/movies.actions";
 import { fetchSearchMovieStart } from "../../../redux/movies/movies.actions";
 
 import {
@@ -29,17 +33,25 @@ const Header = ({
   fetchSearchMovieStart,
   searchInput,
   searchEntry,
+  clearSearchEntry,
+  clearSearchCollections,
 }) => {
-  const [defaultSearchInput, setDefaultSearchInput] = useState();
+  const [setDefaultSearchInput] = useState();
 
   const handleChange = (event) => {
-    searchInput(event.target.value);
-    fetchSearchMovieStart();
-    setDefaultSearchInput(event.target.value);
+    if (event.target.value.trim() !== "") {
+      searchInput(event.target.value);
+      fetchSearchMovieStart();
+      setDefaultSearchInput(event.target.value);
+    } else {
+      clearSearchEntry();
+      clearSearchCollections();
+    }
   };
 
   const removeOverlay = () => {
-    setDefaultSearchInput(null);
+    clearSearchEntry();
+    clearSearchCollections();
   };
 
   return (
@@ -72,10 +84,13 @@ const Header = ({
               <SearchButtonSvg />
             </button>
             <div
-              className={`${defaultSearchInput ? "overlay" : null}`}
+              className={`${searchEntry ? "overlay" : null}`}
               onClick={() => removeOverlay()}
             ></div>
-            <SearchDropdown collections={collections} />
+            <SearchDropdown
+              collections={collections}
+              searchEntry={searchEntry}
+            />
           </Form>
           <Navbar.Collapse>
             <Nav>
@@ -101,6 +116,8 @@ const Header = ({
 const mapDispatchToProps = (dispatch) => ({
   searchInput: (input) => dispatch(searchInput(input)),
   fetchSearchMovieStart: () => dispatch(fetchSearchMovieStart()),
+  clearSearchEntry: () => dispatch(clearSearchEntry()),
+  clearSearchCollections: () => dispatch(clearSearchCollections()),
 });
 
 const mapStateToProps = createStructuredSelector({

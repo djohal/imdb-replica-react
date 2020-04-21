@@ -74,3 +74,11 @@ export const fetchSearchMovieFailure = (error) => ({
   type: MoviesActionType.FETCH_SEARCH_MOVIE_FAILURE,
   payload: error,
 });
+
+export const clearSearchEntry = () => ({
+  type: MoviesActionType.CLEAR_SEARCH_ENTRY,
+});
+
+export const clearSearchCollections = () => ({
+  type: MoviesActionType.CLEAR_SEARCH_COLLECTIONS,
+});
