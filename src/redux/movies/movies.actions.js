@@ -55,3 +55,22 @@ export const fetchExternalIdFailure = (error) => ({
   type: MoviesActionType.FETCH_EXTERNAL_ID_FAILURE,
   payload: error,
 });
+
+export const searchInput = (input) => ({
+  type: MoviesActionType.SEARCH_INPUT,
+  payload: input,
+});
+
+export const fetchSearchMovieStart = () => ({
+  type: MoviesActionType.FETCH_SEARCH_MOVIE_START,
+});
+
+export const fetchSearchMovieSuccess = (payload) => ({
+  type: MoviesActionType.FETCH_SEARCH_MOVIE_SUCCESS,
+  payload,
+});
+
+export const fetchSearchMovieFailure = (error) => ({
+  type: MoviesActionType.FETCH_SEARCH_MOVIE_FAILURE,
+  payload: error,
+});

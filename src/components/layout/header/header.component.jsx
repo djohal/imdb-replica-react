@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-
 import Logo from "../../../static/assets/logo.png";
 import {
   HamburgerMenuSvg,
@@ -15,16 +16,30 @@ import {
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
 import SearchDropdown from "../../search-dropdown/search-dropdown.component";
+import { searchInput } from "../../../redux/movies/movies.actions";
+import { fetchSearchMovieStart } from "../../../redux/movies/movies.actions";
 
-const Header = () => {
-  const [searchInput, setSearchInput] = useState();
+import {
+  selectMoviesCollection,
+  selectSearchInput,
+} from "../../../redux/movies/selectors/search.selectors";
+
+const Header = ({
+  collections,
+  fetchSearchMovieStart,
+  searchInput,
+  searchEntry,
+}) => {
+  const [defaultSearchInput, setDefaultSearchInput] = useState();
 
   const handleChange = (event) => {
-    setSearchInput(event.target.value);
+    searchInput(event.target.value);
+    fetchSearchMovieStart();
+    setDefaultSearchInput(event.target.value);
   };
 
   const removeOverlay = () => {
-    setSearchInput(null);
+    setDefaultSearchInput(null);
   };
 
   return (
@@ -57,10 +72,10 @@ const Header = () => {
               <SearchButtonSvg />
             </button>
             <div
-              className={`${searchInput ? "overlay" : null}`}
+              className={`${defaultSearchInput ? "overlay" : null}`}
               onClick={() => removeOverlay()}
             ></div>
-            <SearchDropdown searchInput={searchInput} />
+            <SearchDropdown collections={collections} />
           </Form>
           <Navbar.Collapse>
             <Nav>
@@ -83,4 +98,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+  searchInput: (input) => dispatch(searchInput(input)),
+  fetchSearchMovieStart: () => dispatch(fetchSearchMovieStart()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  collections: selectMoviesCollection,
+  searchEntry: selectSearchInput,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

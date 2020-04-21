@@ -1,8 +1,15 @@
 import React from "react";
 
-const SearchDropdown = ({ searchInput }) => (
-  <div className={`${searchInput ? "search-dropdown" : null} `}>
-    <div className="search-items">{searchInput}</div>
+const SearchDropdown = ({ collections }) => (
+  <div className={`${collections ? "search-dropdown" : null} `}>
+    <div className="search-items">
+      {collections.map((collection) => (
+        <>
+        <span>{collection.title}</span>
+        <br/>
+        </>
+      ))}
+    </div>
   </div>
 );
 
