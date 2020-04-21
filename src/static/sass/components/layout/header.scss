@@ -1,6 +1,6 @@
 @mixin header-text-style {
   font-size: 0.9rem;
-  color: white;
+  color: white !important;
 }
 
 .header {
@@ -11,23 +11,30 @@
     align-items: center;
     .navbar-nav {
       width: 100%;
+    }
+  }
 
-      .nav-link {
-        @include header-text-style();
-        padding: 0.4rem 1rem;
-        margin: 0 0.25rem;
+  .nav-link {
+    @include header-text-style();
+    padding: 0.4rem 1rem;
+    margin: 0 0.25rem;
 
-        &:hover {
-          background-color: rgba($color: gray, $alpha: 0.5);
-          border-radius: 0.25rem;
-          color: white;
-        }
-      }
+    &:hover {
+      background-color: rgba($color: gray, $alpha: 0.5);
+      border-radius: 0.25rem;
+      color: white;
     }
   }
   .navbar-collapse {
     flex-grow: 0;
   }
+
+  .navbar-toggler {
+    margin: 0.5rem;
+    padding: 0;
+    border: none;
+  }
+
   .navbar-brand {
     margin-right: 0;
   }
@@ -62,6 +69,7 @@
   .form-inline {
     flex-grow: 1;
     display: flex;
+    margin: 0 1rem;
 
     .search-category-selector {
       display: flex;
@@ -76,6 +84,10 @@
       justify-content: center;
       align-items: center;
       padding: 1rem 0rem 1rem 0.5rem;
+
+      @include responsive(phone) {
+        display: none;
+      }
     }
 
     input {
@@ -84,6 +96,10 @@
       height: 2rem;
       border-radius: 0;
       border: none;
+      
+      @include responsive(phone) {
+        display: none;
+      }
     }
 
     .search-button {
@@ -97,6 +113,17 @@
       border: none;
       justify-content: center;
       align-items: center;
+
+      @include responsive(phone) {
+        background-color: transparent;
+        color: white;
+        width: 100%;
+        text-align: right;
+
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
 

@@ -1,3 +1,34 @@
+/* Media query manager */
+@mixin responsive($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      // 600px --> 600 / 16
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab_medium {
+    // 980px
+    @media only screen and (max-width: 61.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab_port {
+    @media only screen and (max-width: 74em) {
+      // 1184px
+      @content;
+    }
+  }
+
+  @if $breakpoint == lg_desktop {
+    @media only screen and (max-width: 102em) {
+      // 1633px
+      @content;
+    }
+  }
+}
+
 @mixin sectionTitle {
   color: $color-primary;
   letter-spacing: 0.00735em;
@@ -25,6 +56,7 @@
     no-repeat 50% / 100% 100% !important;
   background-size: 1.5rem !important;
   right: calc(1% + 1px) !important;
+  z-index: 2 !important;
 
   &:hover {
     background: rgba($color: #000000, $alpha: 0.5)
