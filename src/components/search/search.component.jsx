@@ -11,11 +11,11 @@ import {
   clearSearchEntry,
   clearSearchCollections,
   fetchSearchMovieStart,
-} from "../../redux/movies/movies.actions";
+} from "../../redux/search/search.actions";
 import {
   selectMoviesCollection,
   selectSearchInput,
-} from "../../redux/movies/selectors/search.selectors";
+} from "../../redux/search/search.selectors";
 
 import {
   SearchButtonSvg,

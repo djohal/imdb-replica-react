@@ -3,11 +3,7 @@ import {
   call,
   all,
   put,
-  select,
-  debounce,
 } from "redux-saga/effects";
-
-import { selectSearchInput } from "./selectors/search.selectors";
 
 import axios from "../../axios-movies";
 
@@ -18,8 +14,6 @@ import {
   fetchFeaturedTodaySuccess,
   fetchFanFavoritesSuccess,
   fetchFanFavoritesFailure,
-  fetchSearchMovieSuccess,
-  fetchSearchMovieFailure,
 } from "./movies.actions";
 
 import MoviesActionType from "./movies.types";
@@ -64,22 +58,6 @@ export function* fetchFanFavoritesAsync() {
   }
 }
 
-export function* fetchSearchMovieAsync() {
-  try {
-    const searchInput = yield select(selectSearchInput);
-    if (searchInput.trim() !== "") {
-      const request = yield axios.get(
-        `/search/movie?api_key=${API_KEY}&language=en-US&query=${searchInput}`
-      );
-      const results = request.data.results;
-
-      yield put(fetchSearchMovieSuccess(results));
-    }
-  } catch (error) {
-    put(fetchSearchMovieFailure(error));
-  }
-}
-
 export function* fetchNowPlayingStart() {
   yield takeEvery(
     MoviesActionType.FETCH_NOW_PLAYING_START,
@@ -99,19 +77,10 @@ export function* fetchFanFavoritesStart() {
   );
 }
 
-export function* fetchSearchMovieStart() {
-  yield debounce(
-    100,
-    MoviesActionType.FETCH_SEARCH_MOVIE_START,
-    fetchSearchMovieAsync
-  );
-}
-
 export function* moviesSaga() {
   yield all([
     call(fetchNowPlayingStart),
     call(fetchFeaturedTodayStart),
     call(fetchFanFavoritesStart),
-    call(fetchSearchMovieStart),
   ]);
 }
