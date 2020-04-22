@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../../static/assets/logo.png";
-import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
-
-const isCollectionsEmpty = (data) => {
-  return Array.isArray(data) && data.length === 0;
-};
+import {
+  getSingleDecimalValue,
+  isCollectionsEmpty,
+} from "../../redux/movies/movies.utils";
 
 const SearchDropdown = ({ collections, searchEntry }) => (
   <div className={`${searchEntry ? "search-dropdown" : null} `}>
