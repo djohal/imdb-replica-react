@@ -12,10 +12,7 @@ import {
   RatingSvg,
 } from "./fan-favorites-svgs.component";
 import CarouselContainer from "../carousel/carousel.component";
-
-const getSingleDecimal = (num) => {
-  return (Math.round(num * 10) / 10).toFixed(1);
-};
+import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
 
 const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
   useEffect(() => {
@@ -54,7 +51,7 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
               <div className="featured-details">
                 <div className="rating">
                   <RatingSvg />
-                  <span>{getSingleDecimal(vote_average)}</span>
+                  <span>{getSingleDecimalValue(vote_average)}</span>
                 </div>
                 <span>{title || name}</span>
                 <button>
