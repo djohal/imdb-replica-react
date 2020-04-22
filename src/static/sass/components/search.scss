@@ -27,10 +27,6 @@
     justify-content: center;
     align-items: center;
     padding: 1rem 0rem 1rem 0.5rem;
-
-    @include responsive(phone) {
-      display: none;
-    }
   }
 
   input {
@@ -39,10 +35,6 @@
     height: 2rem;
     border-radius: 0;
     border: none;
-
-    @include responsive(phone) {
-      display: none;
-    }
   }
 
   .search-button {
@@ -56,15 +48,39 @@
     border: none;
     justify-content: center;
     align-items: center;
+  }
+}
 
-    @include responsive(phone) {
-      background-color: transparent;
-      color: white;
-      width: 100%;
-      text-align: right;
+@include responsive(phone) {
+  .form-inline {
+    .search-category-selector,
+    input {
+      display: none;
+    }
+    .search-sm {
+      display: block;
+      background: transparent;
 
       &:focus {
+        background: transparent;
         outline: none;
+        border: none;
+        box-shadow: none;
+        color: white;
+      }
+    }
+
+    .search-btn-container {
+      width: 100%;
+      text-align: right;
+      .search-button {
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

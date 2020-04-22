@@ -23,16 +23,16 @@ const Header = () => {
             <img className="logo" src={Logo} alt="logo" />
           </Navbar.Brand>
           <Nav>
-            <Nav.Link>
+            <Nav.Link className="hide-responsive">
               <HamburgerMenuSvg />
               <span>Menu</span>
             </Nav.Link>
             <Search />
-            <Nav.Link>
+            <Nav.Link className="hide-responsive">
               <ImdbProSvg />
             </Nav.Link>
-            <div className="verticle-line"></div>
-            <Nav.Link className="watchlist ">
+            <div className="verticle-line hide-responsive"></div>
+            <Nav.Link className="watchlist hide-responsive">
               <WatchlistSvg />
               <span>Watchlist</span>
             </Nav.Link>

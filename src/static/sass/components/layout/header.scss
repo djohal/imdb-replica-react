@@ -25,6 +25,15 @@
       color: white;
     }
   }
+
+  .hide-responsive {
+    @include responsive(phone) {
+      display: none;
+    }
+    @include responsive(tab_medium) {
+      display: none;
+    }
+  }
   .navbar-collapse {
     flex-grow: 0;
   }
@@ -65,7 +74,7 @@
   .header-text {
     @include header-text-style();
   }
-  
+
   .verticle-line {
     border-right: 2px solid gray;
     width: 1px;

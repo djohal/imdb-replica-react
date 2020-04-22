@@ -23,6 +23,10 @@ import {
 } from "../layout/header/header-svgs.component";
 
 class Search extends React.Component {
+  state = {
+    searchClicked: false,
+  };
+
   componentDidMount() {
     const { clearSearchEntry, clearSearchCollections } = this.props;
     clearSearchEntry();
@@ -52,6 +56,7 @@ class Search extends React.Component {
   };
   render() {
     const { collections, searchEntry } = this.props;
+    const { searchClicked } = this.state;
     return (
       <Form inline>
         <div className="search-category-selector">
@@ -62,10 +67,17 @@ class Search extends React.Component {
           type="text"
           placeholder="Search IMDb"
           onChange={(e) => this.handleChange(e)}
+          className={`${searchClicked ? "search-sm" : null}`}
         />
-        <button type="submit" className="search-button">
-          <SearchButtonSvg />
-        </button>
+        <div className="search-btn-container">
+          <button
+            type="button"
+            className="search-button"
+            onClick={() => this.setState({ searchClicked: true })}
+          >
+            <SearchButtonSvg />
+          </button>
+        </div>
         <div
           className={`${searchEntry ? "overlay" : null}`}
           onClick={() => this.removeOverlay()}
