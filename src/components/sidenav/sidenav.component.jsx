@@ -39,10 +39,10 @@ const menuItems = [
   },
 ];
 
-const SideNavContainer = (props) => {
+const SideNavContainer = ({ isSearchExpanded }) => {
   const [showNav, setShowNav] = useState();
   return (
-    <div className="sidenav">
+    <div className={`${isSearchExpanded ? "display-none sidenav" : "sidenav"}`}>
       <div className="menu-icon">
         <MenuIcon onClick={() => setShowNav(true)} />
       </div>

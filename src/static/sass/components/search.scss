@@ -53,6 +53,8 @@
 
 @include responsive(phone) {
   .form-inline {
+    margin: 0;
+
     .search-category-selector,
     input {
       display: none;

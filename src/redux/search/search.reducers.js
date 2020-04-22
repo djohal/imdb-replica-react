@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   searchInput: "",
   collections: null,
   isFetching: false,
+  expandSearchInput: false,
 };
 
 const searchReducers = (state = INITIAL_STATE, action) => {
@@ -46,6 +47,12 @@ const searchReducers = (state = INITIAL_STATE, action) => {
         collections: null,
         isFetching: false,
         errorMessage: action.payload,
+      };
+
+    case SearchActionType.EXPAND_SEARCH_INPUT:
+      return {
+        ...state,
+        expandSearchInput: action.payload,
       };
     default:
       return state;

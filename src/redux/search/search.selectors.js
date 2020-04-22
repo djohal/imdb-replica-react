@@ -21,3 +21,8 @@ export const selectIsCollectionsLoaded = createSelector(
   [selectSearch],
   (search) => !!search.collections
 );
+
+export const selectIsSearchExpanded = createSelector(
+  [selectSearch],
+  (search) => search.expandSearchInput
+);

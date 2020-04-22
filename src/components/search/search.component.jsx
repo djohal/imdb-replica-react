@@ -11,10 +11,12 @@ import {
   clearSearchEntry,
   clearSearchCollections,
   fetchSearchMovieStart,
+  expandSearchInput,
 } from "../../redux/search/search.actions";
 import {
   selectMoviesCollection,
   selectSearchInput,
+  selectIsSearchExpanded,
 } from "../../redux/search/search.selectors";
 
 import {
@@ -23,14 +25,15 @@ import {
 } from "../layout/header/header-svgs.component";
 
 class Search extends React.Component {
-  state = {
-    searchClicked: false,
-  };
-
   componentDidMount() {
-    const { clearSearchEntry, clearSearchCollections } = this.props;
+    const {
+      clearSearchEntry,
+      clearSearchCollections,
+      expandSearchInput,
+    } = this.props;
     clearSearchEntry();
     clearSearchCollections();
+    expandSearchInput(false);
   }
 
   handleChange = (event) => {
@@ -55,8 +58,12 @@ class Search extends React.Component {
     clearSearchCollections();
   };
   render() {
-    const { collections, searchEntry } = this.props;
-    const { searchClicked } = this.state;
+    const {
+      collections,
+      searchEntry,
+      expandSearchInput,
+      isSearchExpanded,
+    } = this.props;
     return (
       <Form inline>
         <div className="search-category-selector">
@@ -67,19 +74,19 @@ class Search extends React.Component {
           type="text"
           placeholder="Search IMDb"
           onChange={(e) => this.handleChange(e)}
-          className={`${searchClicked ? "search-sm" : null}`}
+          className={`${isSearchExpanded ? "search-sm" : null}`}
         />
         <div className="search-btn-container">
           <button
             type="button"
-            className="search-button"
-            onClick={() => this.setState({ searchClicked: true })}
+            className={`${isSearchExpanded ? "display-none search-button" : "search-button"}`}
+            onClick={() => expandSearchInput(true)}
           >
             <SearchButtonSvg />
           </button>
         </div>
         <div
-          className={`${searchEntry ? "overlay" : null}`}
+          className={`${searchEntry && !isSearchExpanded ? "overlay" : null}`}
           onClick={() => this.removeOverlay()}
         ></div>
         <SearchDropdown collections={collections} searchEntry={searchEntry} />
@@ -93,11 +100,13 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSearchMovieStart: () => dispatch(fetchSearchMovieStart()),
   clearSearchEntry: () => dispatch(clearSearchEntry()),
   clearSearchCollections: () => dispatch(clearSearchCollections()),
+  expandSearchInput: (payload) => dispatch(expandSearchInput(payload)),
 });
 
 const mapStateToProps = createStructuredSelector({
   collections: selectMoviesCollection,
   searchEntry: selectSearchInput,
+  isSearchExpanded: selectIsSearchExpanded,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

@@ -26,3 +26,8 @@ export const clearSearchEntry = () => ({
 export const clearSearchCollections = () => ({
   type: SearchActionType.CLEAR_SEARCH_COLLECTIONS,
 });
+
+export const expandSearchInput = (payload) => ({
+  type: SearchActionType.EXPAND_SEARCH_INPUT,
+  payload,
+});

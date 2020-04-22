@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -12,15 +14,25 @@ import {
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
 import Search from "../../search/search.component";
+import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
 
-const Header = () => {
+const Header = ({ isSearchExpanded }) => {
   return (
     <div className="header">
-      <Navbar className="navbar-custom" variant="dark">
+      <Navbar
+        className={`${
+          isSearchExpanded ? "navbar-search-sm navbar-custom" : "navbar-custom"
+        }`}
+        variant="dark"
+      >
         <Container>
-          <SideNavContainer />
+          <SideNavContainer isSearchExpanded={isSearchExpanded} />
           <Navbar.Brand>
-            <img className="logo" src={Logo} alt="logo" />
+            <img
+              className={`${isSearchExpanded ? "display-none logo" : "logo"}`}
+              src={Logo}
+              alt="logo"
+            />
           </Navbar.Brand>
           <Nav>
             <Nav.Link className="hide-responsive">
@@ -36,7 +48,7 @@ const Header = () => {
               <WatchlistSvg />
               <span>Watchlist</span>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link className={`${isSearchExpanded ? "display-none" : null}`}>
               <span>Sign In</span>
             </Nav.Link>
           </Nav>
@@ -46,4 +58,8 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  isSearchExpanded: selectIsSearchExpanded,
+});
+
+export default connect(mapStateToProps)(Header);
