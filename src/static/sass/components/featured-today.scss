@@ -28,12 +28,25 @@
 
   .featured-details {
     display: flex;
-    justify-content: space-between;
-    margin: 0 1rem;
+    flex-direction: column;
+    margin: 0.5rem 1rem;
     margin-left: 0rem;
 
     span:first-child {
-      width: 70%;
+      display: block;
+      width: 100%;
+    }
+
+    p {
+      width: 95%;
+      margin-top: 0.25rem;
+      color: $color-alpha-white;
+
+      @include multiLineEllipsis(
+        $lineHeight: 1.2em,
+        $lineCount: 2,
+        $bgColor: black
+      );
     }
   }
 }

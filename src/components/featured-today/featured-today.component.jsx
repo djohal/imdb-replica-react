@@ -26,6 +26,7 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
               release_date,
               first_air_date,
               id,
+              overview,
             }) => (
               <React.Fragment key={id}>
                 <div className="carousel-images">
@@ -37,7 +38,8 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
                 </div>
                 <div className="featured-details">
                   <span>{title || name}</span>
-                  <span>{release_date || first_air_date}</span>
+                  <p>{overview}</p>
+                  {/* <span>{release_date || first_air_date}</span> */}
                 </div>
               </React.Fragment>
             )
