@@ -38,6 +38,11 @@
   font-size: 2.125rem;
   line-height: 2.5rem;
   font-family: Arial, Helvetica, sans-serif;
+
+  @include responsive(phone) {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 }
 
 @mixin carousel-arrow {

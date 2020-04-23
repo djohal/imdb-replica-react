@@ -107,3 +107,42 @@
     }
   }
 }
+
+@include responsive(phone) {
+  .fan-favorites-container {
+    padding-top: 1rem;
+
+    .title {
+      margin-bottom: 1rem;
+    }
+
+    .sub-title {
+      font-size: 1.25rem;
+    }
+
+    .main-container {
+      .container {
+        padding-top: 1rem;
+        background: $color-dark;
+      }
+    }
+
+    .react-multi-carousel-list {
+      width: 100%;
+    }
+
+    .featured-details {
+      margin: 0.5rem 0;
+
+      p {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include responsive(tab_medium) {
+  .fan-favorites-container {
+    margin-top: 1rem;
+  }
+}

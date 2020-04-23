@@ -32,15 +32,23 @@ const CarouselContainer = (props) => {
               max: 464,
               min: 0,
             },
-            items: 1,
+            items: props.mobile || 1,
             partialVisibilityGutter: 30,
           },
           tablet: {
             breakpoint: {
-              max: 1024,
+              max: 768,
               min: 464,
             },
-            items: 2,
+            items: props.tablet || 2,
+            partialVisibilityGutter: 30,
+          },
+          laptop: {
+            breakpoint: {
+              max: 1024,
+              min: 780,
+            },
+            items: props.laptop || 4,
             partialVisibilityGutter: 30,
           },
         }}

@@ -11,7 +11,7 @@ import CarouselContainer from "../carousel/carousel.component";
 import { useWindowSize } from "../../redux/movies/movies.utils";
 
 const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
-  const [width] = useWindowSize();
+  const [windowWidth] = useWindowSize();
 
   useEffect(() => {
     fetchFeaturedTodayStart();
@@ -21,7 +21,7 @@ const FeaturedToday = ({ fetchFeaturedTodayStart, collections }) => {
     <div className="featured-today-container">
       <Container>
         <h3 className="title">Featured today</h3>
-        <CarouselContainer desktop={2} slidesToSlide={width > 600 ? 2 : 1}>
+        <CarouselContainer desktop={2} laptop={2} slidesToSlide={windowWidth > 600 ? 2 : 1}>
           {collections.map(({ backdrop_path, title, name, id, overview }) => (
             <React.Fragment key={id}>
               <div className="carousel-images">
