@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv-webpack": "^1.7.0"
+    "dotenv-webpack": "^1.7.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

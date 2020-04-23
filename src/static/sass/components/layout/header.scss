@@ -8,6 +8,10 @@
     background-color: $color-dark;
     margin: 0 auto;
 
+    @include responsive(phone) {
+      background-color: $color-dark2;
+    }
+
     .container {
       @include responsive(phone) {
         padding: 0;
@@ -19,7 +23,6 @@
       padding-left: 0;
       padding-right: 0;
     }
-   
   }
   .navbar-dark {
     align-items: center;

@@ -24,6 +24,9 @@ import {
   DropDownIconSvg,
 } from "../layout/header/header-svgs.component";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 class Search extends React.Component {
   componentDidMount() {
     const {
@@ -52,7 +55,7 @@ class Search extends React.Component {
     }
   };
 
-  removeOverlay = () => {
+  clearSearchData = () => {
     const { clearSearchEntry, clearSearchCollections } = this.props;
     clearSearchEntry();
     clearSearchCollections();
@@ -70,16 +73,35 @@ class Search extends React.Component {
           <span>All</span>
           <DropDownIconSvg />
         </div>
-        <FormControl
-          type="text"
-          placeholder="Search IMDb"
-          onChange={(e) => this.handleChange(e)}
-          className={`${isSearchExpanded ? "search-sm" : null}`}
-        />
+        <div className="search-input-container">
+          <FormControl
+            type="text"
+            placeholder="Search IMDb"
+            onChange={(e) => this.handleChange(e)}
+            className={`${isSearchExpanded ? "search-sm" : null}`}
+          />
+          <FontAwesomeIcon
+            icon={faTimes}
+            color="white"
+            size="1x"
+            className={`${
+              isSearchExpanded
+                ? "cancel-search-expanded cancel-search"
+                : "cancel-search"
+            }`}
+            onClick={() => {
+              this.clearSearchData();
+              expandSearchInput(false);
+            }}
+          />
+        </div>
+
         <div className="search-btn-container">
           <button
             type="button"
-            className={`${isSearchExpanded ? "display-none search-button" : "search-button"}`}
+            className={`${
+              isSearchExpanded ? "display-none search-button" : "search-button"
+            }`}
             onClick={() => expandSearchInput(true)}
           >
             <SearchButtonSvg />
@@ -87,7 +109,7 @@ class Search extends React.Component {
         </div>
         <div
           className={`${searchEntry && !isSearchExpanded ? "overlay" : null}`}
-          onClick={() => this.removeOverlay()}
+          onClick={() => this.clearSearchData()}
         ></div>
         <SearchDropdown collections={collections} searchEntry={searchEntry} />
       </Form>

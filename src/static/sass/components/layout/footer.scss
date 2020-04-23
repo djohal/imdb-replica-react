@@ -1,11 +1,11 @@
 .footer {
   padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 2rem;
   text-align: center;
 
   &__copyright {
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1rem;
 
     & a {
       text-decoration: none;
@@ -14,7 +14,7 @@
     }
 
     & a:hover {
-      color: $color-primary
+      color: $color-primary;
     }
   }
 }
