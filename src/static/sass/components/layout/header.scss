@@ -9,7 +9,7 @@
     margin: 0 auto;
 
     @include responsive(phone) {
-      background-color: $color-dark2;
+      background-color: black;
     }
 
     .container {
@@ -22,6 +22,7 @@
     @include responsive(phone) {
       padding-left: 0;
       padding-right: 0;
+      background-color: $color-dark2;
     }
   }
   .navbar-dark {
