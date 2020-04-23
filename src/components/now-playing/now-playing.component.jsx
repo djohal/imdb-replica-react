@@ -34,12 +34,14 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
                         />
                       </div>
 
-                      <div className="backdrop-img">
-                        <img
-                          className="d-block w-100 carousel-img"
-                          src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-                          alt={title}
-                        />
+                      <div className="backdrop-img-container">
+                        <div className="backdrop-img">
+                          <img
+                            className="d-block w-100 carousel-img"
+                            src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+                            alt={title}
+                          />
+                        </div>
                         <div className="backdrop-caption">
                           <h1>{title}</h1>
                           <div className="rating">

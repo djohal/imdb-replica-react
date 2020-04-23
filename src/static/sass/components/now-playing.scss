@@ -6,7 +6,7 @@
     background-repeat: repeat;
   }
 
-  .backdrop-img {
+  .backdrop-img-container {
     flex-grow: 1;
     margin-left: 1rem;
     width: 100%;
@@ -59,7 +59,6 @@
 
 @include responsive(phone) {
   .now-playing-container {
-    padding-bottom: 2rem;
     margin: 0;
 
     .container {
@@ -91,7 +90,7 @@
             }
           }
 
-          .backdrop-img {
+          .backdrop-img-container {
             margin: 0;
 
             img {
@@ -100,9 +99,19 @@
               margin: 0;
             }
 
+            .backdrop-img::after {
+              background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(0, 0, 0, 1)
+              );
+              margin-top: -15rem;
+              height: 16rem;
+            }
+
             .backdrop-caption {
               margin-left: 11rem;
-              margin-top: 3rem;
+              bottom: -3rem;
               h1 {
                 font-size: 1.25rem;
               }
