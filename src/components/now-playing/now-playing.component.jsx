@@ -10,9 +10,14 @@ import Container from "react-bootstrap/Container";
 
 import { fetchNowPlayingStart } from "../../redux/movies/movies.actions";
 import { selectMoviesCollection } from "../../redux/movies/selectors/now-playing.selectors";
-import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
+import {
+  getSingleDecimalValue,
+  useWindowSize,
+} from "../../redux/movies/movies.utils";
 
 const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
+  const [width] = useWindowSize();
+
   useEffect(() => {
     fetchNowPlayingStart();
   }, [fetchNowPlayingStart]);
@@ -20,7 +25,7 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
   return (
     <div className="now-playing-container">
       <Container>
-        <Carousel interval={null}>
+        <Carousel interval={width < 600 ? null : 3000}>
           {collections
             ? collections.map(
                 ({ backdrop_path, title, vote_average, poster_path, id }) => (

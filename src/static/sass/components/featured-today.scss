@@ -50,3 +50,22 @@
     }
   }
 }
+
+@include responsive(phone) {
+  .featured-today-container {
+    background: $color-dark;
+    padding-top: 1rem;
+
+    .react-multi-carousel-list {
+      width: 100%;
+    }
+
+    .featured-details {
+      margin: 0.5rem 0;
+
+      p {
+        width: 100%;
+      }
+    }
+  }
+}

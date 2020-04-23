@@ -26,6 +26,10 @@
 
 .react-multiple-carousel__arrow {
   @include carousel-arrow;
+
+  @include responsive(phone) {
+    display: none;
+  }
 }
 .react-multiple-carousel__arrow--right {
   @include carousel-right-arrow;
