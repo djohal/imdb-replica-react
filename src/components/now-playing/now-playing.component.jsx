@@ -25,7 +25,7 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
   return (
     <div className="now-playing-container">
       <Container>
-        <Carousel interval={width < 600 ? null : 3000}>
+        <Carousel interval={width < 600 ? null : 5000}>
           {collections
             ? collections.map(
                 ({ backdrop_path, title, vote_average, poster_path, id }) => (
