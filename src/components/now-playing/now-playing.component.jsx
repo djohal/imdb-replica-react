@@ -8,19 +8,19 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 
-import { fetchNowPlayingStart } from "../../redux/movies/movies.actions";
-import { selectMoviesCollection } from "../../redux/movies/selectors/now-playing.selectors";
+import { fetchDataStart } from "../../redux/movies/movies.actions";
+import { selectNowPlayingCollections } from "../../redux/movies/movies.selectors";
 import {
   getSingleDecimalValue,
   useWindowSize,
 } from "../../redux/movies/movies.utils";
 
-const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
+const NowPlaying = ({ collections, fetchDataStart }) => {
   const [width] = useWindowSize();
 
   useEffect(() => {
-    fetchNowPlayingStart();
-  }, [fetchNowPlayingStart]);
+    fetchDataStart(`/movie/now_playing`);
+  }, [fetchDataStart]);
 
   return (
     <div className="now-playing-container">
@@ -67,11 +67,11 @@ const NowPlaying = ({ fetchNowPlayingStart, collections }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  collections: selectMoviesCollection,
+  collections: selectNowPlayingCollections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchNowPlayingStart: () => dispatch(fetchNowPlayingStart()),
+  fetchDataStart: (url) => dispatch(fetchDataStart(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NowPlaying);

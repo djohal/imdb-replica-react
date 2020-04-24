@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Container from "react-bootstrap/Container";
 
-import { fetchFanFavoritesStart } from "../../redux/movies/movies.actions";
-import { selectMoviesCollection } from "../../redux/movies/selectors/fan-favorites.selectors";
+import { fetchDataStart } from "../../redux/movies/movies.actions";
+import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
 import {
   WatchlistRibbonSvg,
   WatchlistRibbonIconSvg,
@@ -25,13 +25,12 @@ const numberOfSlidesToSlide = (width) => {
     return 6;
   }
 };
-
-const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
+const FanFavourites = ({ fetchDataStart, collections }) => {
   const [windowWidth] = useWindowSize();
 
   useEffect(() => {
-    fetchFanFavoritesStart();
-  }, [fetchFanFavoritesStart]);
+    fetchDataStart(`/movie/popular`);
+  }, [fetchDataStart]);
 
   return (
     <div className="fan-favorites-container">
@@ -51,7 +50,7 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
             laptop={5}
             mobile={2}
           >
-            {collections.map(
+            {!!collections && collections.map(
               ({ poster_path, title, name, vote_average, id }) => (
                 <React.Fragment key={id}>
                   <div className="carousel-images">
@@ -94,11 +93,11 @@ const FanFavourites = ({ fetchFanFavoritesStart, collections }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  collections: selectMoviesCollection,
+  collections: selectFanFavoritesCollections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchFanFavoritesStart: () => dispatch(fetchFanFavoritesStart()),
+  fetchDataStart: (url) => dispatch(fetchDataStart(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FanFavourites);

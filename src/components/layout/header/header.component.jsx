@@ -37,16 +37,16 @@ const Header = ({ isSearchExpanded, history }) => {
             />
           </Navbar.Brand>
           <Nav>
-            <Link className="hide-responsive">
+            <Link to="" className="hide-responsive">
               <HamburgerMenuSvg />
               <span>Menu</span>
             </Link>
             <SearchForm />
-            <Link className="hide-responsive">
+            <Link to="" className="hide-responsive">
               <ImdbProSvg />
             </Link>
             <div className="verticle-line hide-responsive"></div>
-            <Link className="watchlist hide-responsive">
+            <Link to="" className="watchlist hide-responsive">
               <WatchlistSvg />
               <span>Watchlist</span>
             </Link>
