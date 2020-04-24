@@ -13,7 +13,7 @@ import {
   WatchlistSvg,
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
-import Search from "../../search/search.component";
+import SearchForm from "../../search-form/search-form.component";
 import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
 
 const Header = ({ isSearchExpanded }) => {
@@ -39,7 +39,7 @@ const Header = ({ isSearchExpanded }) => {
               <HamburgerMenuSvg />
               <span>Menu</span>
             </Nav.Link>
-            <Search />
+            <SearchForm />
             <Nav.Link className="hide-responsive">
               <ImdbProSvg />
             </Nav.Link>

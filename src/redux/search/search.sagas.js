@@ -37,7 +37,7 @@ function* searchMovies(input) {
 export function* fetchSearchMovieAsync() {
   const searchInput = yield select(selectSearchInput);
 
-  if (searchInput.trim() !== "") {
+  if (!!searchInput && searchInput.trim() !== "") {
     const task = yield fork(yield searchMovies, searchInput);
 
     const action = yield take(["CLEAR_SEARCH_COLLECTIONS"]);
