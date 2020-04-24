@@ -50,14 +50,8 @@ class Search extends React.Component {
       searchInput(event.target.value);
       fetchSearchMovieStart();
     } else {
-      /*
-       * setTimeout required to handle fetchSearchMovieSuccess call
-       * that calls after the collection is cleared
-       */
-      setTimeout(() => {
-        clearSearchEntry();
-        clearSearchCollections();
-      }, 200);
+      clearSearchEntry();
+      clearSearchCollections();
     }
   };
 
