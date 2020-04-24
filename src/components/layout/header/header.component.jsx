@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 
 import Navbar from "react-bootstrap/Navbar";
@@ -16,7 +17,7 @@ import SideNavContainer from "../../sidenav/sidenav.component";
 import SearchForm from "../../search-form/search-form.component";
 import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
 
-const Header = ({ isSearchExpanded }) => {
+const Header = ({ isSearchExpanded, history }) => {
   return (
     <div className="header">
       <Navbar
@@ -32,25 +33,29 @@ const Header = ({ isSearchExpanded }) => {
               className={`${isSearchExpanded ? "display-none logo" : "logo"}`}
               src={Logo}
               alt="logo"
+              onClick={() => history.push("/")}
             />
           </Navbar.Brand>
           <Nav>
-            <Nav.Link className="hide-responsive">
+            <Link className="hide-responsive">
               <HamburgerMenuSvg />
               <span>Menu</span>
-            </Nav.Link>
+            </Link>
             <SearchForm />
-            <Nav.Link className="hide-responsive">
+            <Link className="hide-responsive">
               <ImdbProSvg />
-            </Nav.Link>
+            </Link>
             <div className="verticle-line hide-responsive"></div>
-            <Nav.Link className="watchlist hide-responsive">
+            <Link className="watchlist hide-responsive">
               <WatchlistSvg />
               <span>Watchlist</span>
-            </Nav.Link>
-            <Nav.Link className={`${isSearchExpanded ? "display-none" : null}`}>
+            </Link>
+            <Link
+              to="/sign-in"
+              className={`${isSearchExpanded ? "display-none" : null}`}
+            >
               <span>Sign In</span>
-            </Nav.Link>
+            </Link>
           </Nav>
         </Container>
       </Navbar>
@@ -62,4 +67,4 @@ const mapStateToProps = createStructuredSelector({
   isSearchExpanded: selectIsSearchExpanded,
 });
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

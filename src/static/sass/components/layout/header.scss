@@ -32,7 +32,7 @@
     }
   }
 
-  .nav-link {
+  a {
     @include header-text-style();
     padding: 0.4rem 1rem;
     margin: 0 0.25rem;
@@ -41,6 +41,7 @@
       background-color: rgba($color: gray, $alpha: 0.5);
       border-radius: 0.25rem;
       color: white;
+      text-decoration: none;
     }
   }
 
@@ -67,6 +68,7 @@
   }
   .logo {
     width: 4rem;
+    cursor: pointer;
   }
   .nav-items {
     padding: 0.4rem 1.25rem;

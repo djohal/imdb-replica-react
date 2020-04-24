@@ -1,20 +1,19 @@
 import React from "react";
-import "./App.scss";
+import { Route, Switch } from "react-router-dom";
 
+import "./App.scss";
+import HomePage from "./components/homepage/homepage.component";
 import Header from "./components/layout/header/header.component";
-import NowPlaying from "./components/now-playing/now-playing.component";
-import FeaturedToday from "./components/featured-today/featured-today.component";
-import FanFavorites from "./components/fan-favorites/fan-favorites.component";
-import Footer from "./components/layout/footer/footer.component";
+import SignIn from "./components/auth/sign-in/sign-in.component";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <NowPlaying />
-      <FeaturedToday />
-      <FanFavorites />
-      <Footer />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/sign-in" component={SignIn} />
+      </Switch>
     </div>
   );
 }
