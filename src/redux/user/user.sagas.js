@@ -5,6 +5,7 @@ import { signInSuccess, signInFailure } from "./user.actions";
 import {
   auth,
   googleProvider,
+  facebookProvider,
   createUserProfileDocument,
 } from "../../firebase/firebase.utils";
 
@@ -22,20 +23,33 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-export function* signInWithGoogle() {
+export function* signInWithThirdParty(provider) {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
-    
+    const { user } = yield auth.signInWithPopup(provider);
+
     yield getSnapShotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
   }
 }
 
+
 export function* onGoogleSignInStart() {
-  yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
+  yield takeLatest(
+    UserActionTypes.GOOGLE_SIGN_IN_START,
+    signInWithThirdParty,
+    googleProvider
+  );
+}
+
+export function* onFacebookSignInStart() {
+  yield takeLatest(
+    UserActionTypes.FACEBOOK_SIGN_IN_START,
+    signInWithThirdParty,
+    facebookProvider
+  );
 }
 
 export function* userSagas() {
-  yield all([call(onGoogleSignInStart)]);
+  yield all([call(onGoogleSignInStart), call(onFacebookSignInStart)]);
 }
