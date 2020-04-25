@@ -5,6 +5,21 @@ body {
   color: white;
 }
 
+.light-bg {
+  background-color: #fff;
+  color: black;
+
+  .footer {
+    a {
+      color: rgb(90, 90, 90);
+
+      &:hover {
+        color: #e0a800;
+      }
+    }
+  }
+}
+
 * {
   box-sizing: border-box;
 }

@@ -1,20 +1,18 @@
 .footer {
   padding-top: 5rem;
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
   text-align: center;
 
   &__copyright {
-    color: #fff;
     font-size: 1rem;
+  }
+  a {
+    text-decoration: none;
+    transition: all 0.3s;
+    color: $color-alpha-white;
+  }
 
-    & a {
-      text-decoration: none;
-      color: #ccc;
-      transition: all 0.3s;
-    }
-
-    & a:hover {
-      color: $color-primary;
-    }
+  a:hover {
+    color: $color-primary;
   }
 }

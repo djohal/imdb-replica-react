@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -42,6 +43,7 @@ const SignIn = ({
   facebookSignInStart,
   githubSignInStart,
 }) => {
+  const history = useHistory();
   const signInButtons = [
     {
       name: "IMDb",
@@ -83,7 +85,10 @@ const SignIn = ({
               <p className="divider-text">
                 <span>or</span>
               </p>
-              <button className="create-account-btn">
+              <button
+                className="create-account-btn"
+                onClick={() => history.push("/sign-up")}
+              >
                 Create a New Account
               </button>
               <span className="terms">
