@@ -13,6 +13,7 @@ import GoogleIcon from "../../../static/assets/brands/google.png";
 import {
   googleSignInStart,
   facebookSignInStart,
+  githubSignInStart,
 } from "../../../redux/user/user.actions";
 
 const content = [
@@ -36,7 +37,11 @@ const content = [
   },
 ];
 
-const SignIn = ({ googleSignInStart, facebookSignInStart }) => {
+const SignIn = ({
+  googleSignInStart,
+  facebookSignInStart,
+  githubSignInStart,
+}) => {
   const signInButtons = [
     {
       name: "IMDb",
@@ -55,6 +60,7 @@ const SignIn = ({ googleSignInStart, facebookSignInStart }) => {
     {
       name: "Github",
       icon: GithubIcon,
+      signIn: githubSignInStart,
     },
   ];
   return (
@@ -112,6 +118,7 @@ const SignIn = ({ googleSignInStart, facebookSignInStart }) => {
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   facebookSignInStart: () => dispatch(facebookSignInStart()),
+  githubSignInStart: () => dispatch(githubSignInStart()),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

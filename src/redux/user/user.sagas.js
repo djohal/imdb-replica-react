@@ -7,6 +7,7 @@ import {
   googleProvider,
   facebookProvider,
   createUserProfileDocument,
+  githubProvider,
 } from "../../firebase/firebase.utils";
 
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
@@ -33,7 +34,6 @@ export function* signInWithThirdParty(provider) {
   }
 }
 
-
 export function* onGoogleSignInStart() {
   yield takeLatest(
     UserActionTypes.GOOGLE_SIGN_IN_START,
@@ -50,6 +50,18 @@ export function* onFacebookSignInStart() {
   );
 }
 
+export function* onGithubSignInStart() {
+  yield takeLatest(
+    UserActionTypes.GITHUB_SIGN_IN_START,
+    signInWithThirdParty,
+    githubProvider
+  );
+}
+
 export function* userSagas() {
-  yield all([call(onGoogleSignInStart), call(onFacebookSignInStart)]);
+  yield all([
+    call(onGoogleSignInStart),
+    call(onFacebookSignInStart),
+    call(onGithubSignInStart),
+  ]);
 }
