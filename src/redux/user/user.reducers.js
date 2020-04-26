@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 
 const userReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case UserActionTypes.SIGN_UP_SUCCESS:
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
@@ -14,6 +15,7 @@ const userReducers = (state = INITIAL_STATE, action) => {
         error: null,
       };
 
+    case UserActionTypes.SIGN_UP_FAILURE:
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
         ...state,

@@ -1,10 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const SignUpForm = () => {
+import { signUpStart } from "../../../redux/user/user.actions";
+
+const SignUpForm = ({ signUpStart }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -25,8 +29,8 @@ const SignUpForm = () => {
         "Passwords must match"
       ),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: ({ name, email, password }) => {
+      signUpStart({ email, password, name });
     },
   });
 
@@ -95,4 +99,8 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUpForm);

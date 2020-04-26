@@ -1,6 +1,11 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import { UserActionTypes } from "./user.types";
-import { signInSuccess, signInFailure } from "./user.actions";
+import {
+  signInSuccess,
+  signInFailure,
+  signUpFailure,
+  signUpSuccess,
+} from "./user.actions";
 
 import {
   auth,
@@ -58,10 +63,24 @@ export function* onGithubSignInStart() {
   );
 }
 
+export function* signUp({ payload: { email, password, name } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(signUpSuccess({ user, addtionalData: { name } }));
+  } catch (error) {
+    yield put(signUpFailure(error));
+  }
+}
+
+export function* onSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onFacebookSignInStart),
     call(onGithubSignInStart),
+    call(onSignUpStart),
   ]);
 }
