@@ -117,6 +117,20 @@ export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
+export function* signInWithEmail({ payload: { email, password } }) {
+  try {
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    yield getSnapShotFromUserAuth(user);
+    toast.success("Sign in successful !");
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* onEmailSignInStart() {
+  yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
@@ -126,5 +140,6 @@ export function* userSagas() {
     call(onSignUpSuccess),
     call(onUserSignOutStart),
     call(onCheckUserSession),
+    call(onEmailSignInStart),
   ]);
 }

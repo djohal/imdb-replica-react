@@ -5,8 +5,9 @@ import * as Yup from "yup";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { emailSignInStart } from "../../../redux/user/user.actions";
 
-const SignInForm = ({ signUpStart }) => {
+const SignInForm = ({ emailSignInStart }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,7 +19,9 @@ const SignInForm = ({ signUpStart }) => {
         .required("Enter an email"),
       password: Yup.string().required("Enter a password"),
     }),
-    onSubmit: ({ email, password }) => {},
+    onSubmit: ({ email, password }) => {
+      emailSignInStart(email, password);
+    },
   });
 
   return (
@@ -58,6 +61,9 @@ const SignInForm = ({ signUpStart }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
 
 export default connect(null, mapDispatchToProps)(SignInForm);
