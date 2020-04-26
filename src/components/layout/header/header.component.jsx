@@ -15,9 +15,12 @@ import {
 } from "./header-svgs.component";
 import SideNavContainer from "../../sidenav/sidenav.component";
 import SearchForm from "../../search-form/search-form.component";
-import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
 
-const Header = ({ isSearchExpanded, history }) => {
+import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { signOutStart } from "../../../redux/user/user.actions";
+
+const Header = ({ isSearchExpanded, history, currentUser, signOutStart }) => {
   return (
     <div className="header">
       <Navbar
@@ -50,12 +53,21 @@ const Header = ({ isSearchExpanded, history }) => {
               <WatchlistSvg />
               <span>Watchlist</span>
             </Link>
-            <Link
-              to="/sign-in"
-              className={`${isSearchExpanded ? "display-none" : null}`}
-            >
-              <span>Sign In</span>
-            </Link>
+            {currentUser ? (
+              <div
+                className={`${isSearchExpanded ? "display-none" : "sign-out"}`}
+                onClick={() => signOutStart()}
+              >
+                <span>Sign Out</span>
+              </div>
+            ) : (
+              <Link
+                to="/sign-in"
+                className={`${isSearchExpanded ? "display-none" : null}`}
+              >
+                <span>Sign In</span>
+              </Link>
+            )}
           </Nav>
         </Container>
       </Navbar>
@@ -65,6 +77,11 @@ const Header = ({ isSearchExpanded, history }) => {
 
 const mapStateToProps = createStructuredSelector({
   isSearchExpanded: selectIsSearchExpanded,
+  currentUser: selectCurrentUser,
 });
 
-export default withRouter(connect(mapStateToProps)(Header));
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

@@ -5,6 +5,8 @@ import {
   signInFailure,
   signUpFailure,
   signUpSuccess,
+  signOutSuccess,
+  signOutFailure,
 } from "./user.actions";
 
 import {
@@ -66,7 +68,7 @@ export function* onGithubSignInStart() {
 export function* signUp({ payload: { email, password, name } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield put(signUpSuccess({ user, addtionalData: { name } }));
+    yield put(signUpSuccess({ user, additionalData: { name } }));
   } catch (error) {
     yield put(signUpFailure(error));
   }
@@ -76,11 +78,34 @@ export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapShotFromUserAuth(user, additionalData);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
+}
+
+export function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (error) {
+    yield put(signOutFailure(error));
+  }
+}
+
+export function* onUserSignOutStart() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onFacebookSignInStart),
     call(onGithubSignInStart),
     call(onSignUpStart),
+    call(onSignUpSuccess),
+    call(onUserSignOutStart),
   ]);
 }
