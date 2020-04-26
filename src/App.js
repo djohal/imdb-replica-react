@@ -7,10 +7,10 @@ import { toast, Slide } from "react-toastify";
 import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-import HomePage from "./components/homepage/homepage.component";
+import HomePage from "./pages/homepage/homepage.component";
 import Header from "./components/layout/header/header.component";
-import SignIn from "./components/auth/sign-in/sign-in.component";
-import SignUp from "./components/auth/sign-up/sign-up.component";
+import SignInPage from "./pages/sign-in/sign-in.component";
+import SignUp from "./pages/sign-up/sign-up.component";
 import Footer from "./components/layout/footer/footer.component";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -41,7 +41,7 @@ function App({ checkUserSession, currentUser }) {
           exact
           path="/sign-in"
           render={() =>
-            currentUser ? <Redirect to="/" checkUserSession /> : <SignIn />
+            currentUser ? <Redirect to="/" checkUserSession /> : <SignInPage />
           }
         />
         <Route

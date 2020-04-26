@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Container from "react-bootstrap/Container";
 
-import Logo from "../../../static/assets/logo.png";
-import SignUpForm from "./sign-up-form.component";
+import Logo from "../../static/assets/logo.png";
+import SignUpForm from "../../components/auth/sign-up/sign-up-form.component";
 
 const SignUp = () => {
   return (
