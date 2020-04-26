@@ -9,7 +9,7 @@ import SignInForm from "../../components/auth/sign-in/sign-in-form.component";
 const SignInPage = () => {
   const history = useHistory();
   return (
-    <div className="sign-in">
+    <div className="sign-in-sign-up">
       <Helmet>
         <body class="light-bg"></body>
       </Helmet>

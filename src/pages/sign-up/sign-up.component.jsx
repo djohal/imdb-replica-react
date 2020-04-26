@@ -8,7 +8,7 @@ import SignUpForm from "../../components/auth/sign-up/sign-up-form.component";
 
 const SignUpPage = () => {
   return (
-    <div className="sign-up">
+    <div className="sign-in-sign-up">
       <Helmet>
         <body class="light-bg"></body>
       </Helmet>
@@ -20,7 +20,8 @@ const SignUpPage = () => {
           <div className="divider-section">
             <div className="divider-inner"></div>
             <span>
-              Already have an account? <Link to="/register/sign-in">Sign-in</Link>
+              Already have an account?{" "}
+              <Link to="/register/sign-in">Sign-in</Link>
             </span>
           </div>
         </div>
