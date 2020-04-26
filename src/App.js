@@ -9,8 +9,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import HomePage from "./pages/homepage/homepage.component";
 import Header from "./components/layout/header/header.component";
+import RegistrationPage from "./pages/registration/registration.component";
+import SignUpPage from "./pages/sign-up/sign-up.component";
 import SignInPage from "./pages/sign-in/sign-in.component";
-import SignUp from "./pages/sign-up/sign-up.component";
 import Footer from "./components/layout/footer/footer.component";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -39,6 +40,17 @@ function App({ checkUserSession, currentUser }) {
         <Route exact path="/" component={HomePage} />
         <Route
           exact
+          path="/register/sign-in"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/" checkUserSession />
+            ) : (
+              <RegistrationPage />
+            )
+          }
+        />
+        <Route
+          exact
           path="/sign-in"
           render={() =>
             currentUser ? <Redirect to="/" checkUserSession /> : <SignInPage />
@@ -47,7 +59,7 @@ function App({ checkUserSession, currentUser }) {
         <Route
           path="/sign-up"
           render={() =>
-            currentUser ? <Redirect to="/" checkUserSession /> : <SignUp />
+            currentUser ? <Redirect to="/" checkUserSession /> : <SignUpPage />
           }
         />
       </Switch>

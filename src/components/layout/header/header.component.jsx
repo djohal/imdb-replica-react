@@ -62,7 +62,7 @@ const Header = ({ isSearchExpanded, history, currentUser, signOutStart }) => {
               </div>
             ) : (
               <Link
-                to="/sign-in"
+                to="/register/sign-in"
                 className={`${isSearchExpanded ? "display-none" : null}`}
               >
                 <span>Sign In</span>

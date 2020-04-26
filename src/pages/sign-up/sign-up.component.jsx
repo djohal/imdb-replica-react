@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Logo from "../../static/assets/logo.png";
 import SignUpForm from "../../components/auth/sign-up/sign-up-form.component";
 
-const SignUp = () => {
+const SignUpPage = () => {
   return (
     <div className="sign-up">
       <Helmet>
@@ -20,7 +20,7 @@ const SignUp = () => {
           <div className="divider-section">
             <div className="divider-inner"></div>
             <span>
-              Already have an account? <Link to="/sign-in">Sign-in</Link>
+              Already have an account? <Link to="/register/sign-in">Sign-in</Link>
             </span>
           </div>
         </div>
@@ -32,4 +32,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

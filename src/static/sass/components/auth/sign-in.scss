@@ -1,154 +1,150 @@
-@mixin sign-in-buttons {
-  background: white;
-  outline: none;
-  margin: 0.25rem 0;
-  box-shadow: none;
-  border: 1px solid #ddd;
-  padding: 0.25rem 0;
-  padding-left: 2.5rem;
-  width: 100%;
-  border-radius: 0.25rem;
-  font-weight: bold;
-  color: $color-text-dark2;
-  text-align: left;
-  letter-spacing: 1px;
-}
-
-@mixin divider-text {
-  border-top: 0.5px solid #555555;
-  content: "";
-  position: absolute;
-  height: 5px;
-  top: 50%;
-  width: 90px;
-}
-
 .sign-in {
-  background-color: $color-bg-light;
+  background-color: white;
+  padding-top: 1rem;
+  height: 70vh;
 
-  .sign-in-container {
-    position: relative;
+  .container {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    color: $color-text-dark;
-    height: 50vh;
-    background: no-repeat 100% -webkit-linear-gradient(
-        top,
-        rgba(0, 0, 0, 0.3) 0%,
-        transparent 7px
-      ) #fff;
-    border-bottom: 1px solid #ccc;
-    padding-top: 2rem;
-
-    h3 {
-      font-size: 1.5rem;
-      font-weight: bold;
+    width: 40%;
+    padding-bottom: 2rem;
+    img {
+      width: 7rem;
+    }
+    .form-container {
+      width: 70%;
+      min-width: 20rem;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      padding: 1rem;
     }
 
-    .col {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
+    form {
+      color: black;
+      .title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
 
-    .options {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      width: 55%;
-      margin-right: 2rem;
+      .form-group {
+        margin-bottom: 0.5rem;
 
-      .buttons {
-        display: flex;
-        flex-direction: column;
+        label {
+          font-size: 0.9rem;
+          font-weight: 500;
+          margin-bottom: 0.25rem;
+        }
 
-        .btn-container {
-          display: flex;
-          position: relative;
-          flex-direction: row;
-          align-items: center;
+        input {
+          border-color: #a6a6a6;
+        }
 
-          button {
-            @include sign-in-buttons();
-          }
-
-          img {
-            position: absolute;
-            margin-left: 0.5rem;
-            width: 1.25rem;
+        .form-check {
+          margin-top: 0.5rem;
+          vertical-align: middle;
+          label {
+            font-size: 0.8rem;
+            font-weight: normal;
           }
         }
       }
-      .divider-text {
-        line-height: 0.5;
+
+      .btn-primary {
         margin-top: 1rem;
-
-        span {
-          display: inline-block;
-          position: relative;
-          width: 1rem;
-          &::before {
-            right: 100%;
-            margin-right: 1rem;
-            @include divider-text();
-          }
-          &::after {
-            left: 100%;
-            margin-left: 1rem;
-            @include divider-text();
-          }
-        }
-      }
-
-      .create-account-btn {
-        @include sign-in-buttons();
-        color: $color-dark;
-        text-align: center;
-        padding-left: 0;
-        background-color: $color-primary;
-      }
-
-      .terms {
         width: 100%;
-        margin-top: 1rem;
-        font-size: 0.75rem;
-      }
-    }
+        background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+        border: 1px solid #ccc;
+        color: black;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
 
-    .benefits {
-      height: 80%;
-      border-left: 1px solid rgba(#ccc, 0.8);
-      padding-left: 2rem;
-
-      span {
-        font-weight: bold;
+        &:active,
+        &:active:focus {
+          color: black;
+          border: 1px solid #e77600;
+          box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+        }
       }
-      p {
-        font-size: 0.75rem;
+
+      .spacing {
+        margin-bottom: 1.5rem;
       }
     }
   }
 
-  .recently-viewed-container {
-    background-color: $color-div-light;
-    color: $color-text-dark2;
-    .row {
-      padding-top: 1rem;
-      padding-bottom: 5rem;
-      display: flex;
+  .divider-section {
+    .divider-inner {
+      height: 2rem;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.03) 1px,
+        transparent
+      );
+      margin-bottom: -1rem;
+    }
+    span {
+      font-size: 0.75rem;
+      cursor: pointer;
+
+      a {
+        color: #007bff;
+      }
+    }
+  }
+
+  .divider-break {
+    text-align: center;
+    position: relative;
+    top: 2px;
+    padding-top: 1px;
+    margin-bottom: 14px;
+    line-height: 0;
+
+    span {
+      line-height: 1;
+      font-size: 12px;
+      color: #767676;
+      font-weight: 400;
+      z-index: 2;
+      position: relative;
+      display: inline-block;
+      background-color: #fff;
+      padding: 0 8px 0 7px;
+    }
+
+    &::after {
+      content: "";
       width: 100%;
-      margin: 0;
-      justify-content: space-between;
-      h3 {
-        font-size: 1.25rem;
-        font-weight: bold;
-      }
-      span {
-        font-size: 0.75rem;
-        cursor: pointer;
-        color: #136cb2;
-      }
+      background-color: transparent;
+      display: block;
+      height: 1px;
+      border-top: 1px solid #e7e7e7;
+      position: absolute;
+      top: 50%;
+      margin-top: -1px;
+      z-index: 1;
+    }
+  }
+  .create-account {
+    margin-top: 1rem;
+    width: 100%;
+    background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+    border: 1px solid #ccc;
+    color: black;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+    border-radius: 0.25rem;
+
+    &:active,
+    &:active:focus {
+      color: black;
+      border: 1px solid #e77600;
+      box-shadow: 0 0 3px 2px rgba(grey, 0.5);
     }
   }
 }
