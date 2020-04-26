@@ -54,17 +54,12 @@
       }
 
       .btn-primary {
-        margin-top: 1rem;
-        width: 100%;
+        @include form-button();
+        font-size: 1rem;
         background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
-        border: 1px solid #ccc;
-        color: black;
-        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
 
         &:active,
         &:active:focus {
-          color: black;
-          border: 1px solid #e77600;
           box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
         }
       }
@@ -86,13 +81,19 @@
       );
       margin-bottom: -1rem;
     }
+
+    .account-exist {
+      display: inline-block;
+      margin-right: 0.25rem;
+    }
+
     span {
       font-size: 0.75rem;
       cursor: pointer;
-
-      a {
-        color: #007bff;
-      }
+    }
+    a {
+      color: #007bff;
+      font-size: 0.75rem;
     }
   }
 
@@ -130,21 +131,33 @@
     }
   }
   .create-account {
-    margin-top: 1rem;
-    width: 100%;
-    background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
-    border: 1px solid #ccc;
-    color: black;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
-    font-size: 0.8rem;
-    padding: 0.4rem 0;
-    border-radius: 0.25rem;
+    @include form-button();
+  }
+}
 
-    &:active,
-    &:active:focus {
-      color: black;
-      border: 1px solid #e77600;
-      box-shadow: 0 0 3px 2px rgba(grey, 0.5);
+@include responsive(phone) {
+  .sign-in-sign-up {
+    max-height: 80vh;
+    .container {
+      img {
+        width: 5rem;
+      }
+
+      form .form-group input[type="password"] {
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    }
+
+    .divider-section {
+      a {
+        @include form-button();
+
+        &::after {
+          content: " Now";
+        }
+      }
     }
   }
 }

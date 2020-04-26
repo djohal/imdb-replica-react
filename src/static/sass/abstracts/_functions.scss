@@ -120,3 +120,24 @@
     background: $bgColor;
   }
 }
+
+@mixin form-button {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  width: 100%;
+  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+  border: 1px solid #ccc;
+  color: black;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+  font-size: 0.8rem;
+  padding: 0.5rem 0;
+  border-radius: 0.25rem;
+
+  &:active,
+  &:active:focus {
+    color: black;
+    border: 1px solid #e77600;
+    box-shadow: 0 0 3px 2px rgba(grey, 0.5);
+  }
+}

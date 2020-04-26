@@ -26,6 +26,10 @@
 .registration {
   background-color: $color-bg-light;
 
+  .title-sm {
+    display: none;
+  }
+
   .registration-container {
     position: relative;
     display: flex;
@@ -149,6 +153,58 @@
         cursor: pointer;
         color: #136cb2;
       }
+    }
+  }
+}
+
+@include responsive(phone) {
+  .registration {
+    background: #ffffff;
+    color: $color-dark;
+    height: 70vh;
+
+    .title-sm {
+      display: block;
+      width: 100%;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid #ccc;
+    }
+    .registration-container {
+      padding-top: 1rem;
+      background: none;
+      border: none;
+
+      .col {
+        flex-basis: auto;
+        position: relative;
+
+        h3 {
+          display: none;
+        }
+
+        .options {
+          width: 70%;
+
+          .buttons .btn-container {
+            button {
+              padding: 0.5rem;
+              padding-left: 4.5rem;
+            }
+            img {
+              width: 2rem;
+              margin-left: 1.5rem;
+            }
+          }
+        }
+      }
+      .benefits {
+        display: none;
+      }
+    }
+
+    .recently-viewed-container {
+      display: none;
     }
   }
 }

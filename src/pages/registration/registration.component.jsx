@@ -71,6 +71,7 @@ const RegistrationPage = ({
   ];
   return (
     <div className="registration">
+      <h3 className="title-sm">Sign in</h3>
       <Container className="registration-container">
         <Row>
           <Col>

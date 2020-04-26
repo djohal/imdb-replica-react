@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useRouteMatch } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 
 import Navbar from "react-bootstrap/Navbar";
@@ -19,10 +19,22 @@ import SearchForm from "../../search-form/search-form.component";
 import { selectIsSearchExpanded } from "../../../redux/search/search.selectors";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { signOutStart } from "../../../redux/user/user.actions";
+import { useWindowSize } from "../../../redux/movies/movies.utils";
 
 const Header = ({ isSearchExpanded, history, currentUser, signOutStart }) => {
+  const [windowWidth] = useWindowSize();
+
+  let signUpUrlMatch = useRouteMatch("/sign-up");
+  let signInUrlMatch = useRouteMatch("/sign-in");
+
   return (
-    <div className="header">
+    <div
+      className={`${
+        windowWidth < 600 && (signUpUrlMatch || signInUrlMatch)
+          ? "display-none"
+          : "header"
+      }`}
+    >
       <Navbar
         className={`${
           isSearchExpanded ? "navbar-search-sm navbar-custom" : "navbar-custom"
