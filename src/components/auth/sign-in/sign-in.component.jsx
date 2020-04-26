@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
@@ -11,8 +11,6 @@ import IMDbIcon from "../../../static/assets/brands/imdb.png";
 import FacebookIcon from "../../../static/assets/brands/facebook.png";
 import GithubIcon from "../../../static/assets/brands/github.png";
 import GoogleIcon from "../../../static/assets/brands/google.png";
-
-import Toast from "react-bootstrap/Toast";
 
 import {
   googleSignInStart,
@@ -46,19 +44,8 @@ const SignIn = ({
   googleSignInStart,
   facebookSignInStart,
   githubSignInStart,
-  currentUser,
 }) => {
   const history = useHistory();
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (currentUser) {
-      setShow(true);
-      setTimeout(() => {
-        history.push("/");
-      }, 1000);
-    }
-  }, [currentUser, history]);
 
   const signInButtons = [
     {
@@ -83,9 +70,6 @@ const SignIn = ({
   ];
   return (
     <div className="sign-in">
-      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-        <Toast.Body>Sign in successful !</Toast.Body>
-      </Toast>
       <Container className="sign-in-container">
         <Row>
           <Col>

@@ -25,6 +25,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-simple-sidenav": "^2.0.0",
+    "react-toastify": "^5.5.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",

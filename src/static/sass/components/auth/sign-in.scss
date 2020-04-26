@@ -25,13 +25,7 @@
 
 .sign-in {
   background-color: $color-bg-light;
-  .toast {
-    position: absolute;
-    right: 0;
-    z-index: 2000;
-    background-color: $color-success;
-    padding: 0 1rem;
-  }
+
   .sign-in-container {
     position: relative;
     display: flex;

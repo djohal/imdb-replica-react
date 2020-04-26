@@ -1,5 +1,7 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import { UserActionTypes } from "./user.types";
+import { toast } from "react-toastify";
+
 import {
   signInSuccess,
   signInFailure,
@@ -15,6 +17,7 @@ import {
   facebookProvider,
   createUserProfileDocument,
   githubProvider,
+  getCurrentUser,
 } from "../../firebase/firebase.utils";
 
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
@@ -34,8 +37,8 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
 export function* signInWithThirdParty(provider) {
   try {
     const { user } = yield auth.signInWithPopup(provider);
-
     yield getSnapShotFromUserAuth(user);
+    toast.success("Sign in successful !");
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -99,6 +102,20 @@ export function* onUserSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
 }
 
+export function* isUserAuthenticated() {
+  try {
+    const userAuth = yield getCurrentUser();
+    if (!userAuth) return;
+    yield getSnapShotFromUserAuth(userAuth);
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* onCheckUserSession() {
+  yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
@@ -107,5 +124,6 @@ export function* userSagas() {
     call(onSignUpStart),
     call(onSignUpSuccess),
     call(onUserSignOutStart),
+    call(onCheckUserSession),
   ]);
 }
