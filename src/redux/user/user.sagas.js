@@ -72,6 +72,7 @@ export function* signUp({ payload: { email, password, name } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield put(signUpSuccess({ user, additionalData: { name } }));
+    toast.success("Sign up successful !");
   } catch (error) {
     yield put(signUpFailure(error));
   }

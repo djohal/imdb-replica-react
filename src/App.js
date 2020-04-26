@@ -5,6 +5,8 @@ import { createStructuredSelector } from "reselect";
 import { toast, Slide } from "react-toastify";
 
 import "./App.scss";
+import "react-toastify/dist/ReactToastify.css";
+
 import HomePage from "./components/homepage/homepage.component";
 import Header from "./components/layout/header/header.component";
 import SignIn from "./components/auth/sign-in/sign-in.component";
@@ -42,7 +44,12 @@ function App({ checkUserSession, currentUser }) {
             currentUser ? <Redirect to="/" checkUserSession /> : <SignIn />
           }
         />
-        <Route path="/sign-up" component={SignUp} />
+        <Route
+          path="/sign-up"
+          render={() =>
+            currentUser ? <Redirect to="/" checkUserSession /> : <SignUp />
+          }
+        />
       </Switch>
       <Footer />
     </div>
