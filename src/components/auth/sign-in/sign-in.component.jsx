@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -11,11 +12,14 @@ import FacebookIcon from "../../../static/assets/brands/facebook.png";
 import GithubIcon from "../../../static/assets/brands/github.png";
 import GoogleIcon from "../../../static/assets/brands/google.png";
 
+import Toast from "react-bootstrap/Toast";
+
 import {
   googleSignInStart,
   facebookSignInStart,
   githubSignInStart,
 } from "../../../redux/user/user.actions";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
 
 const content = [
   {
@@ -42,8 +46,20 @@ const SignIn = ({
   googleSignInStart,
   facebookSignInStart,
   githubSignInStart,
+  currentUser,
 }) => {
   const history = useHistory();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (currentUser) {
+      setShow(true);
+      setTimeout(() => {
+        history.push("/");
+      }, 1000);
+    }
+  }, [currentUser, history]);
+
   const signInButtons = [
     {
       name: "IMDb",
@@ -67,6 +83,9 @@ const SignIn = ({
   ];
   return (
     <div className="sign-in">
+      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+        <Toast.Body>Sign in successful !</Toast.Body>
+      </Toast>
       <Container className="sign-in-container">
         <Row>
           <Col>
@@ -120,10 +139,14 @@ const SignIn = ({
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   facebookSignInStart: () => dispatch(facebookSignInStart()),
   githubSignInStart: () => dispatch(githubSignInStart()),
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
