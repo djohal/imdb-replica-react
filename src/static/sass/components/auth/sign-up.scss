@@ -13,15 +13,16 @@
     img {
       width: 7rem;
     }
-
-    form {
+    .form-container {
       width: 60%;
       margin-top: 1rem;
       border: 1px solid #ccc;
       border-radius: 0.5rem;
       padding: 1rem;
+    }
+    
+    form {
       color: black;
-
       .title {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
