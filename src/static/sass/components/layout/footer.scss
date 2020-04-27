@@ -16,3 +16,9 @@
     color: $color-primary;
   }
 }
+
+@media only screen and (max-height: 750px) {
+  .footer {
+    display: none;
+  }
+}
