@@ -16,6 +16,7 @@ import Footer from "./components/layout/footer/footer.component";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
+import NotFoundPage from "./pages/not-found/not-found-page.component";
 
 toast.configure({
   position: "top-right",
@@ -62,6 +63,8 @@ function App({ checkUserSession, currentUser }) {
             currentUser ? <Redirect to="/" checkUserSession /> : <SignUpPage />
           }
         />
+        <Route path="/404" component={NotFoundPage} />
+        <Redirect to="/404" />  
       </Switch>
       <Footer />
     </div>

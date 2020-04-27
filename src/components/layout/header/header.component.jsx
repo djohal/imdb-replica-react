@@ -26,12 +26,14 @@ const Header = ({ isSearchExpanded, history, currentUser, signOutStart }) => {
 
   let signUpUrlMatch = useRouteMatch("/sign-up");
   let signInUrlMatch = useRouteMatch("/sign-in");
+  let notFoundMatch = useRouteMatch("/404");
 
   return (
     <div
       className={`${
-        windowWidth < 600 && (signUpUrlMatch || signInUrlMatch)
-          ? "display-none"
+        (windowWidth < 600 && (signUpUrlMatch || signInUrlMatch)) ||
+        notFoundMatch
+          ? "display-none hide-display"
           : "header"
       }`}
     >
