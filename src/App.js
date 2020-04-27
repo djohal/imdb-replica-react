@@ -23,6 +23,9 @@ const SignInPage = lazy(() => import("./pages/sign-in/sign-in.component"));
 const NotFoundPage = lazy(() =>
   import("./pages/not-found/not-found-page.component")
 );
+const ErrorBoundary = lazy(() =>
+  import("./components/error-boundary/error-boundary.component")
+);
 
 toast.configure({
   position: "top-right",
@@ -44,43 +47,45 @@ function App({ checkUserSession, currentUser }) {
     <div className="App">
       <Header />
       <Suspense fallback={<Spinner />}>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route
-            exact
-            path="/register/sign-in"
-            render={() =>
-              currentUser ? (
-                <Redirect to="/" checkUserSession />
-              ) : (
-                <RegistrationPage />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/sign-in"
-            render={() =>
-              currentUser ? (
-                <Redirect to="/" checkUserSession />
-              ) : (
-                <SignInPage />
-              )
-            }
-          />
-          <Route
-            path="/sign-up"
-            render={() =>
-              currentUser ? (
-                <Redirect to="/" checkUserSession />
-              ) : (
-                <SignUpPage />
-              )
-            }
-          />
-          <Route path="/404" component={NotFoundPage} />
-          <Redirect to="/404" />
-        </Switch>
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route
+              exact
+              path="/register/sign-in"
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" checkUserSession />
+                ) : (
+                  <RegistrationPage />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/sign-in"
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" checkUserSession />
+                ) : (
+                  <SignInPage />
+                )
+              }
+            />
+            <Route
+              path="/sign-up"
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" checkUserSession />
+                ) : (
+                  <SignUpPage />
+                )
+              }
+            />
+            <Route path="/404" component={NotFoundPage} />
+            <Redirect to="/404" />
+          </Switch>
+        </ErrorBoundary>
       </Suspense>
       <Footer />
     </div>
