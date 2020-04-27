@@ -40,6 +40,7 @@
     position: relative;
     width: 95%;
     height: 15rem;
+    background: $color-dark2;
   }
 
   .watchlist-ribbon {
@@ -129,6 +130,10 @@
 
     .react-multi-carousel-list {
       width: 100%;
+
+      .carousel-img {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), black);
+      }
     }
 
     .featured-details {

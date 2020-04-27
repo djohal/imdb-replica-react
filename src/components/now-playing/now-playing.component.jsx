@@ -33,7 +33,7 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
                     <div className="carousel-images">
                       <div className="poster-img-container">
                         <img
-                          className="d-block carousel-img poster-img"
+                          className="d-block w-100 carousel-img poster-img"
                           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
                           alt={title}
                         />

@@ -17,9 +17,11 @@
   }
 
   .carousel-img {
+    height: 15rem;
     width: 25rem;
     margin: 1rem;
     margin-bottom: 0rem;
+    background: $color-dark;
 
     &:first-child {
       margin-left: 0;
@@ -58,6 +60,10 @@
 
     .react-multi-carousel-list {
       width: 100% !important;
+
+      .carousel-img {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), black);
+      }
     }
 
     .featured-details {
