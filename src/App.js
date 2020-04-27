@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -7,16 +7,22 @@ import { toast, Slide } from "react-toastify";
 import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-import HomePage from "./pages/homepage/homepage.component";
 import Header from "./components/layout/header/header.component";
-import RegistrationPage from "./pages/registration/registration.component";
-import SignUpPage from "./pages/sign-up/sign-up.component";
-import SignInPage from "./pages/sign-in/sign-in.component";
 import Footer from "./components/layout/footer/footer.component";
+import Spinner from "./components/spinner/spinner.component";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
-import NotFoundPage from "./pages/not-found/not-found-page.component";
+
+const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
+const RegistrationPage = lazy(() =>
+  import("./pages/registration/registration.component")
+);
+const SignUpPage = lazy(() => import("./pages/sign-up/sign-up.component"));
+const SignInPage = lazy(() => import("./pages/sign-in/sign-in.component"));
+const NotFoundPage = lazy(() =>
+  import("./pages/not-found/not-found-page.component")
+);
 
 toast.configure({
   position: "top-right",
@@ -37,35 +43,45 @@ function App({ checkUserSession, currentUser }) {
   return (
     <div className="App">
       <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route
-          exact
-          path="/register/sign-in"
-          render={() =>
-            currentUser ? (
-              <Redirect to="/" checkUserSession />
-            ) : (
-              <RegistrationPage />
-            )
-          }
-        />
-        <Route
-          exact
-          path="/sign-in"
-          render={() =>
-            currentUser ? <Redirect to="/" checkUserSession /> : <SignInPage />
-          }
-        />
-        <Route
-          path="/sign-up"
-          render={() =>
-            currentUser ? <Redirect to="/" checkUserSession /> : <SignUpPage />
-          }
-        />
-        <Route path="/404" component={NotFoundPage} />
-        <Redirect to="/404" />  
-      </Switch>
+      <Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route
+            exact
+            path="/register/sign-in"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" checkUserSession />
+              ) : (
+                <RegistrationPage />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/sign-in"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" checkUserSession />
+              ) : (
+                <SignInPage />
+              )
+            }
+          />
+          <Route
+            path="/sign-up"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" checkUserSession />
+              ) : (
+                <SignUpPage />
+              )
+            }
+          />
+          <Route path="/404" component={NotFoundPage} />
+          <Redirect to="/404" />
+        </Switch>
+      </Suspense>
       <Footer />
     </div>
   );
