@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect";
 import Container from "react-bootstrap/Container";
 
 import { fetchDataStart } from "../../redux/movies/movies.actions";
+import { addItemIdToWatchlist } from "../../redux/watchlist/watchlist.actions";
 import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
@@ -28,14 +29,17 @@ const numberOfSlidesToSlide = (width) => {
     return 6;
   }
 };
-const FanFavourites = ({ fetchDataStart, collections, currentUser }) => {
+const FanFavourites = ({
+  fetchDataStart,
+  collections,
+  currentUser,
+  addItemIdToWatchlist,
+}) => {
   const [windowWidth] = useWindowSize();
   const history = useHistory();
 
-  const redirectToWatchlistPage = () => {
-    currentUser
-      ? history.push("/watchlist")
-      : history.push("/register/sign-in");
+  const redirectToWatchlistPage = (id) => {
+    currentUser ? addItemIdToWatchlist(id) : history.push("/register/sign-in");
   };
 
   useEffect(() => {
@@ -91,7 +95,10 @@ const FanFavourites = ({ fetchDataStart, collections, currentUser }) => {
                         <span>{getSingleDecimalValue(vote_average)}</span>
                       </div>
                       <span>{title || name}</span>
-                      <button type="button" onClick={redirectToWatchlistPage}>
+                      <button
+                        type="button"
+                        onClick={() => redirectToWatchlistPage(id)}
+                      >
                         <WatchlistRibbonIconSvg />
                         <div className="button-text">Watchlist</div>
                       </button>
@@ -113,6 +120,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataStart: (url) => dispatch(fetchDataStart(url)),
+  addItemIdToWatchlist: (id) => dispatch(addItemIdToWatchlist(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FanFavourites);

@@ -7,28 +7,24 @@
   .navbar-custom {
     background-color: $color-dark;
     margin: 0 auto;
-
-    @include responsive(phone) {
-      background-color: black;
-    }
-
-    .container {
-      @include responsive(phone) {
-        padding: 0;
-      }
-    }
   }
-  .navbar-search-sm {
-    @include responsive(phone) {
-      padding-left: 0;
-      padding-right: 0;
-      background-color: $color-dark2;
-    }
-  }
+
   .navbar-dark {
     align-items: center;
     .navbar-nav {
       width: 100%;
+    }
+  }
+
+  .watchlist {
+    .watchlist-cart {
+      margin-left: 0.5rem;
+      color: black;
+      text-align: center;
+      padding: 0 0.4rem;
+      border-radius: 0.9rem;
+      background-color: $color-primary;
+      font-size: 0.8rem;
     }
   }
 
@@ -46,14 +42,6 @@
     }
   }
 
-  .hide-responsive {
-    @include responsive(phone) {
-      display: none;
-    }
-    @include responsive(tab_medium) {
-      display: none;
-    }
-  }
   .navbar-collapse {
     flex-grow: 0;
   }
@@ -101,5 +89,32 @@
     border-right: 2px solid gray;
     width: 1px;
     height: 2.2rem;
+  }
+}
+
+@include responsive(phone) {
+  .header {
+    .navbar-custom {
+      background-color: black;
+
+      .container {
+        padding: 0;
+      }
+    }
+
+    .navbar-search-sm {
+      padding-left: 0;
+      padding-right: 0;
+      background-color: $color-dark2;
+    }
+    .hide-responsive {
+      display: none;
+    }
+  }
+}
+
+@include responsive(tab_medium) {
+  .hide-responsive {
+    display: none;
   }
 }

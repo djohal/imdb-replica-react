@@ -24,7 +24,7 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => (
     <Link to="/watchlist" className="watchlist hide-responsive">
       <WatchlistSvg />
       <span>Watchlist</span>
-      <span>1</span>
+      <span className="watchlist-cart">100</span>
     </Link>
     {currentUser ? (
       <div
