@@ -9,6 +9,7 @@ import { selectFeaturedTodayCollections } from "../../redux/movies/movies.select
 import CarouselContainer from "../carousel/carousel.component";
 
 import { useWindowSize } from "../../redux/movies/movies.utils";
+import FTCollectionItem from "./ft-collection-item.component";
 
 const FeaturedToday = ({ collections, fetchDataStart }) => {
   const [windowWidth] = useWindowSize();
@@ -27,20 +28,8 @@ const FeaturedToday = ({ collections, fetchDataStart }) => {
           slidesToSlide={windowWidth > 600 ? 2 : 1}
         >
           {!!collections &&
-            collections.map(({ backdrop_path, title, name, id, overview }) => (
-              <React.Fragment key={id}>
-                <div className="carousel-images">
-                  <img
-                    className="d-block carousel-img"
-                    src={`https://image.tmdb.org/t/p/w400/${backdrop_path}`}
-                    alt={title}
-                  />
-                </div>
-                <div className="featured-details">
-                  <span>{title || name}</span>
-                  <p>{overview}</p>
-                </div>
-              </React.Fragment>
+            collections.map((collectionItem, i) => (
+              <FTCollectionItem {...collectionItem} key={i} />
             ))}
         </CarouselContainer>
       </Container>

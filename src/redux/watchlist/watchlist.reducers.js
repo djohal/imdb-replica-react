@@ -1,21 +1,16 @@
 import WatchlistActionTypes from "./watchlist.types";
-import { addItemIdToWatchlist } from "./watchlist.utils";
+import { addItem } from "./watchlist.utils";
 
 const INITIAL_STATE = {
-  watchlistItemIds: [],
+  watchlistItems: [],
 };
 
 const watchlistReducer = (state = INITIAL_STATE, action) => {
-  console.log(action.id);
-
   switch (action.type) {
-    case WatchlistActionTypes.ADD_ITEM_ID_TO_WATCHLIST:
+    case WatchlistActionTypes.ADD_ITEM_TO_WATCHLIST:
       return {
         ...state,
-        watchlistItemIds: addItemIdToWatchlist(
-          state.watchlistItemIds,
-          action.id
-        ),
+        watchlistItems: addItem(state.watchlistItems, action.item),
       };
 
     default:

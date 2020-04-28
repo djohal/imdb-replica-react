@@ -47,7 +47,7 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
                             className="d-block w-100 carousel-img"
                             src={`https://image.tmdb.org/t/p/${
                               width > 500 ? "w780" : "w500"
-                            }${backdrop_path}`}
+                            }${backdrop_path || poster_path}`}
                             alt={title}
                           />
                         </div>

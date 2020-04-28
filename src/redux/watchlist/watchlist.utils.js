@@ -1,11 +1,11 @@
-export const addItemIdToWatchlist = (watchlistIds, watchlistIdToAdd) => {
-  if (!watchlistIds.length) {
-    watchlistIds = [watchlistIdToAdd];
+export const addItem = (watchlistItems, watchlistItemToAdd) => {
+  if (!!watchlistItems && !watchlistItems.length) {
+    watchlistItems = [watchlistItemToAdd];
   }
 
-  if (!watchlistIds.includes(watchlistIdToAdd)) {
-    watchlistIds.push(watchlistIdToAdd);
+  if (!watchlistItems.includes(watchlistItemToAdd)) {
+    watchlistItems.push(watchlistItemToAdd);
   }
 
-  return [...watchlistIds];
+  return [...watchlistItems];
 };

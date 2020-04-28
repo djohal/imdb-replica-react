@@ -5,20 +5,13 @@ import { createStructuredSelector } from "reselect";
 import Container from "react-bootstrap/Container";
 
 import { fetchDataStart } from "../../redux/movies/movies.actions";
-import { addItemIdToWatchlist } from "../../redux/watchlist/watchlist.actions";
+import { addItemToWatchlist } from "../../redux/watchlist/watchlist.actions";
 import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
-import {
-  WatchlistRibbonSvg,
-  WatchlistRibbonIconSvg,
-  RatingSvg,
-} from "./fan-favorites-svgs.component";
 import CarouselContainer from "../carousel/carousel.component";
-import {
-  getSingleDecimalValue,
-  useWindowSize,
-} from "../../redux/movies/movies.utils";
+import { useWindowSize } from "../../redux/movies/movies.utils";
+import FFCollectionItem from "./ff-collection-item.component";
 
 const numberOfSlidesToSlide = (width) => {
   if (width < 600) {
@@ -33,13 +26,13 @@ const FanFavourites = ({
   fetchDataStart,
   collections,
   currentUser,
-  addItemIdToWatchlist,
+  addItemToWatchlist,
 }) => {
   const [windowWidth] = useWindowSize();
   const history = useHistory();
 
-  const redirectToWatchlistPage = (id) => {
-    currentUser ? addItemIdToWatchlist(id) : history.push("/register/sign-in");
+  const redirectToWatchlistPage = (item) => {
+    currentUser ? addItemToWatchlist(item) : history.push("/register/sign-in");
   };
 
   useEffect(() => {
@@ -65,47 +58,13 @@ const FanFavourites = ({
             mobile={2}
           >
             {!!collections &&
-              collections.map(
-                ({ poster_path, title, name, vote_average, id }) => (
-                  <React.Fragment key={id}>
-                    <div className="carousel-images">
-                      <img
-                        className="d-block carousel-img"
-                        src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
-                        alt={title}
-                      />
-                    </div>
-                    <div
-                      className="watchlist-ribbon"
-                      aria-label="add to watchlist"
-                      role="button"
-                      tabIndex="0"
-                    >
-                      <WatchlistRibbonSvg />
-                      <div
-                        className="watchlist-ribbon__icon"
-                        role="presentation"
-                      >
-                        <WatchlistRibbonIconSvg />
-                      </div>
-                    </div>
-                    <div className="featured-details">
-                      <div className="rating">
-                        <RatingSvg />
-                        <span>{getSingleDecimalValue(vote_average)}</span>
-                      </div>
-                      <span>{title || name}</span>
-                      <button
-                        type="button"
-                        onClick={() => redirectToWatchlistPage(id)}
-                      >
-                        <WatchlistRibbonIconSvg />
-                        <div className="button-text">Watchlist</div>
-                      </button>
-                    </div>
-                  </React.Fragment>
-                )
-              )}
+              collections.map((collectionItem, i) => (
+                <FFCollectionItem
+                  collectionItem={collectionItem}
+                  redirectToWatchlistPage={redirectToWatchlistPage}
+                  key={i}
+                />
+              ))}
           </CarouselContainer>
         </Container>
       </div>
@@ -120,7 +79,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataStart: (url) => dispatch(fetchDataStart(url)),
-  addItemIdToWatchlist: (id) => dispatch(addItemIdToWatchlist(id)),
+  addItemToWatchlist: (item) => dispatch(addItemToWatchlist(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FanFavourites);

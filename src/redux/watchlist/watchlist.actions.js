@@ -1,6 +1,6 @@
 import WatchlistActionTypes from "./watchlist.types";
 
-export const addItemIdToWatchlist = (id) => ({
-  type: WatchlistActionTypes.ADD_ITEM_ID_TO_WATCHLIST,
-  id,
+export const addItemToWatchlist = (item) => ({
+  type: WatchlistActionTypes.ADD_ITEM_TO_WATCHLIST,
+  item,
 });
