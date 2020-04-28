@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Container from "react-bootstrap/Container";
 
 import { fetchDataStart } from "../../redux/movies/movies.actions";
 import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+
 import {
   WatchlistRibbonSvg,
   WatchlistRibbonIconSvg,
@@ -25,8 +28,15 @@ const numberOfSlidesToSlide = (width) => {
     return 6;
   }
 };
-const FanFavourites = ({ fetchDataStart, collections }) => {
+const FanFavourites = ({ fetchDataStart, collections, currentUser }) => {
   const [windowWidth] = useWindowSize();
+  const history = useHistory();
+
+  const redirectToWatchlistPage = () => {
+    currentUser
+      ? history.push("/watchlist")
+      : history.push("/register/sign-in");
+  };
 
   useEffect(() => {
     fetchDataStart(`/movie/popular`);
@@ -50,41 +60,45 @@ const FanFavourites = ({ fetchDataStart, collections }) => {
             laptop={5}
             mobile={2}
           >
-            {!!collections && collections.map(
-              ({ poster_path, title, name, vote_average, id }) => (
-                <React.Fragment key={id}>
-                  <div className="carousel-images">
-                    <img
-                      className="d-block carousel-img"
-                      src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
-                      alt={title}
-                    />
-                  </div>
-                  <div
-                    className="watchlist-ribbon"
-                    aria-label="add to watchlist"
-                    role="button"
-                    tabIndex="0"
-                  >
-                    <WatchlistRibbonSvg />
-                    <div className="watchlist-ribbon__icon" role="presentation">
-                      <WatchlistRibbonIconSvg />
+            {!!collections &&
+              collections.map(
+                ({ poster_path, title, name, vote_average, id }) => (
+                  <React.Fragment key={id}>
+                    <div className="carousel-images">
+                      <img
+                        className="d-block carousel-img"
+                        src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
+                        alt={title}
+                      />
                     </div>
-                  </div>
-                  <div className="featured-details">
-                    <div className="rating">
-                      <RatingSvg />
-                      <span>{getSingleDecimalValue(vote_average)}</span>
+                    <div
+                      className="watchlist-ribbon"
+                      aria-label="add to watchlist"
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <WatchlistRibbonSvg />
+                      <div
+                        className="watchlist-ribbon__icon"
+                        role="presentation"
+                      >
+                        <WatchlistRibbonIconSvg />
+                      </div>
                     </div>
-                    <span>{title || name}</span>
-                    <button>
-                      <WatchlistRibbonIconSvg />
-                      <div className="button-text">Watchlist</div>
-                    </button>
-                  </div>
-                </React.Fragment>
-              )
-            )}
+                    <div className="featured-details">
+                      <div className="rating">
+                        <RatingSvg />
+                        <span>{getSingleDecimalValue(vote_average)}</span>
+                      </div>
+                      <span>{title || name}</span>
+                      <button type="button" onClick={redirectToWatchlistPage}>
+                        <WatchlistRibbonIconSvg />
+                        <div className="button-text">Watchlist</div>
+                      </button>
+                    </div>
+                  </React.Fragment>
+                )
+              )}
           </CarouselContainer>
         </Container>
       </div>
@@ -94,6 +108,7 @@ const FanFavourites = ({ fetchDataStart, collections }) => {
 
 const mapStateToProps = createStructuredSelector({
   collections: selectFanFavoritesCollections,
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

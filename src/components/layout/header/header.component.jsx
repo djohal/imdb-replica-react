@@ -63,7 +63,7 @@ const Header = ({ isSearchExpanded, history, currentUser, signOutStart }) => {
               <ImdbProSvg />
             </Link>
             <div className="verticle-line hide-responsive"></div>
-            <Link to="" className="watchlist hide-responsive">
+            <Link to="/watchlist" className="watchlist hide-responsive">
               <WatchlistSvg />
               <span>Watchlist</span>
             </Link>

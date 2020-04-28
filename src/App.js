@@ -20,6 +20,9 @@ const RegistrationPage = lazy(() =>
 );
 const SignUpPage = lazy(() => import("./pages/sign-up/sign-up.component"));
 const SignInPage = lazy(() => import("./pages/sign-in/sign-in.component"));
+const WatchlistPage = lazy(() =>
+  import("./pages/watchlist/watchlist.component")
+);
 const NotFoundPage = lazy(() =>
   import("./pages/not-found/not-found-page.component")
 );
@@ -79,6 +82,16 @@ function App({ checkUserSession, currentUser }) {
                   <Redirect to="/" checkUserSession />
                 ) : (
                   <SignUpPage />
+                )
+              }
+            />
+            <Route
+              path="/watchlist"
+              render={() =>
+                !currentUser ? (
+                  <Redirect to="/register/sign-in" checkUserSession />
+                ) : (
+                  <WatchlistPage />
                 )
               }
             />

@@ -12,11 +12,11 @@ import App from "./App";
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <React.StrictMode>
+      {/* <React.StrictMode> */}
         <PersistGate persistor={persistor}>
           <App />
         </PersistGate>
-      </React.StrictMode>
+      {/* </React.StrictMode> */}
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
