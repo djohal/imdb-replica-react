@@ -56,7 +56,7 @@ const FanFavourites = ({ fetchDataStart, collections }) => {
                   <div className="carousel-images">
                     <img
                       className="d-block carousel-img"
-                      src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                      src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
                       alt={title}
                     />
                   </div>

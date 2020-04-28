@@ -34,7 +34,9 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
                       <div className="poster-img-container">
                         <img
                           className="d-block w-100 carousel-img poster-img"
-                          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                          src={`https://image.tmdb.org/t/p/${
+                            width > 500 ? "w342" : "w154"
+                          }${poster_path}`}
                           alt={title}
                         />
                       </div>
@@ -43,7 +45,9 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
                         <div className="backdrop-img">
                           <img
                             className="d-block w-100 carousel-img"
-                            src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+                            src={`https://image.tmdb.org/t/p/${
+                              width > 500 ? "w780" : "w500"
+                            }${backdrop_path}`}
                             alt={title}
                           />
                         </div>

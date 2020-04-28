@@ -32,7 +32,7 @@ const FeaturedToday = ({ collections, fetchDataStart }) => {
                 <div className="carousel-images">
                   <img
                     className="d-block carousel-img"
-                    src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+                    src={`https://image.tmdb.org/t/p/w400/${backdrop_path}`}
                     alt={title}
                   />
                 </div>
