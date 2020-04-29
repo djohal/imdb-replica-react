@@ -61,14 +61,9 @@
           margin-left: 0.25rem;
         }
       }
-
-      .add-item {
+      button {
         margin-left: 1rem;
-        background: rgba($color: rgb(170, 170, 170), $alpha: 0.5);
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-        font-size: 0.8rem;
-        cursor: pointer;
+        color: white;
       }
     }
   }
