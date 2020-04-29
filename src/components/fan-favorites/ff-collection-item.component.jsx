@@ -1,13 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { useSelector } from "react-redux";
 import { selectWatchlistItems } from "../../redux/watchlist/watchlist.selectors";
-
-import {
-  addItemToWatchlist,
-  removeItemFromWatchlist,
-} from "../../redux/watchlist/watchlist.actions";
 
 import { WatchlistRibbonSvg } from "./fan-favorites-svgs.component";
 
@@ -15,27 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
+import WatchlistBtn from "../watchlist-btn/watchlist-btn.component";
 
 const FFCollectionItem = ({ collectionItem }) => {
   const { poster_path, title, name, vote_average, id } = collectionItem;
-  const history = useHistory();
-  const currentUser = useSelector(selectCurrentUser);
+
   const watchlistItems = useSelector(selectWatchlistItems);
-  const dispatch = useDispatch();
   const item = watchlistItems.filter((item) => item.id === id);
   const selected = !!item & item.length ? item[0].selected : null;
-
-  const redirectToWatchlistPage = (item) => {
-    if (currentUser) {
-      if (selected) {
-        dispatch(removeItemFromWatchlist(item));
-      } else {
-        dispatch(addItemToWatchlist(item));
-      }
-    } else {
-      history.push("/register/sign-in");
-    }
-  };
 
   return (
     <React.Fragment key={id}>
@@ -67,18 +47,7 @@ const FFCollectionItem = ({ collectionItem }) => {
           <span>{getSingleDecimalValue(vote_average)}</span>
         </div>
         <span>{title || name}</span>
-        <button
-          className="watchlist-btn"
-          type="button"
-          onClick={() => redirectToWatchlistPage(collectionItem)}
-        >
-          {selected ? (
-            <FontAwesomeIcon icon={faCheck} size="sm" />
-          ) : (
-            <FontAwesomeIcon icon={faPlus} size="sm" />
-          )}
-          <div className="button-text">Watchlist</div>
-        </button>
+        <WatchlistBtn collectionItem={collectionItem} selected={selected} />
       </div>
     </React.Fragment>
   );

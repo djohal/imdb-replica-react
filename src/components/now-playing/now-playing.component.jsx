@@ -14,6 +14,7 @@ import {
   getSingleDecimalValue,
   useWindowSize,
 } from "../../redux/movies/movies.utils";
+import WatchlistBtn from "../watchlist-btn/watchlist-btn.component";
 
 const NowPlaying = ({ collections, fetchDataStart }) => {
   const [width] = useWindowSize();
@@ -53,9 +54,11 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
                         </div>
                         <div className="backdrop-caption">
                           <h1>{title}</h1>
-                          <div className="rating">
-                            <span>{getSingleDecimalValue(vote_average)}</span>
-                            <FontAwesomeIcon icon={faStar} size="sm" />
+                          <div className="info">
+                            <div className="rating">
+                              <span>{getSingleDecimalValue(vote_average)}</span>
+                              <FontAwesomeIcon icon={faStar} size="sm" />
+                            </div>
                           </div>
                         </div>
                       </div>

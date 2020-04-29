@@ -46,17 +46,29 @@
       display: block;
       overflow: hidden;
     }
-
-    .rating {
+    .info {
       display: flex;
       align-items: center;
-      span {
-        font-size: 1.5rem;
+      .rating {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 1.5rem;
+        }
+        svg {
+          width: 1rem;
+          color: $color-primary;
+          margin-left: 0.25rem;
+        }
       }
-      svg {
-        width: 1rem;
-        color: $color-primary;
-        margin-left: 0.25rem;
+
+      .add-item {
+        margin-left: 1rem;
+        background: rgba($color: rgb(170, 170, 170), $alpha: 0.5);
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.8rem;
+        cursor: pointer;
       }
     }
   }
