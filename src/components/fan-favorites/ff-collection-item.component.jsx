@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { addItemToWatchlist } from "../../redux/watchlist/watchlist.actions";
+import {
+  addItemToWatchlist,
+  removeItemFromWatchlist,
+} from "../../redux/watchlist/watchlist.actions";
 
 import { WatchlistRibbonSvg } from "./fan-favorites-svgs.component";
 
@@ -19,9 +22,17 @@ const FFCollectionItem = ({ collectionItem }) => {
   const dispatch = useDispatch();
 
   const redirectToWatchlistPage = (item) => {
-    return currentUser
-      ? (dispatch(addItemToWatchlist(item)), setSelectedToggle(!selectedToggle))
-      : history.push("/register/sign-in");
+    if (currentUser) {
+      if (selectedToggle) {
+        dispatch(removeItemFromWatchlist(item));
+        setSelectedToggle(!selectedToggle);
+      } else {
+        dispatch(addItemToWatchlist(item));
+        setSelectedToggle(!selectedToggle);
+      }
+    } else {
+      history.push("/register/sign-in");
+    }
   };
 
   return (

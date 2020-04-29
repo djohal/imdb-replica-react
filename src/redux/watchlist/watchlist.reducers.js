@@ -1,5 +1,5 @@
 import WatchlistActionTypes from "./watchlist.types";
-import { addItem } from "./watchlist.utils";
+import { addItem, removeItem } from "./watchlist.utils";
 
 const INITIAL_STATE = {
   watchlistItems: [],
@@ -11,6 +11,18 @@ const watchlistReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         watchlistItems: addItem(state.watchlistItems, action.item),
+      };
+
+    case WatchlistActionTypes.REMOVE_ITEM_FROM_WATCHLIST:
+      return {
+        ...state,
+        watchlistItems: removeItem(state.watchlistItems, action.item),
+      };
+
+    case WatchlistActionTypes.REMOVE_ALL_ITEMS_FROM_WATCHLIST:
+      return {
+        ...state,
+        watchlistItems: [],
       };
 
     default:
