@@ -52,3 +52,40 @@
     }
   }
 }
+
+.watchlist-ribbon {
+  position: absolute;
+  top: 0;
+  left: -8px;
+  z-index: 3;
+  color: white;
+  opacity: 0.8;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  .watchlist-ribbon__bg {
+    position: relative;
+    background-size: 2rem;
+    width: 50px;
+    height: 50px;
+
+    &.selected {
+      color: $color-primary;
+      opacity: 1;
+    }
+
+    .watchlist-ribbon__bg-shadow {
+      fill: black;
+      opacity: 0.5;
+    }
+  }
+  .watchlist-ribbon__icon {
+    position: absolute;
+    top: 5px;
+    left: 1rem;
+    font-size: 1.25rem;
+  }
+}

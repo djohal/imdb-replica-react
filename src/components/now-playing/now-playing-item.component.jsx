@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-
+import { faStar, faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { selectWatchlistItems } from "../../redux/watchlist/watchlist.selectors";
 
-import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
-import WatchlistBtn from "../watchlist-btn/watchlist-btn.component";
+import { selectWatchlistItems } from "redux/watchlist/watchlist.selectors";
+import { getSingleDecimalValue } from "redux/movies/movies.utils";
+import WatchlistBtn from "components/watchlist-btn/watchlist-btn.component";
+import { WatchlistRibbonSvg } from "components/watchlist-item/watchlist-svgs.component";
 
 const NowPlayingItem = ({ collectionItem, width }) => {
   const {
@@ -31,6 +31,22 @@ const NowPlayingItem = ({ collectionItem, width }) => {
           }${poster_path}`}
           alt={title}
         />
+
+        <div
+          className="watchlist-ribbon"
+          aria-label="add to watchlist"
+          role="button"
+          tabIndex="0"
+        >
+          <WatchlistRibbonSvg selectedToggle={selected} />
+          <div className="watchlist-ribbon__icon" role="presentation">
+            {selected ? (
+              <FontAwesomeIcon icon={faCheck} size="sm" color="black" />
+            ) : (
+              <FontAwesomeIcon icon={faPlus} size="sm" />
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="backdrop-img-container">
