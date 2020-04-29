@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Container from "react-bootstrap/Container";
 
 import { fetchDataStart } from "../../redux/movies/movies.actions";
-import { addItemToWatchlist } from "../../redux/watchlist/watchlist.actions";
 import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import CarouselContainer from "../carousel/carousel.component";
 import { useWindowSize } from "../../redux/movies/movies.utils";
@@ -22,18 +19,8 @@ const numberOfSlidesToSlide = (width) => {
     return 6;
   }
 };
-const FanFavourites = ({
-  fetchDataStart,
-  collections,
-  currentUser,
-  addItemToWatchlist,
-}) => {
+const FanFavourites = ({ fetchDataStart, collections }) => {
   const [windowWidth] = useWindowSize();
-  const history = useHistory();
-
-  const redirectToWatchlistPage = (item) => {
-    currentUser ? addItemToWatchlist(item) : history.push("/register/sign-in");
-  };
 
   useEffect(() => {
     fetchDataStart(`/movie/popular`);
@@ -59,11 +46,7 @@ const FanFavourites = ({
           >
             {!!collections &&
               collections.map((collectionItem, i) => (
-                <FFCollectionItem
-                  collectionItem={collectionItem}
-                  redirectToWatchlistPage={redirectToWatchlistPage}
-                  key={i}
-                />
+                <FFCollectionItem collectionItem={collectionItem} key={i} />
               ))}
           </CarouselContainer>
         </Container>
@@ -74,12 +57,10 @@ const FanFavourites = ({
 
 const mapStateToProps = createStructuredSelector({
   collections: selectFanFavoritesCollections,
-  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataStart: (url) => dispatch(fetchDataStart(url)),
-  addItemToWatchlist: (item) => dispatch(addItemToWatchlist(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FanFavourites);
