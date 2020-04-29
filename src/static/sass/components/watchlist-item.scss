@@ -1,13 +1,38 @@
 .watchlist-item {
   display: flex;
   flex-direction: column;
-  border: 1px solid $color-dark;
   margin: 1rem;
   margin-left: 0;
   max-width: 200px;
+  align-items: center;
 
-  img {
-    height: 18rem;
+  .image-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+
+    img {
+      height: 18rem;
+    }
+
+    .remove-item {
+      display: none;
+    }
+
+    &:hover {
+      img {
+        opacity: 0.5;
+      }
+
+      .remove-item {
+        display: block;
+        position: absolute;
+        font-size: 2rem;
+        bottom: 1rem;
+        cursor: pointer;
+      }
+    }
   }
 
   .featured-details {
