@@ -28,21 +28,11 @@ const FFCollectionItem = ({ collectionItem }) => {
           alt={title}
         />
       </div>
-      <div
-        className="watchlist-ribbon"
-        aria-label="add to watchlist"
-        role="button"
-        tabIndex="0"
-      >
-        <WatchlistRibbonSvg selectedToggle={selected} />
-        <div className="watchlist-ribbon__icon" role="presentation">
-          {selected ? (
-            <FontAwesomeIcon icon={faCheck} size="sm" color="black" />
-          ) : (
-            <FontAwesomeIcon icon={faPlus} size="sm" />
-          )}
-        </div>
-      </div>
+      <WatchlistBtn
+        collectionItem={collectionItem}
+        selected={selected}
+        svgIcon
+      />
       <div className="featured-details">
         <div className="rating">
           <FontAwesomeIcon icon={faStar} size="sm" />

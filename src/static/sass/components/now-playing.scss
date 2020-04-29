@@ -9,6 +9,19 @@
   .poster-img-container {
     min-width: 30%;
     background: $color-dark;
+
+    .watchlist-ribbon {
+      left: -10px;
+      .watchlist-ribbon__bg {
+        width: 70px;
+        height: 70px;
+      }
+      .watchlist-ribbon__icon {
+        top: 10px;
+        left: 1.5rem;
+        font-size: 1.5rem;
+      }
+    }
   }
 
   .backdrop-img-container {

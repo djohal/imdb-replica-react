@@ -5,14 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCurrentUser } from "redux/user/user.selectors";
 
 import {
   addItemToWatchlist,
   removeItemFromWatchlist,
-} from "../../redux/watchlist/watchlist.actions";
+} from "redux/watchlist/watchlist.actions";
+import { WatchlistRibbonSvg } from "../watchlist-item/watchlist-svgs.component";
 
-const WatchlistBtn = ({ collectionItem, selected }) => {
+const WatchlistBtn = ({ collectionItem, selected, svgIcon }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
@@ -30,18 +31,39 @@ const WatchlistBtn = ({ collectionItem, selected }) => {
   };
 
   return (
-    <button
-      className="watchlist-btn"
-      type="button"
-      onClick={() => updateWatchListItems(collectionItem)}
-    >
-      {selected ? (
-        <FontAwesomeIcon icon={faCheck} size="sm" />
+    <>
+      {svgIcon ? (
+        <div
+          className="watchlist-ribbon"
+          aria-label="add to watchlist"
+          role="button"
+          tabIndex="0"
+          onClick={() => updateWatchListItems(collectionItem)}
+        >
+          <WatchlistRibbonSvg selectedToggle={selected} />
+          <div className="watchlist-ribbon__icon" role="presentation">
+            {selected ? (
+              <FontAwesomeIcon icon={faCheck} size="sm" color="black" />
+            ) : (
+              <FontAwesomeIcon icon={faPlus} size="sm" />
+            )}
+          </div>
+        </div>
       ) : (
-        <FontAwesomeIcon icon={faPlus} size="sm" />
+        <button
+          className="watchlist-btn"
+          type="button"
+          onClick={() => updateWatchListItems(collectionItem)}
+        >
+          {selected ? (
+            <FontAwesomeIcon icon={faCheck} size="sm" />
+          ) : (
+            <FontAwesomeIcon icon={faPlus} size="sm" />
+          )}
+          <div className="button-text">Watchlist</div>
+        </button>
       )}
-      <div className="button-text">Watchlist</div>
-    </button>
+    </>
   );
 };
 
