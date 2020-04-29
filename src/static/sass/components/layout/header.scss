@@ -17,6 +17,10 @@
   }
 
   .watchlist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     .watchlist-cart {
       margin-left: 0.5rem;
       color: black;

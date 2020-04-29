@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectWatchlistItems } from "../../redux/watchlist/watchlist.selectors";
+
 import {
   addItemToWatchlist,
   removeItemFromWatchlist,
@@ -16,19 +18,19 @@ import { getSingleDecimalValue } from "../../redux/movies/movies.utils";
 
 const FFCollectionItem = ({ collectionItem }) => {
   const { poster_path, title, name, vote_average, id } = collectionItem;
-  const [selectedToggle, setSelectedToggle] = useState(false);
   const history = useHistory();
   const currentUser = useSelector(selectCurrentUser);
+  const watchlistItems = useSelector(selectWatchlistItems);
   const dispatch = useDispatch();
+  const item = watchlistItems.filter((item) => item.id === id);
+  const selected = !!item & item.length ? item[0].selected : null;
 
   const redirectToWatchlistPage = (item) => {
     if (currentUser) {
-      if (selectedToggle) {
+      if (selected) {
         dispatch(removeItemFromWatchlist(item));
-        setSelectedToggle(!selectedToggle);
       } else {
         dispatch(addItemToWatchlist(item));
-        setSelectedToggle(!selectedToggle);
       }
     } else {
       history.push("/register/sign-in");
@@ -50,9 +52,9 @@ const FFCollectionItem = ({ collectionItem }) => {
         role="button"
         tabIndex="0"
       >
-        <WatchlistRibbonSvg selectedToggle={selectedToggle} />
+        <WatchlistRibbonSvg selectedToggle={selected} />
         <div className="watchlist-ribbon__icon" role="presentation">
-          {selectedToggle ? (
+          {selected ? (
             <FontAwesomeIcon icon={faCheck} size="sm" color="black" />
           ) : (
             <FontAwesomeIcon icon={faPlus} size="sm" />
@@ -70,7 +72,7 @@ const FFCollectionItem = ({ collectionItem }) => {
           type="button"
           onClick={() => redirectToWatchlistPage(collectionItem)}
         >
-          {selectedToggle ? (
+          {selected ? (
             <FontAwesomeIcon icon={faCheck} size="sm" />
           ) : (
             <FontAwesomeIcon icon={faPlus} size="sm" />
