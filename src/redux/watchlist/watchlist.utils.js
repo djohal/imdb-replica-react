@@ -13,15 +13,9 @@ export const addItem = (watchlistItems, watchlistItemToAdd) => {
 };
 
 export const removeItem = (watchlistItems, watchlistItemToRemove) => {
-  if (!!watchlistItems && !watchlistItems.length) {
-    return watchlistItems;
-  }
+  if (!!watchlistItems && !watchlistItems.length) return;
 
-  if (watchlistItems.includes(watchlistItemToRemove)) {
-    return watchlistItems.filter(
-      (item) => item.id !== watchlistItemToRemove.id
-    );
-  }
-
-  return [...watchlistItems];
+  return watchlistItems.length === 1
+    ? []
+    : watchlistItems.filter((item) => item.id !== watchlistItemToRemove.id);
 };

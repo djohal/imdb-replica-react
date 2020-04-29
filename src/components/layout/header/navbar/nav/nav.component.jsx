@@ -31,7 +31,9 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
         <span>Watchlist</span>
         <span
           className={`${
-            watchlistItems.length ? "watchlist-cart" : "hide-display"
+            !!watchlistItems && watchlistItems.length
+              ? "watchlist-cart"
+              : "hide-display"
           }`}
         >
           {watchlistItems.length}

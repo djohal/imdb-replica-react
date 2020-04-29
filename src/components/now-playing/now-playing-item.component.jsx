@@ -18,7 +18,10 @@ const NowPlayingItem = ({ collectionItem, width }) => {
   } = collectionItem;
 
   const watchlistItems = useSelector(selectWatchlistItems);
-  const item = watchlistItems.filter((item) => item.id === id);
+
+  const item = watchlistItems.filter((item) =>
+    !!item ? item.id === id : null
+  );
   const selected = !!item & item.length ? item[0].selected : null;
 
   return (

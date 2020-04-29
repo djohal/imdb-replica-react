@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -11,6 +11,12 @@ const WatchlistPage = () => {
   const watchlistItems = useSelector(selectWatchlistItems);
   const history = useHistory();
 
+  useEffect(() => {
+    if (!watchlistItems.length) {
+      history.push("/");
+    }
+  }, [watchlistItems, history]);
+
   return (
     <div className="watchlist-page">
       <Container>
@@ -20,7 +26,7 @@ const WatchlistPage = () => {
             ? watchlistItems.map((item, i) => (
                 <WatchlistItem key={i} item={item} />
               ))
-            : history.push("/")}
+            : null}
         </div>
       </Container>
     </div>
