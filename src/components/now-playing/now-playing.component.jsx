@@ -4,9 +4,9 @@ import { createStructuredSelector } from "reselect";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 
-import { fetchDataStart } from "../../redux/movies/movies.actions";
-import { selectNowPlayingCollections } from "../../redux/movies/movies.selectors";
-import { useWindowSize } from "../../redux/movies/movies.utils";
+import { fetchDataStart } from "redux/movies/movies.actions";
+import { selectNowPlayingCollections } from "redux/movies/movies.selectors";
+import { useWindowSize } from "redux/movies/movies.utils";
 import NowPlayingItem from "./now-playing-item.component";
 
 const NowPlaying = ({ collections, fetchDataStart }) => {
@@ -19,7 +19,7 @@ const NowPlaying = ({ collections, fetchDataStart }) => {
   return (
     <div className="now-playing-container">
       <Container>
-        <Carousel interval={width < 600 ? null : null}>
+        <Carousel interval={width < 600 ? null : 4000}>
           {collections
             ? collections.map((collectionItem, i) => (
                 <Carousel.Item key={i}>
