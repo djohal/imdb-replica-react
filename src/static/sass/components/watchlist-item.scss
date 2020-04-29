@@ -1,0 +1,29 @@
+.watchlist-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $color-dark;
+  margin: 1rem;
+  margin-left: 0;
+  max-width: 200px;
+
+  img {
+    height: 18rem;
+  }
+
+  .featured-details {
+    background: $color-dark2;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+    .info {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      svg {
+        color: $color-primary;
+        margin-left: 0.25rem;
+      }
+    }
+  }
+}
