@@ -21,6 +21,10 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
 
   return (
     <Nav>
+      <div
+        className={`${toggleDropdown ? "overlay" : "hide-display"}`}
+        onClick={() => setToggleDropdown(!toggleDropdown)}
+      ></div>
       <Link to="" className="hide-responsive">
         <HamburgerMenuSvg />
         <span>Menu</span>
@@ -44,13 +48,17 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
         </span>
       </Link>
       {currentUser ? (
-        <>
+        <div className="profile">
           <div
             className={`${isSearchExpanded ? "display-none" : "sign-out"}`}
             onClick={() => setToggleDropdown(!toggleDropdown)}
           >
             <FontAwesomeIcon icon={faUserCircle} size="lg" />
-            <span className="hide-responsive">John</span>
+            <span className="hide-responsive">
+              {!!currentUser.displayName
+                ? currentUser.displayName.split(" ")[0]
+                : ""}
+            </span>
             <FontAwesomeIcon
               icon={faCaretDown}
               size="sm"
@@ -60,12 +68,9 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
           <ProfileDropdown
             signOutStart={signOutStart}
             toggleDropdown={toggleDropdown}
+            currentUser={currentUser}
           />
-          <div
-            className={`${toggleDropdown ? "overlay" : "hide-display"}`}
-            onClick={() => setToggleDropdown(!toggleDropdown)}
-          ></div>
-        </>
+        </div>
       ) : (
         <Link
           to="/register/sign-in"

@@ -29,7 +29,13 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
       additionalData
     );
     const userSnapshot = yield userRef.get();
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+
+    yield put(
+      signInSuccess({
+        id: userSnapshot.id,
+        ...userSnapshot.data(),
+      })
+    );
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -72,7 +78,7 @@ export function* onGithubSignInStart() {
 export function* signUp({ payload: { email, password, name } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield put(signUpSuccess({ user, additionalData: { name } }));
+    yield put(signUpSuccess({ user, additionalData: { displayName: name } }));
     toast.success("Sign up successful !");
   } catch (error) {
     yield put(signUpFailure(error));

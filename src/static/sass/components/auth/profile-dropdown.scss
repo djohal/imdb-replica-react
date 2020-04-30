@@ -1,7 +1,7 @@
 .profile-dropdown {
   position: absolute;
-  top: 3rem;
-  right: 3rem;
+  top: 2.5rem;
+  right: 0;
   height: 7.25rem;
   background-color: $color-dark2;
   z-index: 6;
@@ -30,7 +30,7 @@
 
 @include responsive(phone) {
   .profile-dropdown {
-    right: 1rem;
+    right: 0;
     height: 11rem;
 
     .name {
