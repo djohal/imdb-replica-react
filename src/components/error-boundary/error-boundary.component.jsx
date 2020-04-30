@@ -25,7 +25,9 @@ class ErrorBoundary extends React.Component {
         <div className="error-image">
           <ErrorImage />
         </div>
-        <span>Oops! Something went wrong. Please try again.</span>
+        <span>
+          Oops! Something went wrong. Please refresh the page and try again.
+        </span>
       </div>
     ) : (
       this.props.children

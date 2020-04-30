@@ -48,13 +48,26 @@
           color: $color-alpha-white;
           font-size: 0.9rem;
         }
-
-        .rating {
+        .rating-container {
           display: flex;
           align-items: center;
-          svg {
-            margin-left: 0.25rem;
-            color: $color-primary;
+          width: 100%;
+          .rating {
+            margin-right: 1rem;
+            svg {
+              margin-left: 0.25rem;
+              color: $color-primary;
+            }
+          }
+          button {
+            color: white;
+            padding: 0.25rem;
+            font-size: 0.75rem;
+            max-width: 6rem;
+
+            &:focus {
+              outline: none;
+            }
           }
         }
       }
