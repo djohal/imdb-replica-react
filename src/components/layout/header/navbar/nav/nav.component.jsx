@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Nav from "react-bootstrap/Nav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import {
   HamburgerMenuSvg,
@@ -44,7 +46,9 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
           className={`${isSearchExpanded ? "display-none" : "sign-out"}`}
           onClick={() => signOutStart()}
         >
-          <span>Sign Out</span>
+          <FontAwesomeIcon icon={faUserCircle} size="lg" />
+          <span>John</span>
+          <FontAwesomeIcon icon={faCaretDown} size="sm" />
         </div>
       ) : (
         <Link

@@ -32,6 +32,15 @@
     }
   }
 
+  .sign-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      margin: 0 0.25rem;
+    }
+  }
+
   .sign-out,
   a {
     @include header-text-style();
