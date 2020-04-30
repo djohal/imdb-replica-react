@@ -1,23 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
 import Container from "react-bootstrap/Container";
 
 import WatchlistItem from "../../components/watchlist-item/watchlist-item.component";
 import { selectWatchlistItems } from "../../redux/watchlist/watchlist.selectors";
+import { WatchlistSvg } from "../../components/layout/header/header-svgs.component";
 
 const WatchlistPage = () => {
   const watchlistItems = useSelector(selectWatchlistItems);
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!watchlistItems.length) {
-      history.push("/");
-    }
-  }, [watchlistItems, history]);
 
   return (
     <div className="watchlist-page">
@@ -29,7 +19,16 @@ const WatchlistPage = () => {
               <WatchlistItem key={i} item={item} />
             ))
           ) : (
-            <FontAwesomeIcon icon={faSpinner} size="lg" />
+            <div className="watchlist-empty">
+              <div className="watchlist-icon">
+                <WatchlistSvg />
+              </div>
+              <span>Your Watchlist is empty</span>
+              <span>
+                Add movies and shows to your Watchlist to keep track of what you
+                want to watch.
+              </span>
+            </div>
           )}
         </div>
       </Container>
