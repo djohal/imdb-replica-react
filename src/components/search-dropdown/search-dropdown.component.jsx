@@ -12,8 +12,8 @@ const SearchDropdown = ({ collections, searchEntry }) => {
         }`}
       >
         {collections
-          ? collections.map((collection) => (
-              <SearchDropdownItem collection={collection} />
+          ? collections.map((collection, i) => (
+              <SearchDropdownItem collection={collection} key={i} />
             ))
           : null}
       </div>

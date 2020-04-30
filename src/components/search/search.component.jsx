@@ -5,6 +5,7 @@ import FormControl from "react-bootstrap/FormControl";
 import {
   searchInput,
   fetchSearchMovieStart,
+  expandSearchInput,
 } from "../../redux/search/search.actions";
 
 import {
@@ -16,7 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { clearSearchData } from "../../redux/search/search.utils";
 
-const Search = ({ expandSearchInput, searchEntry, isSearchExpanded }) => {
+const Search = ({ searchEntry, isSearchExpanded }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
 
@@ -52,8 +53,8 @@ const Search = ({ expandSearchInput, searchEntry, isSearchExpanded }) => {
               : "cancel-search"
           }`}
           onClick={() => {
-            clearSearchData();
-            expandSearchInput(false);
+            clearSearchData(dispatch);
+            dispatch(expandSearchInput(false));
           }}
         />
       </div>
@@ -64,14 +65,14 @@ const Search = ({ expandSearchInput, searchEntry, isSearchExpanded }) => {
           className={`${
             isSearchExpanded ? "display-none search-button" : "search-button"
           }`}
-          onClick={() => expandSearchInput(true)}
+          onClick={() => dispatch(expandSearchInput(true))}
         >
           <SearchButtonSvg />
         </button>
       </div>
       <div
         className={`${searchEntry && !isSearchExpanded ? "overlay" : null}`}
-        onClick={() => clearSearchData()}
+        onClick={() => clearSearchData(dispatch)}
       ></div>
     </>
   );
