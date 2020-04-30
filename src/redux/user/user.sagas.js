@@ -10,6 +10,7 @@ import {
   signOutSuccess,
   signOutFailure,
 } from "./user.actions";
+import { removeAllItemsFromWatchlist } from "../watchlist/watchlist.actions";
 
 import {
   auth,
@@ -94,6 +95,7 @@ export function* signOut() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
+    yield put(removeAllItemsFromWatchlist());
   } catch (error) {
     yield put(signOutFailure(error));
   }

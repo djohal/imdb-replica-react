@@ -13,10 +13,8 @@ const FTCollectionItem = ({
       <div className="carousel-images">
         <img
           className="d-block carousel-img"
-          src={`https://image.tmdb.org/t/p/w400/${
-            backdrop_path || poster_path
-          }`}
-          alt={title}
+          src={`https://image.tmdb.org/t/p/w400${backdrop_path || poster_path}`}
+          alt={title || name}
         />
       </div>
       <div className="featured-details">
