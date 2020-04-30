@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import FormControl from "react-bootstrap/FormControl";
 
 import {
   searchInput,
-  clearSearchEntry,
-  clearSearchCollections,
   fetchSearchMovieStart,
-  expandSearchInput,
 } from "../../redux/search/search.actions";
 
 import {
@@ -17,38 +14,20 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { clearSearchData } from "../../redux/search/search.utils";
 
-const Search = ({
-  expandSearchInput,
-  searchEntry,
-  isSearchExpanded,
-  fetchSearchMovieStart,
-  searchInput,
-  clearSearchEntry,
-  clearSearchCollections,
-}) => {
+const Search = ({ expandSearchInput, searchEntry, isSearchExpanded }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
-  const clearSearchData = useCallback(() => {
-    clearSearchEntry();
-    clearSearchCollections();
-  }, [clearSearchEntry, clearSearchCollections]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-      searchInput(searchQuery);
-      fetchSearchMovieStart();
+      dispatch(searchInput(searchQuery));
+      dispatch(fetchSearchMovieStart());
     } else {
-      clearSearchData();
-      expandSearchInput(false);
+      clearSearchData(dispatch);
     }
-  }, [
-    searchQuery,
-    searchInput,
-    fetchSearchMovieStart,
-    expandSearchInput,
-    clearSearchData,
-  ]);
+  }, [searchQuery, dispatch]);
 
   return (
     <>
@@ -98,12 +77,4 @@ const Search = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  searchInput: (input) => dispatch(searchInput(input)),
-  fetchSearchMovieStart: () => dispatch(fetchSearchMovieStart()),
-  clearSearchEntry: () => dispatch(clearSearchEntry()),
-  clearSearchCollections: () => dispatch(clearSearchCollections()),
-  expandSearchInput: (payload) => dispatch(expandSearchInput(payload)),
-});
-
-export default connect(null, mapDispatchToProps)(Search);
+export default Search;

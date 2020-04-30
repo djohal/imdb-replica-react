@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { selectCurrentUser } from "redux/user/user.selectors";
-
 import {
   addItemToWatchlist,
   removeItemFromWatchlist,
 } from "redux/watchlist/watchlist.actions";
 import { WatchlistRibbonSvg } from "../watchlist-item/watchlist-svgs.component";
+import { clearSearchData } from "../../redux/search/search.utils";
 
 const WatchlistBtn = ({ collectionItem, selected, svgIcon }) => {
   const history = useHistory();
@@ -26,6 +26,7 @@ const WatchlistBtn = ({ collectionItem, selected, svgIcon }) => {
         dispatch(addItemToWatchlist(item));
       }
     } else {
+      clearSearchData(dispatch);
       history.push("/register/sign-in");
     }
   };
