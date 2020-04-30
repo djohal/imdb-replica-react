@@ -1,11 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectWatchlistItems } from "redux/watchlist/watchlist.selectors";
-
-import { WatchlistRibbonSvg } from "components/watchlist-item/watchlist-svgs.component";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { getSingleDecimalValue } from "redux/movies/movies.utils";
 import WatchlistBtn from "components/watchlist-btn/watchlist-btn.component";

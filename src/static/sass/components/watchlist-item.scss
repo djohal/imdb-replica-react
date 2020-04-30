@@ -89,3 +89,11 @@
     font-size: 1.25rem;
   }
 }
+
+@include responsive(phone) {
+  .watchlist-item {
+    .image-item img {
+      height: 15rem;
+    }
+  }
+}

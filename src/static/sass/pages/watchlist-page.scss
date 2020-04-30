@@ -5,3 +5,12 @@
     flex-wrap: wrap;
   }
 }
+
+@include responsive(phone) {
+  .watchlist-page {
+    .watchlist-items {
+      padding: 0 1rem;
+      justify-content: space-between;
+    }
+  }
+}
