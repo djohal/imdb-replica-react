@@ -50,8 +50,12 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
             onClick={() => setToggleDropdown(!toggleDropdown)}
           >
             <FontAwesomeIcon icon={faUserCircle} size="lg" />
-            <span>John</span>
-            <FontAwesomeIcon icon={faCaretDown} size="sm" />
+            <span className="hide-responsive">John</span>
+            <FontAwesomeIcon
+              icon={faCaretDown}
+              size="sm"
+              className="hide-responsive"
+            />
           </div>
           <ProfileDropdown
             signOutStart={signOutStart}

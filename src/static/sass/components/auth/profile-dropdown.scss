@@ -23,4 +23,21 @@
       background-color: rgba($color: gray, $alpha: 0.5);
     }
   }
+  .name {
+    display: none;
+  }
+}
+
+@include responsive(phone) {
+  .profile-dropdown {
+    right: 1rem;
+    height: 11rem;
+
+    .name {
+      display: block;
+      color: $color-primary;
+      border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
+      margin-bottom: 0.25rem;
+    }
+  }
 }
