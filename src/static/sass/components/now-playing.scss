@@ -87,8 +87,7 @@
     margin: 0;
 
     .container {
-      padding: 0 !important;
-      height: 40vh;
+      padding: 0 0 5rem 0 !important;
 
       .carousel-control-prev,
       .carousel-control-next {
@@ -104,7 +103,7 @@
 
           .poster-img-container {
             width: 35%;
-            height: 25vh;
+            min-height: 12rem;
             position: absolute;
             z-index: 2;
             margin-top: 5rem;
@@ -141,11 +140,12 @@
               black
             );
             width: 100%;
-            height: 30vh;
 
             img {
               width: 100%;
               height: 100%;
+              min-height: 15rem;
+
               margin: 0;
             }
 
