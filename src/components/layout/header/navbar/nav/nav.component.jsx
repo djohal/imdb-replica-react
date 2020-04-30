@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Nav from "react-bootstrap/Nav";
@@ -13,9 +13,11 @@ import {
 
 import SearchForm from "../../../../search-form/search-form.component";
 import { selectWatchlistItems } from "../../../../../redux/watchlist/watchlist.selectors";
+import ProfileDropdown from "../../../../auth/profile-dropdown/profile-dropdown.component";
 
 const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
   const watchlistItems = useSelector(selectWatchlistItems);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
     <Nav>
@@ -42,18 +44,29 @@ const NavLinks = ({ currentUser, signOutStart, isSearchExpanded }) => {
         </span>
       </Link>
       {currentUser ? (
-        <div
-          className={`${isSearchExpanded ? "display-none" : "sign-out"}`}
-          onClick={() => signOutStart()}
-        >
-          <FontAwesomeIcon icon={faUserCircle} size="lg" />
-          <span>John</span>
-          <FontAwesomeIcon icon={faCaretDown} size="sm" />
-        </div>
+        <>
+          <div
+            className={`${isSearchExpanded ? "display-none" : "sign-out"}`}
+            onClick={() => setToggleDropdown(!toggleDropdown)}
+          >
+            <FontAwesomeIcon icon={faUserCircle} size="lg" />
+            <span>John</span>
+            <FontAwesomeIcon icon={faCaretDown} size="sm" />
+          </div>
+          <ProfileDropdown
+            signOutStart={signOutStart}
+            toggleDropdown={toggleDropdown}
+          />
+          <div
+            className={`${toggleDropdown ? "overlay" : "hide-display"}`}
+            onClick={() => setToggleDropdown(!toggleDropdown)}
+          ></div>
+        </>
       ) : (
         <Link
           to="/register/sign-in"
           className={`${isSearchExpanded ? "display-none" : null}`}
+          onClick={() => setToggleDropdown(false)}
         >
           <span>Sign In</span>
         </Link>
