@@ -11,19 +11,21 @@ const AccountsPage = () => {
   const [windowWidth] = useWindowSize();
 
   return (
-    <div className="sign-in-sign-up">
-      <Helmet>
-        <body class="light-bg"></body>
-      </Helmet>
-      <Container>
-        <img src={Logo} alt="logo" />
-        <div className="form-container">
-          <AccountForm />
-          <div className="spacing"></div>
+    <div className="account">
+      <div className="form-page">
+        <Helmet>
+          <body class="light-bg"></body>
+        </Helmet>
+        <Container>
+          <img src={Logo} alt="logo" />
+          <div className="form-container">
+            <AccountForm />
+            <div className="spacing"></div>
+          </div>
+        </Container>
+        <div className="divider-section">
+          <div className="divider-inner"></div>
         </div>
-      </Container>
-      <div className="divider-section">
-        <div className="divider-inner"></div>
       </div>
     </div>
   );

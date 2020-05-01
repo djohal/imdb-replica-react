@@ -12,29 +12,31 @@ const SignUpPage = () => {
 
   return (
     <div className="sign-in-sign-up">
-      <Helmet>
-        <body class="light-bg"></body>
-      </Helmet>
-      <Container>
-        <img src={Logo} alt="logo" />
-        <div className="form-container">
-          <SignUpForm />
-          <div className="spacing"></div>
-          <div className="divider-section">
-            <div className="divider-inner"></div>
-            <div
-              className={`${
-                windowWidth < 600 ? "divider-break" : "account-exist"
-              }`}
-            >
-              <span>Already have an account? </span>
+      <div className="form-page">
+        <Helmet>
+          <body class="light-bg"></body>
+        </Helmet>
+        <Container>
+          <img src={Logo} alt="logo" />
+          <div className="form-container">
+            <SignUpForm />
+            <div className="spacing"></div>
+            <div className="divider-section">
+              <div className="divider-inner"></div>
+              <div
+                className={`${
+                  windowWidth < 600 ? "divider-break" : "account-exist"
+                }`}
+              >
+                <span>Already have an account? </span>
+              </div>
+              <Link to="/register/sign-in">Sign-in</Link>
             </div>
-            <Link to="/register/sign-in">Sign-in</Link>
           </div>
+        </Container>
+        <div className="divider-section">
+          <div className="divider-inner"></div>
         </div>
-      </Container>
-      <div className="divider-section">
-        <div className="divider-inner"></div>
       </div>
     </div>
   );

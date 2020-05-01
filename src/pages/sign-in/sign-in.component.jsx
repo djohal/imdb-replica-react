@@ -10,28 +10,30 @@ const SignInPage = () => {
   const history = useHistory();
   return (
     <div className="sign-in-sign-up">
-      <Helmet>
-        <body class="light-bg"></body>
-      </Helmet>
-      <Container>
-        <img src={Logo} alt="logo" />
-        <div className="form-container">
-          <SignInForm />
-          <div className="spacing"></div>
+      <div className="form-page">
+        <Helmet>
+          <body class="light-bg"></body>
+        </Helmet>
+        <Container>
+          <img src={Logo} alt="logo" />
+          <div className="form-container">
+            <SignInForm />
+            <div className="spacing"></div>
 
-          <div className="divider-break">
-            <span>New to IMDb?</span>
+            <div className="divider-break">
+              <span>New to IMDb?</span>
+            </div>
+            <button
+              onClick={() => history.push("/sign-up")}
+              className="create-account"
+            >
+              Create your IMDb Account
+            </button>
           </div>
-          <button
-            onClick={() => history.push("/sign-up")}
-            className="create-account"
-          >
-            Create your IMDb Account
-          </button>
+        </Container>
+        <div className="divider-section">
+          <div className="divider-inner"></div>
         </div>
-      </Container>
-      <div className="divider-section">
-        <div className="divider-inner"></div>
       </div>
     </div>
   );
