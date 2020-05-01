@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call, select } from "redux-saga/effects";
+import { takeLatest, put, all, call } from "redux-saga/effects";
 import { UserActionTypes } from "./user.types";
 import { toast } from "react-toastify";
 
@@ -22,8 +22,6 @@ import {
   firestore,
 } from "../../firebase/firebase.utils";
 
-import { selectCurrentUser } from "./user.selectors";
-
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   try {
     const userRef = yield call(
@@ -44,11 +42,11 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-export function* updateUserDetailsInFirebase() {
+export function* updateUserDetailsInFirebase({ payload, history }) {
   try {
-    const currentUser = yield select(selectCurrentUser);
-    const userRef = yield firestore.doc(`users/${currentUser.id}`);
-    yield userRef.update(currentUser);
+    const userRef = yield firestore.doc(`users/${payload.id}`);
+    yield userRef.update(payload);
+    history.push("/account");
   } catch (error) {
     console.log(error);
   }

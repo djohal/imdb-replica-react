@@ -38,11 +38,10 @@ const EditAccountForm = ({ data }) => {
         if (data === "email") {
           currentUser.email = email;
         }
-        dispatch(updateUserDetail(currentUser));
+        dispatch(updateUserDetail(currentUser, history));
       } else {
-        updateUserPass(password);
+        updateUserPass(password, history);
       }
-      history.push("/account");
     },
   });
 

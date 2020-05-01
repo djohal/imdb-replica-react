@@ -54,7 +54,7 @@ export const getUserWatchlistRef = async (userId) => {
   }
 };
 
-export const updateUserPass = async (pass) => {
+export const updateUserPass = async (pass, history) => {
   const user = await firebase.auth().currentUser;
   try {
     await user.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -65,6 +65,7 @@ export const updateUserPass = async (pass) => {
   try {
     const userAuth = await firebase.auth().currentUser;
     await userAuth.updatePassword(pass);
+    history.push("/account");
   } catch (error) {
     console.log(error);
   }

@@ -64,7 +64,8 @@ export const emailSignInStart = (emailAndPassword) => ({
   payload: emailAndPassword,
 });
 
-export const updateUserDetail = (userData) => ({
+export const updateUserDetail = (userData, history) => ({
   type: UserActionTypes.UPDATE_USER_DETAILS,
   payload: userData,
+  history,
 });
