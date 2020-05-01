@@ -35,9 +35,20 @@
           label {
             margin: 0;
           }
-
+          .form-info {
+            width: 70%;
+          }
           .form-control-plaintext {
+            width: 100%;
             border: none;
+            padding: 0;
+            font-size: 0.8rem;
+          }
+
+          .email {
+            font-size: 0.8rem;
+            white-space: pre-wrap;
+            word-break: break-all;
             padding: 0;
           }
 
