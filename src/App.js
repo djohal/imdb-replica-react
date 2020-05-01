@@ -15,6 +15,7 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 import AccountsPage from "./pages/account/account.component";
 import EditAccount from "./components/edit-account/edit-account.component";
+import ResetPassword from "./components/reset-password/reset-password.component";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
 const RegistrationPage = lazy(() =>
@@ -115,6 +116,16 @@ function App({ checkUserSession, currentUser }) {
                   <Redirect to="/" checkUserSession />
                 ) : (
                   <EditAccount />
+                )
+              }
+            />
+            <Route
+              path="/account/reset-password"
+              render={() =>
+                !currentUser ? (
+                  <Redirect to="/" checkUserSession />
+                ) : (
+                  <ResetPassword />
                 )
               }
             />

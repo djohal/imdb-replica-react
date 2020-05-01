@@ -39,6 +39,7 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
     );
   } catch (error) {
     yield put(signInFailure(error));
+    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 
@@ -49,6 +50,7 @@ export function* updateUserDetailsInFirebase({ payload, history }) {
     history.push("/account");
   } catch (error) {
     console.log(error);
+    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 
@@ -59,6 +61,7 @@ export function* signInWithThirdParty(provider) {
     toast.success("Sign in successful !");
   } catch (error) {
     yield put(signInFailure(error));
+    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 
@@ -93,6 +96,7 @@ export function* signUp({ payload: { email, password, name } }) {
     toast.success("Sign up successful !");
   } catch (error) {
     yield put(signUpFailure(error));
+    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 
@@ -143,6 +147,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
     toast.success("Sign in successful !");
   } catch (error) {
     yield put(signInFailure(error));
+    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 
