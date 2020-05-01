@@ -29,7 +29,12 @@ const AccountForm = () => {
           <Form.Label>Email:</Form.Label>
           <div className="email">{email}</div>
         </div>
-        <Button type="button">Edit</Button>
+        <Button
+          type="button"
+          onClick={() => history.push(`${match.url}/edit/email`)}
+        >
+          Edit
+        </Button>
       </Form.Group>
       <Form.Group controlId="formBasicPass">
         <div className="form-info">

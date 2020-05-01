@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Container from "react-bootstrap/Container";
 
@@ -8,6 +8,19 @@ import EditAccountForm from "./edit-account-form.component";
 
 const EditAccount = () => {
   const history = useHistory();
+  const match = useRouteMatch();
+
+  const matchNameUrl = match.url.includes("name");
+  const matchEmailUrl = match.url.includes("email");
+
+  const fetchTitle = () => {
+    if (matchNameUrl) {
+      return "name";
+    } else if (matchEmailUrl) {
+      return "email";
+    }
+  };
+
   return (
     <div className="edit-account">
       <div className="form-page">
@@ -17,9 +30,9 @@ const EditAccount = () => {
         <Container>
           <img src={Logo} alt="logo" onClick={() => history.push("/")} />
           <div className="main">
-            <h3 className="title">Change your name</h3>
+            <h3 className="title">Change your {fetchTitle()}</h3>
             <div className="form-container">
-              <EditAccountForm />
+              <EditAccountForm data={fetchTitle()} />
               <div className="spacing"></div>
             </div>
           </div>
