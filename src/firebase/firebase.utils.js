@@ -39,6 +39,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const getUserWatchlistRef = async (userId) => {
+  const watchlistRef = await firestore
+    .collection("watchlist")
+    .where("userId", "==", userId);
+  const snapshot = await watchlistRef.get();
+
+  if (snapshot.empty) {
+    const watchlistDocRef = firestore.collection("watchlist").doc();
+    watchlistDocRef.set({ userId, watchlist: [] });
+    return watchlistDocRef;
+  } else {
+    return snapshot.docs[0].ref;
+  }
+};
+
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {

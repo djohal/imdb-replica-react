@@ -13,3 +13,8 @@ export const removeItemFromWatchlist = (item) => ({
 export const removeAllItemsFromWatchlist = () => ({
   type: WatchlistActionTypes.REMOVE_ALL_ITEMS_FROM_WATCHLIST,
 });
+
+export const getUserWatchlistItems = (watchlistItems) => ({
+  type: WatchlistActionTypes.GET_USER_WATCHLIST_ITEMS,
+  payload: watchlistItems,
+});

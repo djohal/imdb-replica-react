@@ -25,6 +25,12 @@ const watchlistReducer = (state = INITIAL_STATE, action) => {
         watchlistItems: [],
       };
 
+    case WatchlistActionTypes.GET_USER_WATCHLIST_ITEMS:
+      return {
+        ...state,
+        watchlistItems: action.payload,
+      };
+
     default:
       return state;
   }
