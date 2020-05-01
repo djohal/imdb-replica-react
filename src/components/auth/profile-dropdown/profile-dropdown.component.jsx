@@ -12,6 +12,7 @@ const ProfileDropdown = ({ signOutStart, toggleDropdown, currentUser }) => {
           : "Unknown"}
       </span>
       <span onClick={() => history.push("/watchlist")}>Your watchlist</span>
+      <span onClick={() => history.push("/account")}>Account settings</span>
       <span onClick={() => signOutStart()}>Sign out</span>
     </div>
   );

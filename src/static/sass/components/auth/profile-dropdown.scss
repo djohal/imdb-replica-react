@@ -2,7 +2,7 @@
   position: absolute;
   top: 2.5rem;
   right: 0;
-  height: 7.25rem;
+  height: 10rem;
   background-color: $color-dark2;
   z-index: 6;
   display: flex;
@@ -31,7 +31,7 @@
 @include responsive(phone) {
   .profile-dropdown {
     right: 0;
-    height: 11rem;
+    height: 13rem;
 
     .name {
       display: block;

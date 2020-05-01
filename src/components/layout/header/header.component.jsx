@@ -10,13 +10,14 @@ const Header = () => {
 
   let signUpUrlMatch = useRouteMatch("/sign-up");
   let signInUrlMatch = useRouteMatch("/sign-in");
+  let accountUrlMatch = useRouteMatch("/account");
   let notFoundMatch = useRouteMatch("/404");
 
   return (
     <div
       className={`${
         (windowWidth < 600 && (signUpUrlMatch || signInUrlMatch)) ||
-        notFoundMatch
+        (accountUrlMatch || notFoundMatch)
           ? "display-none hide-display"
           : "header"
       }`}
