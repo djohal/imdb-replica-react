@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 import { UserActionTypes } from "./user.types";
 import { toast } from "react-toastify";
 
@@ -19,7 +19,10 @@ import {
   createUserProfileDocument,
   githubProvider,
   getCurrentUser,
+  firestore,
 } from "../../firebase/firebase.utils";
+
+import { selectCurrentUser } from "./user.selectors";
 
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   try {
@@ -38,6 +41,16 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
     );
   } catch (error) {
     yield put(signInFailure(error));
+  }
+}
+
+export function* updateUserDetailsInFirebase() {
+  try {
+    const currentUser = yield select(selectCurrentUser);
+    const userRef = yield firestore.doc(`users/${currentUser.id}`);
+    yield userRef.update(currentUser);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -139,6 +152,13 @@ export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+export function* onUserDataUpdate() {
+  yield takeLatest(
+    UserActionTypes.UPDATE_USER_DETAILS,
+    updateUserDetailsInFirebase
+  );
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
@@ -149,5 +169,6 @@ export function* userSagas() {
     call(onUserSignOutStart),
     call(onCheckUserSession),
     call(onEmailSignInStart),
+    call(onUserDataUpdate),
   ]);
 }

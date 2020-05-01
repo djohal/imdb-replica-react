@@ -30,6 +30,13 @@ const userReducers = (state = INITIAL_STATE, action) => {
         error: null,
       };
 
+    case UserActionTypes.UPDATE_USER_DETAILS:
+      return {
+        ...state,
+        currentUser: action.payload,
+        error: null,
+      };
+
     default:
       return state;
   }
