@@ -14,6 +14,7 @@ import Spinner from "./components/spinner/spinner.component";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 import AccountsPage from "./pages/account/account.component";
+import EditAccount from "./components/edit-account/edit-account.component";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
 const RegistrationPage = lazy(() =>
@@ -97,12 +98,23 @@ function App({ checkUserSession, currentUser }) {
               }
             />
             <Route
+              exact
               path="/account"
               render={() =>
                 !currentUser ? (
                   <Redirect to="/" checkUserSession />
                 ) : (
                   <AccountsPage />
+                )
+              }
+            />
+            <Route
+              path="/account/edit/:info"
+              render={() =>
+                !currentUser ? (
+                  <Redirect to="/" checkUserSession />
+                ) : (
+                  <EditAccount />
                 )
               }
             />
