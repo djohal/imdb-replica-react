@@ -17,7 +17,10 @@ const AccountForm = () => {
           <Form.Label>Name:</Form.Label>
           <Form.Control plaintext readOnly defaultValue={displayName} />
         </div>
-        <Button type="button" onClick={() => history.push(`/account/edit/name`)}>
+        <Button
+          type="button"
+          onClick={() => history.push(`${match.url}/edit/name`)}
+        >
           Edit
         </Button>
       </Form.Group>

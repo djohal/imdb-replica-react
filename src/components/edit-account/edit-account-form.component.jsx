@@ -1,21 +1,25 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { selectCurrentUser } from "redux/user/user.selectors";
 
-const EditAccountForm = ({ emailSignInStart }) => {
+const EditAccountForm = () => {
+  const { displayName } = useSelector(selectCurrentUser);
+
   const formik = useFormik({
     initialValues: {
-      name: "",
+      name: displayName,
     },
     validationSchema: Yup.object({
       name: Yup.string()
         .max(20, "Max character limit is 20 characters")
-        .required("Enter an email"),
+        .required("Enter a name"),
     }),
-    onSubmit: ({ email, password }) => {},
+    onSubmit: () => {},
   });
 
   return (
