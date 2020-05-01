@@ -18,6 +18,8 @@ const EditAccount = () => {
       return "name";
     } else if (matchEmailUrl) {
       return "email";
+    } else {
+      return "password";
     }
   };
 

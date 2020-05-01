@@ -54,6 +54,22 @@ export const getUserWatchlistRef = async (userId) => {
   }
 };
 
+export const updateUserPass = async (pass) => {
+  const user = await firebase.auth().currentUser;
+  try {
+    await user.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider());
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const userAuth = await firebase.auth().currentUser;
+    await userAuth.updatePassword(pass);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {

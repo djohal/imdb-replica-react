@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { selectCurrentUser } from "redux/user/user.selectors";
 import { updateUserDetail } from "../../redux/user/user.actions";
+import { updateUserPass } from "../../firebase/firebase.utils";
 
 const EditAccountForm = ({ data }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -18,6 +19,7 @@ const EditAccountForm = ({ data }) => {
     initialValues: {
       name: currentUser.displayName,
       email: currentUser.email,
+      password: "********",
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -26,15 +28,20 @@ const EditAccountForm = ({ data }) => {
       email: Yup.string()
         .email("Enter a valid email address")
         .required("Enter an email"),
+      password: Yup.string().min(8, null).required("Enter a password"),
     }),
-    onSubmit: ({ name, email }) => {
-      if (data === "name") {
-        currentUser.displayName = name;
+    onSubmit: ({ name, email, password }) => {
+      if (data !== "password") {
+        if (data === "name") {
+          currentUser.displayName = name;
+        }
+        if (data === "email") {
+          currentUser.email = email;
+        }
+        dispatch(updateUserDetail(currentUser));
+      } else {
+        updateUserPass(password);
       }
-      if (data === "email") {
-        currentUser.email = email;
-      }
-      dispatch(updateUserDetail(currentUser));
       history.push("/account");
     },
   });
@@ -81,6 +88,30 @@ const EditAccountForm = ({ data }) => {
           />
           <Form.Control.Feedback type="invalid">
             {formik.errors.email}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Save changes
+        </Button>
+      </Form>
+    );
+  }
+
+  if (data === "password") {
+    return (
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <span className="subtitle">
+          Use the form below to change the password for your IMDb account
+        </span>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>New Password:</Form.Label>
+          <Form.Control
+            type="password"
+            {...formik.getFieldProps("password")}
+            isInvalid={formik.touched.password && formik.errors.password}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.password}
           </Form.Control.Feedback>
         </Form.Group>
         <Button variant="primary" type="submit">

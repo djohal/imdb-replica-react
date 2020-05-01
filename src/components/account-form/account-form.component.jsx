@@ -41,7 +41,12 @@ const AccountForm = () => {
           <Form.Label>Password:</Form.Label>
           <Form.Control plaintext readOnly defaultValue="********" />
         </div>
-        <Button type="button">Edit</Button>
+        <Button
+          type="button"
+          onClick={() => history.push(`${match.url}/edit/password`)}
+        >
+          Edit
+        </Button>
       </Form.Group>
     </Form>
   );
