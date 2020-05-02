@@ -34,7 +34,7 @@ const EditPasswordForm = ({ formik }) => (
       </Form.Control.Feedback>
     </Form.Group>
     <Form.Group controlId="formReenterPassword">
-      <Form.Label>Reenter new assword:</Form.Label>
+      <Form.Label>Re-enter new assword:</Form.Label>
       <Form.Control
         type="password"
         name="reEnterPassword"

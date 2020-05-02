@@ -18,6 +18,10 @@
           &:active:focus {
             box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
           }
+
+          @include responsive(phone) {
+            width: 100%;
+          }
         }
       }
 
