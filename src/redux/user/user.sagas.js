@@ -55,6 +55,24 @@ export function* updateUserDetailsInFirebase({ payload, history }) {
   }
 }
 
+export function* updateUserPassInFirebase({ payload, history }) {
+  const user = yield auth.currentUser;
+  try {
+    yield auth.signInWithEmailAndPassword(user.email, payload.currentPassword);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+
+  try {
+    yield user.updatePassword(payload.newPassword);
+    history.push("/account");
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
 export function* updateUserEmailInFirebase({ payload, history }) {
   const currentUser = yield auth.currentUser;
 
@@ -196,6 +214,13 @@ export function* onUserDataUpdate() {
   );
 }
 
+export function* onUserPassUpdate() {
+  yield takeLatest(
+    UserActionTypes.UPDATE_USER_PASSWORD,
+    updateUserPassInFirebase
+  );
+}
+
 export function* onUserEmailUpdate() {
   yield takeLatest(
     UserActionTypes.UPDATE_USER_EMAIL,
@@ -218,6 +243,7 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onEmailSignInStart),
     call(onUserDataUpdate),
+    call(onUserPassUpdate),
     call(onResetPassword),
     call(onUserEmailUpdate),
   ]);

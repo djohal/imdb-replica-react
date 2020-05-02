@@ -10,8 +10,8 @@ import { selectCurrentUser } from "redux/user/user.selectors";
 import {
   updateUserDetail,
   updateUserEmail,
+  updateUserPassword,
 } from "../../redux/user/user.actions";
-import { updateUserPass } from "../../firebase/firebase.utils";
 
 const EditAccountForm = ({ data }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -42,7 +42,12 @@ const EditAccountForm = ({ data }) => {
 
     if (data === "password") {
       return {
-        password: Yup.string().min(8, null).required("Enter a password"),
+        currentPassword: Yup.string().min(8, null).required("Enter a password"),
+        newPassword: Yup.string().min(8, null).required("Enter a password"),
+        reEnterPassword: Yup.string().oneOf(
+          [Yup.ref("newPassword"), null],
+          "Passwords must match"
+        ),
       };
     }
   };
@@ -54,23 +59,27 @@ const EditAccountForm = ({ data }) => {
       email: "",
       emailVerify: "",
       password: "",
+      currentPassword: "",
+      newPassword: "",
+      reEnterPassword: "",
     },
     validationSchema: Yup.object(conditionalValidation()),
-    onSubmit: ({ name, email, password }) => {
+    onSubmit: ({ name, email, password, currentPassword, newPassword }) => {
       console.log(password);
 
-      if (data !== "password") {
-        if (data === "name") {
-          currentUser.displayName = name;
-          dispatch(updateUserDetail(currentUser, history));
-        }
-        if (data === "email") {
-          currentUser.email = email;
-          currentUser["password"] = password;
-          dispatch(updateUserEmail(currentUser, history));
-        }
-      } else {
-        updateUserPass(password, history);
+      if (data === "name") {
+        currentUser.displayName = name;
+        dispatch(updateUserDetail(currentUser, history));
+      }
+      if (data === "email") {
+        currentUser.email = email;
+        currentUser["password"] = password;
+        dispatch(updateUserEmail(currentUser, history));
+      }
+      if (data === "password") {
+        currentUser["currentPassword"] = currentPassword;
+        currentUser["newPassword"] = newPassword;
+        dispatch(updateUserPassword(currentUser, history));
       }
     },
   });
@@ -166,16 +175,44 @@ const EditAccountForm = ({ data }) => {
         <span className="subtitle">
           Use the form below to change the password for your IMDb account
         </span>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>New Password:</Form.Label>
+        <Form.Group controlId="formCurrentPassword">
+          <Form.Label>Current password:</Form.Label>
           <Form.Control
             type="password"
-            name="password"
-            {...formik.getFieldProps("password")}
-            isInvalid={formik.touched.password && formik.errors.password}
+            name="currentPassword"
+            {...formik.getFieldProps("currentPassword")}
+            isInvalid={
+              formik.touched.currentPassword && formik.errors.currentPassword
+            }
           />
           <Form.Control.Feedback type="invalid">
-            {formik.errors.password}
+            {formik.errors.currentPassword}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formNewPassword">
+          <Form.Label>New password:</Form.Label>
+          <Form.Control
+            type="password"
+            name="newPassword"
+            {...formik.getFieldProps("newPassword")}
+            isInvalid={formik.touched.newPassword && formik.errors.newPassword}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.newPassword}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formReenterPassword">
+          <Form.Label>Reenter new assword:</Form.Label>
+          <Form.Control
+            type="password"
+            name="reEnterPassword"
+            {...formik.getFieldProps("reEnterPassword")}
+            isInvalid={
+              formik.touched.reEnterPassword && formik.errors.reEnterPassword
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.reEnterPassword}
           </Form.Control.Feedback>
         </Form.Group>
         <Button variant="primary" type="submit">

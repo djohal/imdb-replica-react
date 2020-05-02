@@ -70,6 +70,12 @@ export const updateUserDetail = (userData, history) => ({
   history,
 });
 
+export const updateUserPassword = (password, history) => ({
+  type: UserActionTypes.UPDATE_USER_PASSWORD,
+  payload: password,
+  history,
+});
+
 export const resetUserPassword = (email) => ({
   type: UserActionTypes.RESET_USER_PASSWORD,
   payload: email,
