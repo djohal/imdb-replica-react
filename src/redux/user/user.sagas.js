@@ -56,32 +56,18 @@ export function* updateUserDetailsInFirebase({ payload, history }) {
 }
 
 export function* updateUserPassInFirebase({ payload, history }) {
-  const user = yield auth.currentUser;
-  try {
-    yield auth.signInWithEmailAndPassword(user.email, payload.currentPassword);
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-
+  const user = auth.currentUser;
   try {
     yield user.updatePassword(payload.newPassword);
     history.push("/account");
+    toast.success("Password updated successfully!");
   } catch (error) {
-    console.log(error);
+    toast.error("Oops! Something went wrong. Please try again.");
     return error;
   }
 }
 
 export function* updateUserEmailInFirebase({ payload, history }) {
-  const currentUser = yield auth.currentUser;
-
-  try {
-    yield auth.signInWithEmailAndPassword(currentUser.email, payload.password);
-  } catch (error) {
-    console.log(error);
-  }
-
   try {
     yield auth.currentUser.updateEmail(payload.email);
 
@@ -93,6 +79,7 @@ export function* updateUserEmailInFirebase({ payload, history }) {
   } catch (error) {
     console.log(error);
     toast.error("Oops! Something went wrong. Please try again.");
+    return error;
   }
 }
 

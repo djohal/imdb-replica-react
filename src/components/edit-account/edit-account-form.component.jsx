@@ -3,15 +3,17 @@ import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { toast } from "react-toastify";
+
 import { selectCurrentUser } from "redux/user/user.selectors";
 import {
   updateUserDetail,
   updateUserEmail,
   updateUserPassword,
 } from "../../redux/user/user.actions";
+import { verifyUserCredentials } from "../../firebase/firebase.utils";
 
 const EditAccountForm = ({ data }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -64,7 +66,13 @@ const EditAccountForm = ({ data }) => {
       reEnterPassword: "",
     },
     validationSchema: Yup.object(conditionalValidation()),
-    onSubmit: ({ name, email, password, currentPassword, newPassword }) => {
+    onSubmit: async ({
+      name,
+      email,
+      password,
+      currentPassword,
+      newPassword,
+    }) => {
       console.log(password);
 
       if (data === "name") {
@@ -73,13 +81,19 @@ const EditAccountForm = ({ data }) => {
       }
       if (data === "email") {
         currentUser.email = email;
-        currentUser["password"] = password;
-        dispatch(updateUserEmail(currentUser, history));
+        const checkCredentials = await verifyUserCredentials(password);
+
+        checkCredentials.success
+          ? dispatch(updateUserEmail(currentUser, history))
+          : toast.error("Invalid password!");
       }
       if (data === "password") {
-        currentUser["currentPassword"] = currentPassword;
         currentUser["newPassword"] = newPassword;
-        dispatch(updateUserPassword(currentUser, history));
+        const checkCredentials = await verifyUserCredentials(currentPassword);
+
+        checkCredentials.success
+          ? dispatch(updateUserPassword(currentUser, history))
+          : toast.error("Invalid password!");
       }
     },
   });

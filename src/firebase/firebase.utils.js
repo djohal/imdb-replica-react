@@ -54,6 +54,20 @@ export const getUserWatchlistRef = async (userId) => {
   }
 };
 
+export const verifyUserCredentials = async (password) => {
+  const currentUser = await firebase.auth().currentUser;
+
+  try {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(currentUser.email, password);
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+};
+
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
