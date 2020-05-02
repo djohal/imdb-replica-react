@@ -18,8 +18,10 @@
 @import "components/search-dropdown";
 @import "components/watchlist-item";
 @import "components/watchlist-btn";
-@import "components/account-form";
-@import "components/edit-account";
+
+@import "components/account/account-form";
+@import "components/account/edit-account";
+@import "components/account/reset-password";
 
 @import "components/not-found";
 @import "components/spinner";
