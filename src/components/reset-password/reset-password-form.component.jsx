@@ -7,7 +7,10 @@ import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { selectCurrentUser } from "redux/user/user.selectors";
-import { updateUserDetail } from "../../redux/user/user.actions";
+import {
+  updateUserDetail,
+  resetUserPassword,
+} from "../../redux/user/user.actions";
 import { updateUserPass } from "../../firebase/firebase.utils";
 
 const ResetPasswordForm = ({ data }) => {
@@ -26,7 +29,8 @@ const ResetPasswordForm = ({ data }) => {
         .email("Enter a valid email address")
         .required("Enter an email"),
     }),
-    onSubmit: ({ name, email, password }) => {
+    onSubmit: ({ email }) => {
+      dispatch(resetUserPassword(email));
       setFormSubmit(true);
     },
   });

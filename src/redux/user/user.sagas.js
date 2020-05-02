@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 import { UserActionTypes } from "./user.types";
 import { toast } from "react-toastify";
 
@@ -21,6 +21,7 @@ import {
   getCurrentUser,
   firestore,
 } from "../../firebase/firebase.utils";
+import { selectUser } from "./user.selectors";
 
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   try {
@@ -48,6 +49,17 @@ export function* updateUserDetailsInFirebase({ payload, history }) {
     const userRef = yield firestore.doc(`users/${payload.id}`);
     yield userRef.update(payload);
     history.push("/account");
+  } catch (error) {
+    console.log(error);
+    toast.error("Oops! Something went wrong. Please try again.");
+  }
+}
+
+export function* sendResetPassEmail() {
+  const user = yield select(selectUser);
+
+  try {
+    yield auth.sendPasswordResetEmail(user.resetEmail);
   } catch (error) {
     console.log(error);
     toast.error("Oops! Something went wrong. Please try again.");
@@ -162,6 +174,10 @@ export function* onUserDataUpdate() {
   );
 }
 
+export function* onResetPassword() {
+  yield takeLatest(UserActionTypes.RESET_USER_PASSWORD, sendResetPassEmail);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
@@ -173,5 +189,6 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onEmailSignInStart),
     call(onUserDataUpdate),
+    call(onResetPassword),
   ]);
 }

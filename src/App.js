@@ -119,16 +119,7 @@ function App({ checkUserSession, currentUser }) {
                 )
               }
             />
-            <Route
-              path="/account/reset-password"
-              render={() =>
-                !currentUser ? (
-                  <Redirect to="/" checkUserSession />
-                ) : (
-                  <ResetPassword />
-                )
-              }
-            />
+            <Route path="/account/reset-password" component={ResetPassword} />
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>

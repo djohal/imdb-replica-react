@@ -3,6 +3,7 @@ import { UserActionTypes } from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
+  resetEmail: null,
 };
 
 const userReducers = (state = INITIAL_STATE, action) => {
@@ -35,6 +36,12 @@ const userReducers = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
         error: null,
+      };
+
+    case UserActionTypes.RESET_USER_PASSWORD:
+      return {
+        ...state,
+        resetEmail: action.payload,
       };
 
     default:

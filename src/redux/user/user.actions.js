@@ -69,3 +69,8 @@ export const updateUserDetail = (userData, history) => ({
   payload: userData,
   history,
 });
+
+export const resetUserPassword = (email) => ({
+  type: UserActionTypes.RESET_USER_PASSWORD,
+  payload: email,
+});
