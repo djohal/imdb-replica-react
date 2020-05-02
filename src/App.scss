@@ -26,6 +26,10 @@ body {
     right: 0;
     left: unset;
     width: 15rem;
+
+    @media only screen and (max-width: 37.5em) {
+      right: 0.5rem;
+    }
   }
   .Toastify__toast--success {
     background: #105220 !important;

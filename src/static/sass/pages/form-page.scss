@@ -71,7 +71,7 @@
 
 @include responsive(phone) {
   .form-page {
-    max-height: 80vh;
+    max-height: 100%;
     .container {
       img {
         width: 5rem;
