@@ -55,6 +55,29 @@ export function* updateUserDetailsInFirebase({ payload, history }) {
   }
 }
 
+export function* updateUserEmailInFirebase({ payload, history }) {
+  const currentUser = yield auth.currentUser;
+
+  try {
+    yield auth.signInWithEmailAndPassword(currentUser.email, payload.password);
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    yield auth.currentUser.updateEmail(payload.email);
+
+    const userRef = yield firestore.doc(`users/${payload.id}`);
+    delete payload["password"];
+    yield userRef.update(payload);
+
+    history.push("/account");
+  } catch (error) {
+    console.log(error);
+    toast.error("Oops! Something went wrong. Please try again.");
+  }
+}
+
 export function* sendResetPassEmail() {
   const user = yield select(selectUser);
 
@@ -173,6 +196,13 @@ export function* onUserDataUpdate() {
   );
 }
 
+export function* onUserEmailUpdate() {
+  yield takeLatest(
+    UserActionTypes.UPDATE_USER_EMAIL,
+    updateUserEmailInFirebase
+  );
+}
+
 export function* onResetPassword() {
   yield takeLatest(UserActionTypes.RESET_USER_PASSWORD, sendResetPassEmail);
 }
@@ -189,5 +219,6 @@ export function* userSagas() {
     call(onEmailSignInStart),
     call(onUserDataUpdate),
     call(onResetPassword),
+    call(onUserEmailUpdate),
   ]);
 }

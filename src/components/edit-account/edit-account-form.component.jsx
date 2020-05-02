@@ -7,7 +7,10 @@ import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { selectCurrentUser } from "redux/user/user.selectors";
-import { updateUserDetail } from "../../redux/user/user.actions";
+import {
+  updateUserDetail,
+  updateUserEmail,
+} from "../../redux/user/user.actions";
 import { updateUserPass } from "../../firebase/firebase.utils";
 
 const EditAccountForm = ({ data }) => {
@@ -15,36 +18,57 @@ const EditAccountForm = ({ data }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const conditionalValidation = () => {
+    if (data === "name") {
+      return {
+        name: Yup.string()
+          .max(20, "Max character limit is 20 characters")
+          .required("Enter a name"),
+      };
+    }
+
+    if (data === "email") {
+      return {
+        email: Yup.string()
+          .email("Enter a valid email address")
+          .required("Enter an email"),
+        emailVerify: Yup.string().oneOf(
+          [Yup.ref("email"), null],
+          "Emails must match"
+        ),
+        password: Yup.string().min(8, null).required("Enter a password"),
+      };
+    }
+
+    if (data === "password") {
+      return {
+        password: Yup.string().min(8, null).required("Enter a password"),
+      };
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       name: currentUser.displayName,
       oldEmail: currentUser.email,
       email: "",
       emailVerify: "",
-      password: "********",
+      password: "",
     },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .max(20, "Max character limit is 20 characters")
-        .required("Enter a name"),
-      email: Yup.string()
-        .email("Enter a valid email address")
-        .required("Enter an email"),
-      emailVerify: Yup.string().oneOf(
-        [Yup.ref("email"), null],
-        "Emails must match"
-      ),
-      password: Yup.string().min(8, null).required("Enter a password"),
-    }),
+    validationSchema: Yup.object(conditionalValidation()),
     onSubmit: ({ name, email, password }) => {
+      console.log(password);
+
       if (data !== "password") {
         if (data === "name") {
           currentUser.displayName = name;
+          dispatch(updateUserDetail(currentUser, history));
         }
         if (data === "email") {
           currentUser.email = email;
+          currentUser["password"] = password;
+          dispatch(updateUserEmail(currentUser, history));
         }
-        dispatch(updateUserDetail(currentUser, history));
       } else {
         updateUserPass(password, history);
       }
@@ -121,6 +145,8 @@ const EditAccountForm = ({ data }) => {
           <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
+            name="password"
+            {...formik.getFieldProps("password")}
             isInvalid={formik.touched.password && formik.errors.password}
           />
           <Form.Control.Feedback type="invalid">
@@ -144,6 +170,7 @@ const EditAccountForm = ({ data }) => {
           <Form.Label>New Password:</Form.Label>
           <Form.Control
             type="password"
+            name="password"
             {...formik.getFieldProps("password")}
             isInvalid={formik.touched.password && formik.errors.password}
           />
