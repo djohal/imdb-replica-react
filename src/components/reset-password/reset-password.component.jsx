@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Container from "react-bootstrap/Container";
 
@@ -8,10 +8,6 @@ import ResetPasswordForm from "./reset-password-form.component";
 
 const ResetPassword = () => {
   const history = useHistory();
-  const match = useRouteMatch();
-
-  const matchNameUrl = match.url.includes("name");
-  const matchEmailUrl = match.url.includes("email");
 
   return (
     <div className="reset-password">

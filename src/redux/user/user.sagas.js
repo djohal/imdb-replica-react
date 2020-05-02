@@ -62,7 +62,6 @@ export function* sendResetPassEmail() {
     yield auth.sendPasswordResetEmail(user.resetEmail);
   } catch (error) {
     console.log(error);
-    toast.error("Oops! Something went wrong. Please try again.");
   }
 }
 

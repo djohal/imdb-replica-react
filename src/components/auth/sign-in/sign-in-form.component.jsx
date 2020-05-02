@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { emailSignInStart } from "../../../redux/user/user.actions";
+import { Link } from "react-router-dom";
 
 const SignInForm = ({ emailSignInStart }) => {
   const formik = useFormik({
@@ -40,7 +41,10 @@ const SignInForm = ({ emailSignInStart }) => {
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <div className="password-label-container">
+          <Form.Label>Password</Form.Label>
+          <Link to="/account/reset-password">Forgot your password?</Link>
+        </div>
         <Form.Control
           type="password"
           name="password"

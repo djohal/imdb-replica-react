@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { selectCurrentUser } from "redux/user/user.selectors";
-import {
-  updateUserDetail,
-  resetUserPassword,
-} from "../../redux/user/user.actions";
-import { updateUserPass } from "../../firebase/firebase.utils";
+import { resetUserPassword } from "../../redux/user/user.actions";
 
 const ResetPasswordForm = ({ data }) => {
-  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [formSubmit, setFormSubmit] = useState(false);
 

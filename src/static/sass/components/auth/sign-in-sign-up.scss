@@ -20,6 +20,18 @@
             font-weight: normal;
           }
         }
+
+        .password-label-container {
+          display: flex;
+          justify-content: space-between;
+          a {
+            font-size: 0.8rem;
+
+            &:hover {
+              color: $color-primary-dark;
+            }
+          }
+        }
       }
     }
 
