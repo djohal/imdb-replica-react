@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const EditPasswordForm = ({ formik }) => (
   <Form noValidate onSubmit={formik.handleSubmit}>
     <span className="subtitle">
-      Use the form below to change the password for your IMDb account
+      Use the form below to change the password for your IMDb account. If you
+      forgot your password you can reset it{" "}
+      {<Link to="/account/reset-password">here</Link>}.
     </span>
     <Form.Group controlId="formCurrentPassword">
       <Form.Label>Current password:</Form.Label>
