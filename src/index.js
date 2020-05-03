@@ -13,12 +13,24 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       {/* <React.StrictMode> */}
-        <PersistGate persistor={persistor}>
-          <App />
-        </PersistGate>
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
       {/* </React.StrictMode> */}
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register(`${process.env.PUBLIC_URL}/firebase-messaging-sw.js`)
+    .then(function (registration) {
+      console.log("Registration successful, scope is:", registration.scope);
+    })
+    .catch(function (err) {
+      console.log("Service worker registration failed, error:", err);
+    });
+}
+
 serviceWorker.register();

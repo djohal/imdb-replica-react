@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { toast, Slide } from "react-toastify";
-
+import axios from "axios";
 import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +16,7 @@ import { checkUserSession } from "./redux/user/user.actions";
 import AccountsPage from "./pages/account/account.component";
 import EditAccount from "./components/edit-account/edit-account.component";
 import ResetPassword from "./components/reset-password/reset-password.component";
+import { messaging } from "./firebase/firebase.utils";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
 const RegistrationPage = lazy(() =>
@@ -47,6 +48,52 @@ toast.configure({
 function App({ checkUserSession, currentUser }) {
   useEffect(() => {
     checkUserSession();
+    let token;
+    async function requestFirebase() {
+      messaging
+        .requestPermission()
+        .then(async function () {
+          token = await messaging.getToken();
+          console.log(token);
+
+          var notification = {
+            title: "Portugal vs. Denmark",
+            body: "5 to 1",
+            icon: "",
+            click_action: "http://localhost:8081",
+          };
+
+          var key =
+            "AAAASoYyy3M:APA91bHIoDO_kXKS0s-_kvjb4tjoc15MB5INvf4_4cNdyqo3ynf0GLd-pQKyrBjsI3D3yp-sJ23fHejLSmOpq2aIgWbU7TfpVHgDl5hqzHx7K1EgUgi_p4eujj6ytMQcmdSIXtQI5Bah";
+
+          fetch("https://fcm.googleapis.com/fcm/send", {
+            method: "POST",
+            headers: {
+              Authorization: "key=" + key,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              notification: notification,
+              to: token,
+              webpush: {},
+            }),
+          })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        })
+        .catch(function (err) {
+          console.log("Unable to get permission to notify.", err);
+        });
+      navigator.serviceWorker.addEventListener("message", (message) =>
+        console.log(message)
+      );
+    }
+
+    requestFirebase();
   }, [checkUserSession]);
 
   return (

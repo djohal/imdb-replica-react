@@ -1,6 +1,7 @@
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/messaging"
 
 const config = {
   apiKey: "AIzaSyDlxgZ7Q2SmBV-492dHHt6B6YS_-CK7qQg",
@@ -78,6 +79,12 @@ export const getCurrentUser = () => {
 };
 
 firebase.initializeApp(config);
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey(
+  // Project Settings => Cloud Messaging => Web Push certificates
+  "BGLvgZvfDzgXdH4gL73_vkL6pQ1SnA_uK44LEgO11Od6jDJcGwUpDieY-6IcW6qol0LSolqEzgkTg8DtVpxbraM"
+);
+export { messaging };
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
