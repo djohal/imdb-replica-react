@@ -28,7 +28,7 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
       }
       return {
         ...state,
-        isFetching: true,
+        isFetching: false,
         nowPlayingCollections: state.nowPlayingCollections,
         featuredTodayCollections: state.featuredTodayCollections,
         fanFavoritesCollections: state.fanFavoritesCollections,
