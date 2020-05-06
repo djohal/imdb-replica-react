@@ -8,14 +8,14 @@ import { getUserWatchlistItems } from "./watchlist.actions";
 
 export function* updateWatchlistInFirebase() {
   const currentUser = yield select(selectCurrentUser);
+  const watchlist = yield select(selectWatchlistItems);
 
   if (currentUser) {
     try {
-      const watchlistRef = yield getUserWatchlistRef(currentUser.id);
-      const watchlist = yield select(selectWatchlistItems);
-      yield watchlistRef.update({ watchlist });
+      const watchlistRef = yield call(getUserWatchlistRef, currentUser.id);
+      return watchlistRef.update({ watchlist });
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   }
 }
@@ -23,11 +23,12 @@ export function* updateWatchlistInFirebase() {
 export function* getWatchlistItemsFromFirebase() {
   try {
     const currentUser = yield select(selectCurrentUser);
-    const watchlistRef = yield getUserWatchlistRef(currentUser.id);
+    const watchlistRef = yield call(getUserWatchlistRef, currentUser.id);
     const watchlistSnapshot = yield watchlistRef.get();
+
     yield put(getUserWatchlistItems(watchlistSnapshot.data().watchlist));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 }
 
