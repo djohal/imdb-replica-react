@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const FTCollectionItem = ({
   backdrop_path,
@@ -11,7 +12,7 @@ const FTCollectionItem = ({
   return (
     <React.Fragment key={id}>
       <div className="carousel-images">
-        <img
+        <LazyLoadImage
           className="d-block carousel-img"
           src={`https://image.tmdb.org/t/p/w400${backdrop_path || poster_path}`}
           alt={title || name}

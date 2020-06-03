@@ -1,11 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectWatchlistItems } from "redux/watchlist/watchlist.selectors";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectWatchlistItems } from 'redux/watchlist/watchlist.selectors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { getSingleDecimalValue } from "redux/movies/movies.utils";
-import WatchlistBtn from "components/watchlist-btn/watchlist-btn.component";
+import { getSingleDecimalValue } from 'redux/movies/movies.utils';
+import WatchlistBtn from 'components/watchlist-btn/watchlist-btn.component';
 
 const FFCollectionItem = ({ collectionItem }) => {
   const { poster_path, title, name, vote_average, id } = collectionItem;
@@ -19,7 +20,7 @@ const FFCollectionItem = ({ collectionItem }) => {
   return (
     <React.Fragment key={id}>
       <div className="carousel-images">
-        <img
+        <LazyLoadImage
           className="d-block carousel-img"
           src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
           alt={title}

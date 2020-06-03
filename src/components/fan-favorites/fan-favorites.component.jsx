@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import Container from "react-bootstrap/Container";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import Container from 'react-bootstrap/Container';
 
-import { fetchDataStart } from "../../redux/movies/movies.actions";
-import { selectFanFavoritesCollections } from "../../redux/movies/movies.selectors";
+import { fetchDataStart } from '../../redux/movies/movies.actions';
+import { selectFanFavoritesCollections } from '../../redux/movies/movies.selectors';
 
-import CarouselContainer from "../carousel/carousel.component";
-import { useWindowSize } from "../../redux/movies/movies.utils";
-import FFCollectionItem from "./ff-collection-item.component";
+import CarouselContainer from '../carousel/carousel.component';
+import { useWindowSize } from '../../redux/movies/movies.utils';
+import FFCollectionItem from './ff-collection-item.component';
 
 const numberOfSlidesToSlide = (width) => {
   if (width < 600) {

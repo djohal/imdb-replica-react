@@ -1,11 +1,13 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { selectWatchlistItems } from "redux/watchlist/watchlist.selectors";
-import { getSingleDecimalValue } from "redux/movies/movies.utils";
-import WatchlistBtn from "components/watchlist-btn/watchlist-btn.component";
+import { selectWatchlistItems } from 'redux/watchlist/watchlist.selectors';
+import { getSingleDecimalValue } from 'redux/movies/movies.utils';
+import WatchlistBtn from 'components/watchlist-btn/watchlist-btn.component';
+import FallbackImage from 'static/assets/fallbackImage.jpeg';
 
 const NowPlayingItem = ({ collectionItem, width }) => {
   const {
@@ -26,10 +28,10 @@ const NowPlayingItem = ({ collectionItem, width }) => {
   return (
     <div className="carousel-images">
       <div className="poster-img-container">
-        <img
+        <LazyLoadImage
           className="d-block w-100 carousel-img poster-img"
           src={`https://image.tmdb.org/t/p/${
-            width > 500 ? "w342" : "w154"
+            width > 500 ? 'w342' : 'w154'
           }${poster_path}`}
           alt={title}
         />
@@ -43,12 +45,16 @@ const NowPlayingItem = ({ collectionItem, width }) => {
 
       <div className="backdrop-img-container">
         <div className="backdrop-img">
-          <img
+          <LazyLoadImage
             className="d-block w-100 carousel-img"
-            src={`https://image.tmdb.org/t/p/${width > 500 ? "w780" : "w500"}${
+            src={`https://image.tmdb.org/t/p/${width > 500 ? 'w780' : 'w500'}${
               backdrop_path || poster_path
             }`}
             alt={title}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = FallbackImage;
+            }}
           />
         </div>
         <div className="backdrop-caption">
